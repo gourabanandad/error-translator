@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "error-translator"
+version = "0.1.0"
+description = "A CLI tool that explains Python errors in simple human language."
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [
+    { name = "Gourabananda Datta", email = "gourabanandadatta@zohomail.com" }
+]
+
+[project.scripts]
+explain-error = "error_translator.cli:main"
+
+# --- NEW LINES BELOW ---
+[tool.setuptools]
+packages = ["error_translator"]

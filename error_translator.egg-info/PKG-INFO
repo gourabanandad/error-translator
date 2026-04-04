@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: error-translator
+Version: 0.1.0
+Summary: A CLI tool that explains Python errors in simple human language.
+Author-email: Gourabananda Datta <gourabanandadatta@zohomail.com>
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
