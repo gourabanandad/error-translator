@@ -5,11 +5,9 @@ def translate_error(traceback_text: str) -> dict:
     """
     Parses traceback text and returns a human-readable explanation and fix.
     """
-    location_match = re.search(r'File "(.*?)", line (\d+), in (.+)', traceback_text)
+    location_match = re.search(r'File\s+[\'"]?(.*?)[\'"]?,\s+line\s+(\d+)', traceback_text)    
     file_name = location_match.group(1) if location_match else "unknown file"
     line_number = location_match.group(2) if location_match else "unknown line"
-    in_function = location_match.group(3) if location_match else "unknown function"
-    # Grab the last non-empty line of the traceback, which usually contains the actual error
     lines = [line.strip() for line in traceback_text.strip().split('\n') if line.strip()]
     if not lines:
         return {"explanation": "No error text provided.", "fix": "Provide a valid Python error."}
@@ -32,7 +30,6 @@ def translate_error(traceback_text: str) -> dict:
                 "matched_error": actual_error_line,
                 "file": file_name,
                 "line": line_number,
-                "function": in_function
             }
 
     # If no rules match, return the default payload
@@ -42,5 +39,4 @@ def translate_error(traceback_text: str) -> dict:
         "matched_error": actual_error_line,
         "file": file_name,
         "line": line_number,
-        "function": in_function
     }

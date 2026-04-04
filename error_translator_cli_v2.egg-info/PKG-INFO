@@ -1,0 +1,70 @@
+Metadata-Version: 2.4
+Name: error-translator-cli-v2
+Version: 0.1.3
+Summary: A CLI tool that explains Python errors in simple human language.
+Author-email: Gourabananda Datta <gourabanandadatta@zohomail.com>
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+🚨 Error Translator CLI
+
+A lightweight, rule-based command-line tool that translates confusing Python traceback errors into simple, human-readable English and suggests actionable fixes.
+
+✨ Features
+
+No AI/LLMs required: Runs entirely locally using fast Regex pattern matching.
+
+Beginner Friendly: Explains why the error happened in plain English.
+
+Actionable: Provides a suggested fix for your specific code.
+
+Pinpoint Accuracy: Extracts the exact file name and line number where the code broke.
+
+Beautiful Output: Color-coded terminal text for easy reading.
+
+📦 Installation
+
+You can install this tool globally on your machine using pip.
+
+
+pip install error-translator-cli-v2
+
+
+🚀 Usage
+
+Simply pass your Python error message or traceback as a string to the explain-error command.
+
+Example 1: NameError with Full Traceback
+
+explain-error "Traceback (most recent call last):
+  File 'script.py', line 2, in <module>
+    print(my_variable)
+NameError: name 'my_variable' is not defined"
+
+
+Example 2: Quick TypeError
+
+explain-error "TypeError: unsupported operand type(s) for +: 'int' and 'str'"
+
+
+🧠 Supported Errors
+
+Currently, the tool can accurately diagnose and explain:
+
+NameError
+
+TypeError
+
+IndexError
+
+KeyError
+
+ZeroDivisionError
+
+ModuleNotFoundError
+
+AttributeError
+
+(More error definitions are actively being added!)
+
+Built by Gourabananda Datta.

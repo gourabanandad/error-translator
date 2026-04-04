@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+error_translator/__init__.py
+error_translator/cli.py
+error_translator/core.py
+error_translator/rules.py
+error_translator_cli_v2.egg-info/PKG-INFO
+error_translator_cli_v2.egg-info/SOURCES.txt
+error_translator_cli_v2.egg-info/dependency_links.txt
+error_translator_cli_v2.egg-info/entry_points.txt
+error_translator_cli_v2.egg-info/top_level.txt
+tests/test_core.py
