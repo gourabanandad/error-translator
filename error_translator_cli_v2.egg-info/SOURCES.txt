@@ -1,6 +1,7 @@
 README.md
 pyproject.toml
 error_translator/__init__.py
+error_translator/auto.py
 error_translator/cli.py
 error_translator/core.py
 error_translator/rules.py
