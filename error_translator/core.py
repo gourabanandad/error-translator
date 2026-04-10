@@ -4,8 +4,7 @@ import os
 def load_rules():
     """Loads the error rules from the JSON file."""
     # Find the absolute path to the json file next to this script
-    # current_dir = os.path.dirname(data\rules.json)
-    current_dir = 'data/'
+    current_dir = os.path.dirname(os.path.abspath(__file__))
     json_path = os.path.join(current_dir, 'rules.json')
     
     with open(json_path, 'r') as file:
