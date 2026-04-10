@@ -1,2 +1,0 @@
-[console_scripts]
-explain-error = error_translator.cli:main
