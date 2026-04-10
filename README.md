@@ -1,50 +1,43 @@
-🚨 Error Translator CLI
+# Error Translator CLI
 
-A lightweight, rule-based command-line tool that translates confusing Python traceback errors into simple, human-readable English and suggests actionable fixes.
+## Overview
+A lightweight, rule-based command-line tool designed to translate confusing Python traceback errors into plain, human-readable English and suggest actionable fixes.
 
-✨ Features
+## Key Features
+- **No AI or LLMs Required:** Runs entirely locally using fast, regex-based pattern matching.
+- **Beginner Friendly:** Explains the root cause of errors in simple English terminology, making debugging more approachable.
+- **Actionable Guidance:** Provides practical, suggested fixes tailored to your specific code context.
+- **Pinpoint Accuracy:** Extracts and highlights the exact file name and line number where the code encountered an issue.
+- **Improved Readability:** Utilizes well-formatted, color-coded terminal output to make reading errors easier.
 
-No AI/LLMs required: Runs entirely locally using fast Regex pattern matching.
-
-Beginner Friendly: Explains why the error happened in plain English.
-
-Actionable: Provides a suggested fix for your specific code.
-
-Pinpoint Accuracy: Extracts the exact file name and line number where the code broke.
-
-Beautiful Output: Color-coded terminal text for easy reading.
-
-📦 Installation
-
-You can install this tool globally on your machine using pip.
-
-
+## Installation
+You can install this tool globally on your machine using pip:
+```bash
 pip install error-translator-cli-v2
+```
 
-
-🚀 Usage
-
-You can use the Error Translator in three different ways:
+## Quick Start Guide
+You can use the Error Translator in three distinct ways, depending on your preferred workflow:
 
 ### 1. Magic Import (Recommended)
-Simply add this single import at the top of your Python script. If your script crashes, it will automatically intercept and translate the error!
+Simply add this single import statement at the top of your Python script. If your script crashes, the tool will automatically intercept and translate the error.
 
 ```python
 import error_translator.auto
 
 # Your normal code...
-math_is_broken = 10 / 0  # This crash will be automatically translated!
+math_is_broken = 10 / 0  # This crash will be automatically intercepted and translated
 ```
 
 ### 2. Run Scripts via CLI
-You can execute your python files directly through the CLI tool. It will run your program normally and intercept any crashes.
+You can execute your Python files directly through the provided CLI tool. It will run your program normally and intercept any crashes if they occur.
 
 ```bash
 explain-error run script.py
 ```
 
 ### 3. Translate Raw Error Strings
-You can pass errors as a string or pipe them from another command.
+You can also pass raw error messages directly as a string or pipe them from another command.
 
 **Pass directly:**
 ```bash
@@ -56,25 +49,17 @@ explain-error "TypeError: unsupported operand type(s) for +: 'int' and 'str'"
 cat error.log | explain-error
 ```
 
+## Supported Errors
+Currently, the tool can accurately diagnose and explain the following Python errors:
+- NameError
+- TypeError
+- IndexError
+- KeyError
+- ZeroDivisionError
+- ModuleNotFoundError
+- AttributeError
 
-🧠 Supported Errors
+*Note: More error definitions are actively being added to the database.*
 
-Currently, the tool can accurately diagnose and explain:
-
-NameError
-
-TypeError
-
-IndexError
-
-KeyError
-
-ZeroDivisionError
-
-ModuleNotFoundError
-
-AttributeError
-
-(More error definitions are actively being added!)
-
+---
 Built by Gourabananda Datta.

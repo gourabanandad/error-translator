@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: error-translator-cli-v2
-Version: 1.0.0
+Version: 1.0.1
 Summary: A CLI tool that explains Python errors in simple human language.
 Author-email: Gourabananda Datta <gourabanandadatta@zohomail.com>
 Requires-Python: >=3.7
@@ -32,19 +32,37 @@ pip install error-translator-cli-v2
 
 🚀 Usage
 
-Simply pass your Python error message or traceback as a string to the explain-error command.
+You can use the Error Translator in three different ways:
 
-Example 1: NameError with Full Traceback
+### 1. Magic Import (Recommended)
+Simply add this single import at the top of your Python script. If your script crashes, it will automatically intercept and translate the error!
 
-explain-error "Traceback (most recent call last):
-  File 'script.py', line 2, in <module>
-    print(my_variable)
-NameError: name 'my_variable' is not defined"
+```python
+import error_translator.auto
 
+# Your normal code...
+math_is_broken = 10 / 0  # This crash will be automatically translated!
+```
 
-Example 2: Quick TypeError
+### 2. Run Scripts via CLI
+You can execute your python files directly through the CLI tool. It will run your program normally and intercept any crashes.
 
+```bash
+explain-error run script.py
+```
+
+### 3. Translate Raw Error Strings
+You can pass errors as a string or pipe them from another command.
+
+**Pass directly:**
+```bash
 explain-error "TypeError: unsupported operand type(s) for +: 'int' and 'str'"
+```
+
+**Pipe from a file:**
+```bash
+cat error.log | explain-error
+```
 
 
 🧠 Supported Errors
