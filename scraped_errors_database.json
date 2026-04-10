@@ -1,0 +1,252 @@
+[
+    {
+        "error_name": "ArithmeticError",
+        "official_description": "The base class for those built-in exceptions that are raised for various",
+        "needs_regex": true
+    },
+    {
+        "error_name": "BufferError",
+        "official_description": "Raised when a buffer related operation cannot be",
+        "needs_regex": true
+    },
+    {
+        "error_name": "LookupError",
+        "official_description": "The base class for the exceptions that are raised when a key or index used on",
+        "needs_regex": true
+    },
+    {
+        "error_name": "AssertionError",
+        "official_description": "Raised when an assert statement fails.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "AttributeError",
+        "official_description": "Raised when an attribute reference (see Attribute references) or",
+        "needs_regex": true
+    },
+    {
+        "error_name": "EOFError",
+        "official_description": "Raised when the input() function hits an end-of-file condition (EOF)",
+        "needs_regex": true
+    },
+    {
+        "error_name": "FloatingPointError",
+        "official_description": "Not currently used.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ImportError",
+        "official_description": "Raised when the import statement has troubles trying to",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ModuleNotFoundError",
+        "official_description": "A subclass of ImportError which is raised by import",
+        "needs_regex": true
+    },
+    {
+        "error_name": "IndexError",
+        "official_description": "Raised when a sequence subscript is out of range.  (Slice indices are",
+        "needs_regex": true
+    },
+    {
+        "error_name": "KeyError",
+        "official_description": "Raised when a mapping (dictionary) key is not found in the set of existing keys.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "MemoryError",
+        "official_description": "Raised when an operation runs out of memory but the situation may still be",
+        "needs_regex": true
+    },
+    {
+        "error_name": "NameError",
+        "official_description": "Raised when a local or global name is not found.  This applies only to",
+        "needs_regex": true
+    },
+    {
+        "error_name": "NotImplementedError",
+        "official_description": "This exception is derived from RuntimeError.  In user defined base",
+        "needs_regex": true
+    },
+    {
+        "error_name": "OSError",
+        "official_description": "This exception is raised when a system function returns a system-related",
+        "needs_regex": true
+    },
+    {
+        "error_name": "OverflowError",
+        "official_description": "Raised when the result of an arithmetic operation is too large to be",
+        "needs_regex": true
+    },
+    {
+        "error_name": "PythonFinalizationError",
+        "official_description": "This exception is derived from RuntimeError.  It is raised when",
+        "needs_regex": true
+    },
+    {
+        "error_name": "RecursionError",
+        "official_description": "This exception is derived from RuntimeError.  It is raised when the",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ReferenceError",
+        "official_description": "This exception is raised when a weak reference proxy, created by the",
+        "needs_regex": true
+    },
+    {
+        "error_name": "RuntimeError",
+        "official_description": "Raised when an error is detected that doesn\u00e2\u0080\u0099t fall in any of the other",
+        "needs_regex": true
+    },
+    {
+        "error_name": "SyntaxError",
+        "official_description": "Raised when the parser encounters a syntax error.  This may occur in an",
+        "needs_regex": true
+    },
+    {
+        "error_name": "IndentationError",
+        "official_description": "Base class for syntax errors related to incorrect indentation.  This is a",
+        "needs_regex": true
+    },
+    {
+        "error_name": "TabError",
+        "official_description": "Raised when indentation contains an inconsistent use of tabs and spaces.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "SystemError",
+        "official_description": "Raised when the interpreter finds an internal error, but the situation does not",
+        "needs_regex": true
+    },
+    {
+        "error_name": "TypeError",
+        "official_description": "Raised when an operation or function is applied to an object of inappropriate",
+        "needs_regex": true
+    },
+    {
+        "error_name": "UnboundLocalError",
+        "official_description": "Raised when a reference is made to a local variable in a function or method, but",
+        "needs_regex": true
+    },
+    {
+        "error_name": "UnicodeError",
+        "official_description": "Raised when a Unicode-related encoding or decoding error occurs.  It is a",
+        "needs_regex": true
+    },
+    {
+        "error_name": "UnicodeEncodeError",
+        "official_description": "Raised when a Unicode-related error occurs during encoding.  It is a subclass of",
+        "needs_regex": true
+    },
+    {
+        "error_name": "UnicodeDecodeError",
+        "official_description": "Raised when a Unicode-related error occurs during decoding.  It is a subclass of",
+        "needs_regex": true
+    },
+    {
+        "error_name": "UnicodeTranslateError",
+        "official_description": "Raised when a Unicode-related error occurs during translating.  It is a subclass",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ValueError",
+        "official_description": "Raised when an operation or function receives an argument that has the",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ZeroDivisionError",
+        "official_description": "Raised when the second argument of a division or modulo operation is zero.  The",
+        "needs_regex": true
+    },
+    {
+        "error_name": "EnvironmentError",
+        "official_description": "",
+        "needs_regex": true
+    },
+    {
+        "error_name": "IOError",
+        "official_description": "",
+        "needs_regex": true
+    },
+    {
+        "error_name": "WindowsError",
+        "official_description": "Only available on Windows.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "BlockingIOError",
+        "official_description": "Raised when an operation would block on an object (e.g. socket) set",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ChildProcessError",
+        "official_description": "Raised when an operation on a child process failed.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ConnectionError",
+        "official_description": "A base class for connection-related issues.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "BrokenPipeError",
+        "official_description": "A subclass of ConnectionError, raised when trying to write on a",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ConnectionAbortedError",
+        "official_description": "A subclass of ConnectionError, raised when a connection attempt",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ConnectionRefusedError",
+        "official_description": "A subclass of ConnectionError, raised when a connection attempt",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ConnectionResetError",
+        "official_description": "A subclass of ConnectionError, raised when a connection is",
+        "needs_regex": true
+    },
+    {
+        "error_name": "FileExistsError",
+        "official_description": "Raised when trying to create a file or directory which already exists.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "FileNotFoundError",
+        "official_description": "Raised when a file or directory is requested but doesn\u00e2\u0080\u0099t exist.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "InterruptedError",
+        "official_description": "Raised when a system call is interrupted by an incoming signal.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "IsADirectoryError",
+        "official_description": "Raised when a file operation (such as os.remove()) is requested",
+        "needs_regex": true
+    },
+    {
+        "error_name": "NotADirectoryError",
+        "official_description": "Raised when a directory operation (such as os.listdir()) is requested on",
+        "needs_regex": true
+    },
+    {
+        "error_name": "PermissionError",
+        "official_description": "Raised when trying to run an operation without the adequate access",
+        "needs_regex": true
+    },
+    {
+        "error_name": "ProcessLookupError",
+        "official_description": "Raised when a given process doesn\u00e2\u0080\u0099t exist.",
+        "needs_regex": true
+    },
+    {
+        "error_name": "TimeoutError",
+        "official_description": "Raised when a system function timed out at the system level.",
+        "needs_regex": true
+    }
+]

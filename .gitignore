@@ -9,3 +9,7 @@ build/
 # Environment files
 .env
 venv/
+
+# OS Files
+.DS_Store
+Thumbs.db

@@ -1,78 +1,188 @@
 {
-  "rules": [
-    {
-      "pattern": "NameError: name '(.*)' is not defined",
-      "explanation": "You tried to use a variable or function named '{0}', but Python doesn't recognize it.",
-      "fix": "Check if '{0}' is spelled correctly, or ensure you defined/imported it before using it."
-    },
-    {
-      "pattern": "TypeError: can only concatenate str \\(not \\\"(.*)\\\"\\) to str",
-      "explanation": "You are trying to add a string to a {0}, which Python cannot do.",
-      "fix": "Convert the {0} to a string first using str() before concatenating."
-    },
-    {
-      "pattern": "TypeError: unsupported operand type\\(s\\) for \\+: '(.*)' and '(.*)'",
-      "explanation": "You are trying to add two incompatible types: a {0} and a {1}.",
-      "fix": "Ensure both sides of the '+' are the same type (e.g., both numbers or both strings)."
-    },
-    {
-      "pattern": "IndexError: list index out of range",
-      "explanation": "You are trying to access an item in a list at a position that doesn't exist.",
-      "fix": "Check the length of your list using len(). Remember, Python lists start counting at 0!"
-    },
-    {
-      "pattern": "KeyError: '(.*)'",
-      "explanation": "You tried to look up a key named '{0}' in a dictionary, but that key doesn't exist.",
-      "fix": "Check for typos in the key name, or use the .get('{0}') method to safely access dictionary values."
-    },
-    {
-      "pattern": "ZeroDivisionError: division by zero",
-      "explanation": "You are trying to divide a number by zero, which is mathematically impossible.",
-      "fix": "Add an if-statement before the division to check if the denominator is 0."
-    },
-    {
-      "pattern": "ModuleNotFoundError: No module named '(.*)'",
-      "explanation": "Python is trying to import a package named '{0}', but it isn't installed in your current environment.",
-      "fix": "Open your terminal and run: pip install {0}"
-    },
-    {
-      "pattern": "AttributeError: '(.*)' object has no attribute '(.*)'",
-      "explanation": "You are trying to use a method or property named '{1}' on a {0} object, but {0}s don't have that capability.",
-      "fix": "Check the spelling of '{1}'. If it's correct, verify that your variable is actually the data type you think it is."
-    },
-    {
-      "pattern": "SyntaxError: invalid syntax",
-      "explanation": "Python doesn't understand your code's grammar. You might be missing a colon, parenthesis, or quote.",
-      "fix": "Check the line where the error occurred (and the line before it) for missing characters or typos."
-    },
-    {
-      "pattern": "IndentationError: expected an indented block",
-      "explanation": "Python expected indented code after a statement like 'def', 'if', 'for', or 'while', but didn't find it.",
-      "fix": "Add indentation (usually 4 spaces) to the line(s) following the statement that ends with a colon."
-    },
-    {
-      "pattern": "IndentationError: unexpected indent",
-      "explanation": "You added extra indentation where Python didn't expect it.",
-      "fix": "Remove the extra spaces or tabs at the beginning of the line mentioned in the error."
-    },
-    {
-      "pattern": "ValueError: invalid literal for int\\(\\) with base 10: '(.*)'",
-      "explanation": "You tried to convert the string '{0}' to an integer, but it doesn't contain a valid whole number.",
-      "fix": "Make sure the string only contains digits. If it contains a decimal, convert it to a float first."
-    },
-    {
-      "pattern": "FileNotFoundError: \\\\[Errno 2\\\\] No such file or directory: '(.*)'",
-      "explanation": "Python tried to open the file '{0}', but it doesn't exist at that location.",
-      "fix": "Check if your file path is correct, the file exists, and you are running the script from the correct directory."
-    },
-    {
-      "pattern": "ImportError: cannot import name '(.*)' from '(.*)'",
-      "explanation": "You tried to import '{0}' from the module '{1}', but it can't be found there.",
-      "fix": "Check if '{0}' is spelled correctly, or if '{1}' actually has a function/class named '{0}'. It could also be a circular import."
+    "rules": [
+        {
+            "pattern": "NameError: name '(.*)' is not defined",
+            "explanation": "You tried to use a variable or function named '{0}', but Python doesn't recognize it.",
+            "fix": "Check if '{0}' is spelled correctly, or ensure you defined/imported it before using it."
+        },
+        {
+            "pattern": "TypeError: can only concatenate str \\(not \"(.*)\"\\) to str",
+            "explanation": "You are trying to add a string to a {0}, which Python cannot do.",
+            "fix": "Convert the {0} to a string first using str() before concatenating."
+        },
+        {
+            "pattern": "TypeError: unsupported operand type\\(s\\) for \\+: '(.*)' and '(.*)'",
+            "explanation": "You are trying to add two incompatible types: a {0} and a {1}.",
+            "fix": "Ensure both sides of the '+' are the same type (e.g., both numbers or both strings)."
+        },
+        {
+            "pattern": "IndexError: list index out of range",
+            "explanation": "You are trying to access an item in a list at a position that doesn't exist.",
+            "fix": "Check the length of your list using len(). Remember, Python lists start counting at 0!"
+        },
+        {
+            "pattern": "KeyError: '(.*)'",
+            "explanation": "You tried to look up a key named '{0}' in a dictionary, but that key doesn't exist.",
+            "fix": "Check for typos in the key name, or use the .get('{0}') method to safely access dictionary values."
+        },
+        {
+            "pattern": "ZeroDivisionError: division by zero",
+            "explanation": "You are trying to divide a number by zero, which is mathematically impossible.",
+            "fix": "Add an if-statement before the division to check if the denominator is 0."
+        },
+        {
+            "pattern": "ModuleNotFoundError: No module named '(.*)'",
+            "explanation": "Python is trying to import a package named '{0}', but it isn't installed in your current environment.",
+            "fix": "Open your terminal and run: pip install {0}"
+        },
+        {
+            "pattern": "AttributeError: '(.*)' object has no attribute '(.*)'",
+            "explanation": "You are trying to use a method or property named '{1}' on a {0} object, but {0}s don't have that capability.",
+            "fix": "Check the spelling of '{1}'. If it's correct, verify that your variable is actually the data type you think it is."
+        },
+        {
+            "pattern": "SyntaxError: invalid syntax",
+            "explanation": "Python doesn't understand your code's grammar. You might be missing a colon, parenthesis, or quote.",
+            "fix": "Check the line where the error occurred (and the line before it) for missing characters or typos."
+        },
+        {
+            "pattern": "IndentationError: expected an indented block",
+            "explanation": "Python expected indented code after a statement like 'def', 'if', 'for', or 'while', but didn't find it.",
+            "fix": "Add indentation (usually 4 spaces) to the line(s) following the statement that ends with a colon."
+        },
+        {
+            "pattern": "IndentationError: unexpected indent",
+            "explanation": "You added extra indentation where Python didn't expect it.",
+            "fix": "Remove the extra spaces or tabs at the beginning of the line mentioned in the error."
+        },
+        {
+            "pattern": "ValueError: invalid literal for int\\(\\) with base 10: '(.*)'",
+            "explanation": "You tried to convert the string '{0}' to an integer, but it doesn't contain a valid whole number.",
+            "fix": "Make sure the string only contains digits. If it contains a decimal, convert it to a float first."
+        },
+        {
+            "pattern": "FileNotFoundError: \\[Errno 2\\] No such file or directory: '(.*)'",
+            "explanation": "Python tried to open the file '{0}', but it doesn't exist at that location.",
+            "fix": "Check if your file path is correct, the file exists, and you are running the script from the correct directory."
+        },
+        {
+            "pattern": "ImportError: cannot import name '(.*)' from '(.*)'",
+            "explanation": "You tried to import '{0}' from the module '{1}', but it can't be found there.",
+            "fix": "Check if '{0}' is spelled correctly, or if '{1}' actually has a function/class named '{0}'. It could also be a circular import."
+        },
+        {
+            "pattern": "^ArithmeticError:",
+            "explanation": "An `ArithmeticError` means that a mathematical calculation or operation encountered a problem and couldn't be completed successfully. It's a general category for issues like trying to divide by zero (though that often raises `ZeroDivisionError`), or numbers becoming too large or small to handle (`OverflowError`). When you see this error, it's a strong hint that there's an unexpected value or condition in your arithmetic expressions.",
+            "fix": "1. **Locate the operation**: Use the traceback to identify the exact line of code where the arithmetic calculation is happening. \n2. **Inspect input values**: Check all numbers and variables involved in that calculation. Are they what you expect? Look for zero values in denominators, extremely large or small numbers, or unexpected `None` values. \n3. **Add validation**: Implement checks *before* performing the calculation to handle potential problematic inputs. For example, if dividing, ensure the divisor is not zero. If working with ranges, ensure numbers stay within expected bounds. \n4. **Handle specific errors**: If you are writing code that could raise arithmetic errors, consider catching more specific exceptions like `ZeroDivisionError` or `OverflowError` to provide more targeted error handling and user feedback."
+        },
+        {
+            "pattern": "BufferError",
+            "explanation": "A `BufferError` means that a Python operation tried to access or modify a block of memory (a 'buffer'), but something went wrong. This often happens because the buffer was already closed, became invalid, or was being used in a way that conflicted with the current operation (e.g., trying to write to a buffer that was only opened for reading, or accessing a buffer that no longer exists). It's like trying to write on a piece of paper that someone already shredded.",
+            "fix": "Check the lifecycle of the object or resource that provides the buffer. Ensure that the buffer is still open and valid when you attempt to use it. If you're working with files or streams, make sure they haven't been closed prematurely. If you're dealing with external libraries or low-level memory, verify that memory pointers or handles are still valid and the buffer hasn't been deallocated or modified by another part of your program or an external process."
+        },
+        {
+            "pattern": "EOFError: EOF when reading a line",
+            "explanation": "This error occurs when Python's `input()` function tries to read text, but it reaches an \"End Of File\" (EOF) condition on its input source before it can receive any data. This typically happens when the program expects interactive input from a user but is run in an environment where its standard input stream is closed or empty, or when input is redirected from an empty file.",
+            "fix": "1. **Run Interactively:** If your script needs direct user input, ensure you are running it in a terminal or console where you can type. 2. **Check Input Source:** If you are redirecting input from a file (e.g., `python script.py < input.txt`), verify that the `input.txt` file actually contains the expected data and is not empty. 3. **Execution Environment:** Ensure your IDE, script runner, or calling process isn't closing the standard input stream prematurely. 4. **Add Error Handling:** For robustness, you can wrap `input()` calls in a `try...except EOFError:` block to handle this situation gracefully, providing a default value or a user-friendly message if input is unavailable."
+        },
+        {
+            "pattern": "NotImplementedError",
+            "explanation": "This error occurs when you try to call a method that has been explicitly marked as 'not yet implemented'. It's often used in base classes or interfaces to indicate that a specific method *must* be overridden and provided with a concrete implementation by any class that inherits from it. It's like a placeholder or a 'to-do' note for future developers.",
+            "fix": "If you encounter this error, it means the method you're trying to use needs to be implemented. You need to: 1. Identify the class you are using and the method that raised the error (look at the traceback). 2. If you are inheriting from a base class, you must override that specific method in your derived class and provide its concrete implementation, replacing the `raise NotImplementedError` line with your actual code. 3. If you are the one defining the base class, ensure that any subclasses correctly implement the methods you've marked with `NotImplementedError`."
+        },
+        {
+            "pattern": "LookupError",
+            "explanation": "A LookupError is a general error that occurs when you try to access an item from a collection (like a list, dictionary, or tuple) using a key or index that doesn't exist or is outside the valid range. It's the base class for more specific errors like KeyError (when a dictionary key isn't found) and IndexError (when a list/tuple index is out of bounds).",
+            "fix": "To fix this, first identify which collection and key/index are causing the issue. Before accessing an item, always verify that the key or index exists. For dictionaries, use the 'in' operator (`if key in my_dict:`) or the `.get()` method with a default value. For lists or tuples, ensure your index is within the valid range (0 to `len(my_list) - 1`). Using `try-except LookupError:` (or more specifically `try-except KeyError:` or `try-except IndexError:`) can also gracefully handle cases where the lookup might fail."
+        },
+        {
+            "pattern": "FloatingPointError",
+            "explanation": "The FloatingPointError is a standard Python exception but is almost never raised by the Python interpreter itself for typical floating-point operations. Python usually handles issues like division by zero in floating-point math by returning `inf` (infinity) or `NaN` (Not a Number) instead of raising this error. If you encounter this error, it's highly likely that your code or a third-party library you are using has explicitly raised it to signal a specific unhandled issue during a floating-point calculation, such as an overflow, underflow, or an invalid operation that isn't automatically converted to `inf` or `NaN`.",
+            "fix": "1. **Identify the Source:** Locate the `raise FloatingPointError` statement in your code or the library's source. This will pinpoint the specific floating-point calculation that triggered the error. 2. **Review Calculations:** Examine the inputs and the arithmetic operations being performed. Look for potential issues like division by extremely small numbers (approaching zero), operations on very large numbers that might exceed representable limits, or calculations involving `NaN` or `inf` that are not handled. 3. **Implement Pre-checks:** Add conditional checks before performing critical floating-point operations. For example, verify denominators are not too close to zero, or ensure input values are within expected ranges. 4. **Handle Edge Cases:** Decide how to gracefully handle the situation that causes the error. This might involve clamping values, using alternative algorithms, returning a sensible default, or logging a warning. 5. **Library Specific:** If a third-party library is raising it, consult its documentation for expected input ranges or specific ways to configure its error handling for floating-point issues."
+        },
+        {
+            "pattern": "MemoryError",
+            "explanation": "This error means your Python program tried to use more computer memory (RAM) than was available. Imagine your computer has a certain amount of desk space, and your program tried to put too many books (data) on it. Eventually, there's no more space left, and the program crashes.",
+            "fix": "To fix this, you generally need to reduce the amount of memory your program uses. Here are some strategies:\n\n1.  **Process Data in Chunks:** If you're loading a large file or dataset, try processing it in smaller batches instead of all at once.\n2.  **Use Generators:** For iterating over large sequences, use generators (functions with `yield`) instead of creating full lists or tuples in memory.\n3.  **Optimize Data Structures:** Choose more memory-efficient data structures. For example, use `array.array` instead of a list for numbers, or `set` instead of a list if order doesn't matter and you need uniqueness.\n4.  **Reduce Data Size:** If possible, store less information or use more compact representations (e.g., smaller integer types if your numbers fit).\n5.  **Garbage Collection:** Ensure you're not holding onto unnecessary references to large objects that could otherwise be freed by the garbage collector.\n6.  **Increase Memory:** (Less ideal for fixing code, more of a workaround) If you're on a system you control, you could try increasing the available RAM or virtual memory, though this only postpones the problem if your program's memory usage grows infinitely."
+        },
+        {
+            "pattern": "OverflowError",
+            "explanation": "This error means that an arithmetic operation or a function (often from the `math` module) tried to produce a number that is too large to be stored or represented accurately by the computer's memory or the specific data type being used. While Python's native integers can handle arbitrarily large numbers, this error typically occurs when dealing with floating-point numbers that exceed their maximum possible value (e.g., `sys.float_info.max`), or when a function (especially those implemented in C, like many in the `math` module) tries to return a value larger than its underlying C type can handle.",
+            "fix": "1. **Identify the source:** Locate the specific calculation or function call that's generating the excessively large number. Print intermediate results to see where the value starts to grow too large. \n2. **Check input values:** Ensure the inputs to your arithmetic operations or functions are within a reasonable range. Very large exponents, factorials of large numbers, or `exp()` of large values are common culprits.\n3. **Rethink the algorithm:** Can you modify your calculation to avoid generating such large intermediate results? For example, instead of calculating `A * B / C` where `A` and `B` are very large, perhaps you can calculate `(A / C) * B` or use logarithms for products/powers of large numbers to work with smaller values.\n4. **Handle large floats:** If working with floating-point numbers, be aware of `sys.float_info.max`. If your number exceeds this, it might result in an `OverflowError` or `float('inf')`. If infinity is an acceptable outcome, you might need to catch the error or check for `inf` after the operation.\n5. **Use specialized libraries:** For extremely large numbers or high precision, consider using libraries like `Decimal` (for arbitrary precision decimals) or `numpy` (which can sometimes handle larger ranges or provide different error behaviors)."
+        },
+        {
+            "pattern": "RecursionError",
+            "explanation": "A `RecursionError` happens when a function calls itself repeatedly (this is called recursion) without reaching a 'base case' that tells it when to stop. Think of it like a never-ending echo. Python has a built-in safety limit (usually around 1000 calls deep) to prevent your program from consuming all its memory in an infinite loop. When your function calls itself more times than this limit, Python stops it and raises this error.",
+            "fix": "1. **Check Your Base Case:** The most common cause is a missing or incorrect 'base case' in your recursive function. Ensure there's a condition that, when met, causes the function to return a value without making further recursive calls. This is the exit condition for your recursion. \n2. **Ensure Progress Towards Base Case:** Verify that each recursive call modifies the input in a way that brings it closer to the base case. If inputs remain the same or diverge, you'll never hit the stop condition. \n3. **Consider an Iterative Solution:** For many problems, a recursive solution can be rewritten using loops (an iterative approach). Iterative solutions don't have the recursion depth limit and are often more memory-efficient for deep computations. \n4. **Increase Recursion Limit (Use with Extreme Caution!):** In rare cases where you are absolutely certain your recursive algorithm is correct and efficient, and you need a deeper recursion, you can temporarily increase the limit using `import sys; sys.setrecursionlimit(new_limit)`. However, this is generally discouraged as it can lead to stack overflow issues and is often a workaround for a flawed recursive design."
+        },
+        {
+            "pattern": "RuntimeError",
+            "explanation": "This is a very general error. It means something unexpected happened during your program's execution that doesn't fit into more specific error categories like `TypeError` (wrong type) or `ValueError` (wrong value). It's often a catch-all for problems related to the program's internal state, incorrect library usage, or complex interactions that weren't anticipated.",
+            "fix": "The most important step is to read the full error message that accompanies 'RuntimeError' carefully, as it almost always provides crucial clues about what specific unexpected condition occurred. Then, examine the traceback to pinpoint the exact line of code where the error was raised. If the error originates from a third-party library, consult its documentation for common usage patterns or known issues. Review recent code changes that might have introduced an unexpected state or interaction. Using a debugger to step through the code leading up to the error can also help you understand the program's state and data just before the failure."
+        },
+        {
+            "pattern": "TabError: inconsistent use of tabs and spaces in indentation",
+            "explanation": "Python uses indentation (the spaces or tabs at the beginning of a line) to understand how your code is structured into blocks. This error means you've mixed tabs and spaces in the indentation of your code within the same file or even the same line, which confuses Python because it expects one consistent style (either all spaces or all tabs).",
+            "fix": "The best way to fix this is to choose one consistent style for indentation across your entire project. The overwhelming standard in Python is to use 4 spaces per indentation level. Configure your code editor or IDE to automatically insert spaces instead of tabs when you press the Tab key. Many editors also have a feature to 'convert indentation' (e.g., convert all tabs to spaces, or vice-versa) for an entire file. You can also use code formatters like 'autopep8' or 'black' which can automatically fix such issues."
+        },
+        {
+            "pattern": "SystemError:.*",
+            "explanation": "This error means the Python interpreter encountered an internal problem it couldn't handle more specifically. It's usually not a bug in *your* Python code's logic, but rather an issue within the Python interpreter itself, an extension module written in C (like those used by many powerful libraries), or an underlying system library that Python is interacting with. It's Python's way of saying 'something unexpected and low-level went wrong' that prevented it from continuing normally.",
+            "fix": "1. **Update Components:** Ensure your Python version, any involved third-party libraries (especially those with C extensions), and your operating system are up-to-date. Outdated components can sometimes lead to unexpected internal conflicts. \n2. **Reinstall:** Try reinstalling the problematic library or even Python itself. Corrupted installations can cause internal errors. \n3. **Isolate:** If possible, try to create a minimal example that consistently reproduces the error. This helps pinpoint the exact trigger and narrows down the potential cause. \n4. **Environment Check:** Verify your system environment variables, library paths, and system dependencies are correctly configured for your Python installation and any relevant third-party libraries. \n5. **Report a Bug:** If the error is consistent, reproducible, and you suspect it's a bug in Python itself or a specific library, report it to the respective project's issue tracker, including your minimal reproducible example and environment details."
+        },
+        {
+            "pattern": "AssertionError",
+            "explanation": "An AssertionError occurs when an 'assert' statement in your Python code fails. The 'assert' statement is used to check if a condition is true. If the condition evaluates to 'False', Python immediately stops execution and raises this error. It's commonly used during development for internal sanity checks and to ensure that certain conditions that *should always* be true, indeed are, indicating a bug if they are not.",
+            "fix": "1.  **Locate the 'assert' statement**: Look at the traceback to find the exact line where the AssertionError was raised. It will point to an 'assert' statement. \n2.  **Understand the condition**: Identify the condition that the 'assert' statement was checking. For example, in 'assert x > 0', the condition is 'x > 0'.\n3.  **Debug why it's False**: Use print statements, a debugger (like pdb), or review the code logic leading up to the 'assert' to understand why the condition evaluated to 'False'. This usually means a variable has an unexpected value or there's a flaw in your program's logic.\n4.  **Fix the underlying bug**: Once you understand why the condition was 'False', correct the logic or data that led to that incorrect state. An AssertionError often signals a deeper bug that needs fixing, rather than just removing or ignoring the assertion."
+        },
+        {
+            "pattern": "ReferenceError: weakly-referenced object no longer exists",
+            "explanation": "This error occurs when you attempt to use a 'weak reference' (created using Python's `weakref` module) to access an object, but the original object it pointed to has already been deleted or 'garbage collected' by Python. A weak reference is like a sticky note that points to an object, but it doesn't prevent that object from being removed from memory if no other 'strong' references are pointing to it. When you try to use the sticky note after the object it points to is gone, you get this error.",
+            "fix": "Before attempting to use the object retrieved from a weak reference, always check if the object still exists. You can do this by calling the weak reference object itself (e.g., `my_weak_ref()`). If it returns `None`, the original object has been garbage collected, and you should handle this scenario gracefully (e.g., by skipping the operation or creating a new object). If it returns the object, then you can safely use it. If you intend for the object to persist for a certain duration, ensure there is at least one 'strong' reference to it elsewhere in your code for that period."
+        },
+        {
+            "pattern": "^UnicodeDecodeError:.*",
+            "explanation": "This error happens when Python tries to convert a sequence of raw bytes into a human-readable text string (this process is called 'decoding'), but it encounters bytes that it doesn't understand according to the specified (or assumed) character encoding. Imagine trying to read a book written in French using only a German dictionary; some words just won't make sense. Similarly, if your data is encoded in, say, Latin-1, but Python tries to decode it as UTF-8, it will stumble upon byte sequences that aren't valid UTF-8 characters.",
+            "fix": "The primary fix is to explicitly tell Python the correct character encoding of the data you're working with. When opening files, use the `encoding` parameter in the `open()` function (e.g., `open('filename.txt', 'r', encoding='latin-1')`). When decoding byte sequences directly, use the `decode()` method with the correct encoding (e.g., `my_bytes.decode('utf-8')`). Common encodings to try if you're unsure include `'utf-8'` (most common), `'latin-1'`, `'cp1252'`, or `'iso-8859-1'`. If some data loss is acceptable and you just want to avoid the error, you can also use the `errors` parameter (e.g., `my_bytes.decode('utf-8', errors='ignore')` to skip invalid characters, or `errors='replace'` to substitute them with a placeholder character like `\\ufffd`)."
+        },
+        {
+            "pattern": "UnicodeTranslateError",
+            "explanation": "This error occurs when Python tries to convert (translate) text data from one character encoding to another, but encounters a character or byte sequence that is invalid or unrepresentable in the target encoding. Imagine you have a document written in a language with special characters and you try to save it using a very basic alphabet that doesn't have those characters; this error means Python encountered one of those 'untranslatable' characters.",
+            "fix": "The most common reason for this error is using the wrong encoding when reading from or writing to a file, or when processing data from a network or external source. You need to identify the correct character encoding of the data you're working with.\n\n1.  **Identify the correct encoding**: Check the source of your data. If it's a file, the creator might know. If it's web data, check HTTP headers. Common encodings include 'utf-8' (most common and versatile), 'latin-1', 'cp1252', 'ascii'.\n2.  **Specify the encoding**: When opening files, always specify the encoding. For example, if you're reading a UTF-8 file: `open('your_file.txt', 'r', encoding='utf-8')`. If you're writing a file: `open('output.txt', 'w', encoding='utf-8')`.\n3.  **Ensure consistency**: Make sure the encoding you *use* matches the encoding the data *actually has*.\n4.  **Error Handling (last resort)**: If you cannot determine the correct encoding or if you're dealing with mixed or malformed data, you can instruct Python to handle errors during encoding/decoding, but be aware this can lead to data loss. For example: `your_string.encode('ascii', errors='ignore')` or `your_bytes.decode('utf-8', errors='replace')`."
+        },
+        {
+            "pattern": "WindowsError",
+            "explanation": "This error occurs when your Python code is running on a Windows operating system and encounters a problem while trying to perform an operation that interacts directly with the underlying Windows system. It means a low-level system call or an attempt to use a Windows-specific feature has failed. The `WindowsError` class itself is only defined on Windows, indicating the issue stems from a Windows-specific operation.",
+            "fix": "To fix this, you need to examine the detailed error message that accompanies `WindowsError` in your traceback. This message often provides specific clues about why the Windows operation failed.\n1.  **Read the full error message:** Look for phrases like 'Access is denied', 'The system cannot find the file specified', or specific error codes (e.g., `[Errno 2]`). This is crucial for understanding the exact nature of the problem.\n2.  **Check paths and existence:** If the error relates to files or directories, verify that the paths are correct and that the files/folders actually exist.\n3.  **Verify permissions:** Ensure that your Python script or the user running it has the necessary permissions to perform the requested operation (e.g., read, write, create, delete).\n4.  **Review Windows-specific code:** If you are using libraries or code that directly interface with Windows APIs (like `pywin32`, `ctypes` for specific DLLs), double-check that your usage is correct and compatible with your Windows version.\n5.  **Try running as administrator:** For some operations, your script might require elevated privileges. Try running your Python script with administrative rights."
+        },
+        {
+            "pattern": "ChildProcessError",
+            "explanation": "Your Python code tried to run another program or process (like a command you'd type in a terminal), but something went wrong when Python tried to start, communicate with, or finish running that external 'child' process. This error indicates a failure in the interaction with the external program, not necessarily a bug in your Python code's logic itself.",
+            "fix": "1.  **Verify the external command/program:** Ensure the program or command you're trying to run (e.g., using the `subprocess` module) actually exists on your system. Often, the program might be missing or misnamed. \n2.  **Check its path:** If the program isn't in your system's PATH environment variable, provide its full, absolute path in your Python code. \n3.  **Permissions:** Make sure your Python script has the necessary permissions to execute the external program. \n4.  **Arguments and Syntax:** Double-check the arguments you're passing to the external program; incorrect arguments or syntax for the child process can cause it to fail. \n5.  **Review the child process's output:** If using `subprocess`, capture `stdout` and especially `stderr` from the child process. The output on `stderr` often contains specific error messages from the external program itself that can tell you exactly why it failed."
+        },
+        {
+            "pattern": "ConnectionError",
+            "explanation": "A ConnectionError means your Python program tried to connect to an external resource (like a website, a database server, or another program on the network), but the connection attempt failed. This is often due to the remote resource being unavailable, incorrect connection details, or network issues preventing your program from reaching its destination. It's like trying to call someone, but their phone is off, the number is wrong, or there's no signal.",
+            "fix": "1. **Verify the target service:** Ensure the service you're trying to connect to is running and accessible. Try accessing it manually (e.g., open a web URL in a browser, connect to a database with a client tool). 2. **Check connection details:** Double-check the hostname/IP address, port number, and any other connection parameters in your code for typos. 3. **Inspect network connectivity:** Ensure your computer has a working internet connection and that no firewalls (on your machine or the remote server) are blocking the connection. If you're behind a proxy, ensure your Python environment is configured to use it. 4. **Review service status:** The remote service might be temporarily down or experiencing high load. Wait a bit and try again. 5. **Consider timeouts and retries:** If the service is slow or intermittently available, implement a reasonable connection timeout and consider adding retry logic with exponential backoff to handle transient network issues more gracefully."
+        },
+        {
+            "pattern": "BrokenPipeError",
+            "explanation": "This error occurs when your program tries to write data to a communication channel (like a pipe to another process, a network socket, or even a file system pipe) but the receiving end of that channel has unexpectedly closed, disconnected, or terminated. It's like trying to talk into a phone when the person on the other end has already hung up.",
+            "fix": "1. **Implement `try...except BrokenPipeError`**: Wrap your write operations in a `try` block and catch `BrokenPipeError`. This allows your program to handle the situation gracefully, perhaps by logging the error and cleaning up resources, instead of crashing. 2. **Verify Receiver Status**: Before writing, check if the receiving process or connection is still active and open. If you're using subprocesses, ensure the subprocess is still running. 3. **Ensure Proper Shutdown**: Make sure the receiving end of your communication doesn't close prematurely. Design your inter-process communication or network protocols to handle graceful disconnections and ensure all data is sent and received before either side shuts down."
+        },
+        {
+            "pattern": "ConnectionRefusedError",
+            "explanation": "This error means your Python program tried to connect to another service (like a website, a database, or another program running on a server), but the connection was actively rejected by the target. It's like trying to call a phone number, and instead of just ringing, you get an immediate 'number not available' message. This often happens because the service you're trying to reach isn't running, isn't listening on the expected address/port, or a firewall is blocking the attempt.",
+            "fix": "1. **Check if the target service is running:** Ensure the server, database, API, or application you're trying to connect to is actually started and operational. \n2. **Verify IP address and port:** Double-check that your code is attempting to connect to the correct IP address (or hostname) and port number. Common mistakes include using `localhost` when the service is remote, or using an incorrect port.\n3. **Check firewall settings:** A firewall (on your machine, the target server, or network) might be blocking the connection on that specific port. You may need to configure a rule to allow the connection.\n4. **Ensure the service is listening correctly:** If the service is running, make sure it's configured to listen for incoming connections on the correct network interface (e.g., `0.0.0.0` for all interfaces, not just `127.0.0.1` if you're connecting from a different machine)."
+        },
+        {
+            "pattern": "ConnectionResetError",
+            "explanation": "Imagine you're talking on the phone to someone, and suddenly the line goes dead without them saying goodbye. That's essentially what a `ConnectionResetError` is. It means the other end of your network connection (like a web server, database, or another program) unexpectedly closed the connection. Your program was trying to send or receive data, but the other side just cut you off.",
+            "fix": "1. **Check the other end:** First, ensure the server, database, or service you're trying to connect to is actually running, accessible, and not overloaded. It might have crashed, restarted, or be experiencing high traffic. \n2. **Network/Firewall:** Verify your network connection and any firewalls (both local and remote) that might be interfering. Firewalls can sometimes abruptly close connections if they detect suspicious activity or enforce timeouts.\n3. **Application Logic:** If your program is a client, ensure it's not trying to send data on a connection that the server has already decided to close. Implement `try-except` blocks around network operations to gracefully handle this error, perhaps by retrying the connection after a short delay or logging the incident.\n4. **Server-Side Logs:** If you control the server-side, check its logs for any errors or explanations as to why it might be closing connections. This could be due to resource limits, bugs, or specific server configuration/timeouts."
+        }
+    ],
+    "default": {
+        "explanation": "This is an unknown error. The tool couldn't find a specific match.",
+        "fix": "Try copying the last line of the error into a search engine or StackOverflow."
     }
-  ],
-  "default": {
-    "explanation": "This is an unknown error. The tool couldn't find a specific match.",
-    "fix": "Try copying the last line of the error into a search engine or StackOverflow."
-  }
 }
