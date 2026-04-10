@@ -18,6 +18,13 @@ def print_result(result: dict):
     
     if "file" in result:
         print(f"{Colors.YELLOW} Location: {result['file']} (Line {result['line']}){Colors.RESET}\n")
+        if result.get("code"):
+            print(f"{Colors.RESET}   |")
+            print(f"{Colors.RESET}   |  {Colors.RED}{result['code']}{Colors.RESET}")
+            print(f"{Colors.RESET}   |\n")
+        else:
+            print("\n")
+
     else:
         print()
     

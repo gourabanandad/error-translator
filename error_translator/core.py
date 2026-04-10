@@ -12,7 +12,8 @@ def load_rules():
         return json.load(file)
 
 def translate_error(traceback_text: str) -> dict:
-    import re # Lazy import
+    import re
+    import linecache  # <-- NEW: Lazy import the linecache module
     
     data = load_rules()
     rules = data["rules"]
@@ -24,13 +25,23 @@ def translate_error(traceback_text: str) -> dict:
     
     actual_error_line = lines[-1]
 
-    # Flexible regex to catch single or double quotes, and handle missing ones
     location_match = re.search(r'File\s+[\'"]?(.*?)[\'"]?,\s+line\s+(\d+)', traceback_text)
     file_name = location_match.group(1) if location_match else "Unknown File"
     line_number = location_match.group(2) if location_match else "Unknown Line"
 
+    # --- NEW CONTEXT ENGINE LOGIC ---
+    code_context = ""
+    if file_name != "Unknown File" and line_number != "Unknown Line":
+        try:
+            # linecache safely fetches the exact line of code as a string
+            raw_line = linecache.getline(file_name, int(line_number))
+            if raw_line:
+                code_context = raw_line.strip() # Remove extra spaces/newlines
+        except Exception:
+            pass # If the file can't be read for any reason, fail silently
+    # --------------------------------
+
     for rule in rules:
-        # Compile the regex pattern on the fly
         pattern = re.compile(rule["pattern"])
         match = pattern.search(actual_error_line)
         
@@ -41,7 +52,8 @@ def translate_error(traceback_text: str) -> dict:
                 "fix": rule["fix"].format(*extracted_values),
                 "matched_error": actual_error_line,
                 "file": file_name,
-                "line": line_number
+                "line": line_number,
+                "code": code_context 
             }
 
     return {
@@ -49,5 +61,6 @@ def translate_error(traceback_text: str) -> dict:
         "fix": default_error["fix"],
         "matched_error": actual_error_line,
         "file": file_name,
-        "line": line_number
+        "line": line_number,
+        "code": code_context      
     }

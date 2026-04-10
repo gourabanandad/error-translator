@@ -39,6 +39,36 @@
       "pattern": "AttributeError: '(.*)' object has no attribute '(.*)'",
       "explanation": "You are trying to use a method or property named '{1}' on a {0} object, but {0}s don't have that capability.",
       "fix": "Check the spelling of '{1}'. If it's correct, verify that your variable is actually the data type you think it is."
+    },
+    {
+      "pattern": "SyntaxError: invalid syntax",
+      "explanation": "Python doesn't understand your code's grammar. You might be missing a colon, parenthesis, or quote.",
+      "fix": "Check the line where the error occurred (and the line before it) for missing characters or typos."
+    },
+    {
+      "pattern": "IndentationError: expected an indented block",
+      "explanation": "Python expected indented code after a statement like 'def', 'if', 'for', or 'while', but didn't find it.",
+      "fix": "Add indentation (usually 4 spaces) to the line(s) following the statement that ends with a colon."
+    },
+    {
+      "pattern": "IndentationError: unexpected indent",
+      "explanation": "You added extra indentation where Python didn't expect it.",
+      "fix": "Remove the extra spaces or tabs at the beginning of the line mentioned in the error."
+    },
+    {
+      "pattern": "ValueError: invalid literal for int\\(\\) with base 10: '(.*)'",
+      "explanation": "You tried to convert the string '{0}' to an integer, but it doesn't contain a valid whole number.",
+      "fix": "Make sure the string only contains digits. If it contains a decimal, convert it to a float first."
+    },
+    {
+      "pattern": "FileNotFoundError: \\\\[Errno 2\\\\] No such file or directory: '(.*)'",
+      "explanation": "Python tried to open the file '{0}', but it doesn't exist at that location.",
+      "fix": "Check if your file path is correct, the file exists, and you are running the script from the correct directory."
+    },
+    {
+      "pattern": "ImportError: cannot import name '(.*)' from '(.*)'",
+      "explanation": "You tried to import '{0}' from the module '{1}', but it can't be found there.",
+      "fix": "Check if '{0}' is spelled correctly, or if '{1}' actually has a function/class named '{0}'. It could also be a circular import."
     }
   ],
   "default": {

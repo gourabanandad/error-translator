@@ -7,7 +7,7 @@ def test_name_error_translation_double_quotes():
     print(my_variable)
 NameError: name 'my_variable' is not defined"""
 
-    result = translate_error(mock_traceback)
+    result = error_translator(mock_traceback)
     
     assert "my_variable" in result["explanation"]
     assert result["file"] == "script.py"
@@ -20,7 +20,7 @@ def test_name_error_translation_single_quotes():
     print(my_variable)
 NameError: name 'my_variable' is not defined"""
 
-    result = translate_error(mock_traceback)
+    result = error_translator(mock_traceback)
     
     assert result["file"] == "script.py"
     assert result["line"] == "2"
@@ -29,7 +29,7 @@ def test_unknown_error_fallback():
     """Test that garbage input returns the default safe message."""
     mock_traceback = "Something completely random went wrong here."
     
-    result = translate_error(mock_traceback)
+    result = error_translator(mock_traceback)
     
     assert "unknown error" in result["explanation"]
     assert result["matched_error"] == "Something completely random went wrong here."
