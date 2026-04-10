@@ -61,5 +61,10 @@ Currently, the tool can accurately diagnose and explain the following Python err
 
 *Note: More error definitions are actively being added to the database.*
 
+## Cloud API
+This tool includes a built-in FastAPI server so you can integrate the translation engine into your own web apps or VS Code extensions.
+```bash
+uvicorn error_translator.server:app --reload
+
 ---
 Built by Gourabananda Datta.
