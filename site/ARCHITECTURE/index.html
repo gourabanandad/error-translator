@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#system-architecture" class="md-skip">
+        <a href="#architecture-one-core-engine-multiple-tools" class="md-skip">
           Skip to content
         </a>
       
@@ -323,10 +323,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#architectural-goals" class="md-nav__link">
+  <a href="#the-core-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architectural goals
+        The Core Engine
       
     </span>
   </a>
@@ -334,10 +334,82 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#high-level-flow" class="md-nav__link">
+  <a href="#tool-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        High-level flow
+        Tool Surfaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tool Surfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-magic-import-auto-hook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Magic Import Auto-Hook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-python-native-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python Native API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fastapi-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FastAPI Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-vs-code-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. VS Code Extension
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Flow
       
     </span>
   </a>
@@ -345,10 +417,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#runtime-components" class="md-nav__link">
+  <a href="#runtime-contract" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Runtime components
+        Runtime Contract
       
     </span>
   </a>
@@ -356,43 +428,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#translation-lifecycle" class="md-nav__link">
+  <a href="#extension-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Translation lifecycle
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#output-contract" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output contract
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extension-strategy-for-contributors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Extension strategy for contributors
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supporting-development-scripts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Supporting development scripts
+        Extension Strategy
       
     </span>
   </a>
@@ -461,10 +500,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#architectural-goals" class="md-nav__link">
+  <a href="#the-core-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architectural goals
+        The Core Engine
       
     </span>
   </a>
@@ -472,10 +511,82 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#high-level-flow" class="md-nav__link">
+  <a href="#tool-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        High-level flow
+        Tool Surfaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tool Surfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-magic-import-auto-hook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Magic Import Auto-Hook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-python-native-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python Native API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fastapi-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FastAPI Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-vs-code-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. VS Code Extension
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Flow
       
     </span>
   </a>
@@ -483,10 +594,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#runtime-components" class="md-nav__link">
+  <a href="#runtime-contract" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Runtime components
+        Runtime Contract
       
     </span>
   </a>
@@ -494,43 +605,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#translation-lifecycle" class="md-nav__link">
+  <a href="#extension-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Translation lifecycle
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#output-contract" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output contract
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extension-strategy-for-contributors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Extension strategy for contributors
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supporting-development-scripts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Supporting development scripts
+        Extension Strategy
       
     </span>
   </a>
@@ -554,99 +632,68 @@
 
 
 
-<h1 id="system-architecture">System Architecture<a class="headerlink" href="#system-architecture" title="Permanent link">&para;</a></h1>
-<p>This document describes the runtime architecture of Error Translator and the extension points contributors should use when evolving the project.</p>
-<h2 id="architectural-goals">Architectural goals<a class="headerlink" href="#architectural-goals" title="Permanent link">&para;</a></h2>
+<h1 id="architecture-one-core-engine-multiple-tools">Architecture: One Core Engine, Multiple Tools<a class="headerlink" href="#architecture-one-core-engine-multiple-tools" title="Permanent link">&para;</a></h1>
+<p>Error Translator is built on a single translation engine that powers multiple delivery surfaces.</p>
 <ul>
-<li><strong>Deterministic translation</strong> from traceback text to structured guidance.</li>
-<li><strong>Single core engine</strong> reused by CLI, import hook, and API surfaces.</li>
-<li><strong>Rule-driven behavior</strong> so most enhancements avoid risky core rewrites.</li>
-<li><strong>Incremental extensibility</strong> through AST handlers and tests.</li>
+<li>One core engine: error parsing, regex matching, AST inspection, and JSON output.</li>
+<li>Multiple tools: CLI, Magic Import auto-hook, Python native API, FastAPI server, and VS Code extension.</li>
 </ul>
-<h2 id="high-level-flow">High-level flow<a class="headerlink" href="#high-level-flow" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart TD
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    Input[Traceback text] --&gt; Core[core.translate_error]
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    Core --&gt; Rules[rules.json]
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    Core --&gt; AST[ast_handlers.py]
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    Core --&gt; Result[Translation dictionary]
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    Result --&gt; CLI[cli.py terminal output]
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    Result --&gt; Auto[auto.py sys.excepthook]
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    Result --&gt; API[server.py FastAPI response]
+<p>This keeps behavior consistent across terminal workflows, editor UX, and backend integrations.</p>
+<h2 id="the-core-engine">The Core Engine<a class="headerlink" href="#the-core-engine" title="Permanent link">&para;</a></h2>
+<p>The core engine lives in error_translator/core.py and owns all translation logic.</p>
+<p>It does four things fast:</p>
+<ol>
+<li>Extracts the final error line from traceback input.</li>
+<li>Matches against the local regex rule database.</li>
+<li>Runs AST inspection only when an error type benefits from deeper context.</li>
+<li>Returns structured JSON-style output for any renderer.</li>
+</ol>
+<h2 id="tool-surfaces">Tool Surfaces<a class="headerlink" href="#tool-surfaces" title="Permanent link">&para;</a></h2>
+<h3 id="1-cli">1. CLI<a class="headerlink" href="#1-cli" title="Permanent link">&para;</a></h3>
+<p>explain-error can run scripts, translate raw error strings, or process piped logs.</p>
+<h3 id="2-magic-import-auto-hook">2. Magic Import Auto-Hook<a class="headerlink" href="#2-magic-import-auto-hook" title="Permanent link">&para;</a></h3>
+<p>import error_translator.auto overrides sys.excepthook and auto-translates unhandled crashes.</p>
+<h3 id="3-python-native-api">3. Python Native API<a class="headerlink" href="#3-python-native-api" title="Permanent link">&para;</a></h3>
+<p>from error_translator.core import translate_error gives backend code direct access to JSON output.</p>
+<h3 id="4-fastapi-server">4. FastAPI Server<a class="headerlink" href="#4-fastapi-server" title="Permanent link">&para;</a></h3>
+<p>error_translator.server exposes the same engine over HTTP for service environments.</p>
+<h3 id="5-vs-code-extension">5. VS Code Extension<a class="headerlink" href="#5-vs-code-extension" title="Permanent link">&para;</a></h3>
+<p>The extension calls a PyInstaller-frozen executable of the same engine.</p>
+<p>Why this matters:</p>
+<ul>
+<li>No Python environment setup required in the extension runtime path.</li>
+<li>Very low startup overhead for hover interactions.</li>
+<li>Consistent translation behavior with the CLI path.</li>
+</ul>
+<h2 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A[User Input: CLI / VS Code / Auto-Hook / API] --&gt; B[Regex DB Matcher]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; C{Needs deeper context?}
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    C -- No --&gt; D[JSON Output]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    C -- Yes --&gt; E[AST Inspection]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    E --&gt; D
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    D --&gt; F[Rendered UI: Terminal / Hover / API Response]
 </code></pre></div>
-<h2 id="runtime-components">Runtime components<a class="headerlink" href="#runtime-components" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Component</th>
-<th>Responsibility</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>error_translator/core.py</code></td>
-<td>Parses traceback text, selects the final error line, matches rules, and returns a translation dictionary.</td>
-</tr>
-<tr>
-<td><code>error_translator/rules.json</code></td>
-<td>Stores regex patterns and associated explanation/fix templates.</td>
-</tr>
-<tr>
-<td><code>error_translator/ast_handlers.py</code></td>
-<td>Adds optional contextual insights for selected error categories.</td>
-</tr>
-<tr>
-<td><code>error_translator/cli.py</code></td>
-<td>Implements the <code>explain-error</code> command and user-facing terminal formatting.</td>
-</tr>
-<tr>
-<td><code>error_translator/auto.py</code></td>
-<td>Installs a custom <code>sys.excepthook</code> for automatic translation of unhandled exceptions.</td>
-</tr>
-<tr>
-<td><code>error_translator/server.py</code></td>
-<td>Exposes <code>GET /</code> and <code>POST /translate</code> endpoints through FastAPI.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="translation-lifecycle">Translation lifecycle<a class="headerlink" href="#translation-lifecycle" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Receive traceback text from CLI input, API request, or intercepted exception.</li>
-<li>Extract the final non-empty error line.</li>
-<li>Parse traceback metadata (<code>file</code>, <code>line</code>) when available.</li>
-<li>Evaluate regex rules in <code>rules.json</code> in order.</li>
-<li>Render explanation/fix templates using matched capture groups.</li>
-<li>Read source code context from disk when file and line are known.</li>
-<li>Query AST insight handlers when relevant.</li>
-<li>Return a stable dictionary for downstream rendering.</li>
-</ol>
-<h2 id="output-contract">Output contract<a class="headerlink" href="#output-contract" title="Permanent link">&para;</a></h2>
-<p>Primary response fields:</p>
+<h2 id="runtime-contract">Runtime Contract<a class="headerlink" href="#runtime-contract" title="Permanent link">&para;</a></h2>
+<p>Every entry point gets a predictable translation object with fields like:</p>
 <ul>
-<li><code>explanation</code></li>
-<li><code>fix</code></li>
-<li><code>matched_error</code></li>
-<li><code>file</code></li>
-<li><code>line</code></li>
-<li><code>code</code></li>
-<li><code>ast_insight</code> (optional)</li>
+<li>explanation</li>
+<li>fix</li>
+<li>matched_error</li>
+<li>file</li>
+<li>line</li>
+<li>code</li>
+<li>ast_insight</li>
 </ul>
-<p>Contributors should preserve this contract unless there is a strong compatibility rationale and corresponding versioning discussion.</p>
-<h2 id="extension-strategy-for-contributors">Extension strategy for contributors<a class="headerlink" href="#extension-strategy-for-contributors" title="Permanent link">&para;</a></h2>
-<p>Use this order of operations when improving behavior:</p>
+<p>Stable output shape is intentional. It keeps integrations simple and lowers maintenance cost.</p>
+<h2 id="extension-strategy">Extension Strategy<a class="headerlink" href="#extension-strategy" title="Permanent link">&para;</a></h2>
+<p>When improving behavior, use this order:</p>
 <ol>
-<li><strong>Rule change first</strong> (<code>rules.json</code>) for coverage or wording improvements.</li>
-<li><strong>AST handler updates</strong> for context-aware suggestions.</li>
-<li><strong>Core pipeline changes</strong> only when rule-driven options are insufficient.</li>
-<li><strong>Test updates</strong> to lock in intended behavior.</li>
-<li><strong>Documentation updates</strong> to describe current behavior precisely.</li>
+<li>Update rules first in error_translator/rules.json.</li>
+<li>Add AST handlers only for cases where rules alone are insufficient.</li>
+<li>Touch core pipeline last, and only for cross-cutting improvements.</li>
+<li>Lock behavior with tests in tests/test_core.py.</li>
 </ol>
-<h2 id="supporting-development-scripts">Supporting development scripts<a class="headerlink" href="#supporting-development-scripts" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>builder.py</code>: assists with rule draft generation from scraped exception data.</li>
-<li><code>scraper.py</code>: refreshes the exception dataset used by the builder workflow.</li>
-</ul>
-<p>These scripts are optional and not required for the runtime translation path.</p>
 
 
 

@@ -1,82 +1,98 @@
 # Contributing to Error Translator
 
-Thank you for contributing to Error Translator. This guide defines the working standards for code, rules, tests, and documentation so the project remains reliable and easy to maintain.
+First open-source contribution? You are absolutely welcome here.
 
-## Contribution principles
+This project is intentionally beginner-friendly. Most improvements happen in one JSON file, and many meaningful contributions require zero Python coding.
 
-- **Clarity over cleverness**: prefer straightforward logic and plain language.
-- **Small, reviewable changes**: scoped PRs are easier to test and maintain.
-- **Tests with behavior changes**: new behavior should be covered by regression tests.
-- **Docs as part of the feature**: user-facing behavior changes require documentation updates.
+## New Contributor Path
 
-## Local setup
+1. Pick one real traceback that confused you.
+2. Add or improve one rule in error_translator/rules.json.
+3. Run tests.
+4. Open a PR with your sample traceback and expected explanation.
 
-```bash
+That alone is a high-value contribution.
+
+If you get stuck at any point, open a draft PR anyway and ask for help. Maintainers will guide you.
+
+## Local Setup
+
+~~~bash
 pip install -r requirements.txt
 pytest
-```
+~~~
 
-If tests pass, the environment is ready for contribution work.
+If tests pass, you are ready.
 
-## Where to make changes
+## Easiest Way to Contribute: Add a Rule
 
-- `error_translator/rules.json`:
-  - Add or improve regex patterns, explanations, and fixes.
-  - Preferred location for most translation improvements.
-- `error_translator/core.py`:
-  - Update matching/parsing flow only when rule changes are insufficient.
-- `error_translator/ast_handlers.py`:
-  - Add contextual source-aware insights for specific error families.
-- `tests/test_core.py`:
-  - Add coverage for any changed behavior.
-- `README.md` and `docs/`:
-  - Keep onboarding and operational guidance accurate.
+You can extend coverage without writing any Python.
 
-## Recommended workflow
+Open error_translator/rules.json and add a new object to the rules array.
 
-1. Identify one concrete issue (incorrect match, unclear fix, missing docs, etc.).
-2. Reproduce it with a traceback sample.
-3. Implement the minimal fix in rule, code, or docs.
-4. Add/adjust tests.
-5. Run `pytest`.
-6. Re-read modified docs for correctness and tone.
+Use this copy-paste template:
 
-## Rule authoring standards
+~~~json
+{
+  "pattern": "ValueError: invalid literal for int\\(\\) with base 10: '(.*)'",
+  "explanation": "You tried to convert '{0}' into an integer, but it is not a valid whole number.",
+  "fix": "Make sure '{0}' only contains digits, or parse it as float first if decimals are expected."
+}
+~~~
 
-When adding or refining a rule:
+Example where this helps:
 
-- Match as specifically as practical to avoid false positives.
-- Keep explanations concise, neutral, and actionable.
-- Keep fixes concrete (what to change and where to look).
-- Avoid broad language that could describe many unrelated failures.
-- Validate with at least one representative test case.
+Input error line:
 
-## Documentation standards
+~~~text
+ValueError: invalid literal for int() with base 10: '12.7'
+~~~
 
-To keep docs professional and useful for future contributors:
+Result after matching:
 
-- Use clear headings and short paragraphs.
-- Define terms before using project-specific shorthand.
-- Prefer imperative guidance for contributor steps.
-- Avoid promises not backed by current implementation.
-- Update docs in the same PR as behavior changes.
+- {0} becomes 12.7
+- Your explanation and fix are filled in automatically
 
-## Optional maintenance tools
+How placeholders work:
 
-- `python builder.py`:
-  - Generates draft rules from the scraped dataset.
-  - Requires `GEMINI_API_KEY`.
-- `python scraper.py`:
-  - Refreshes `scraped_errors_database.json` from Python documentation.
+- (.*) captures dynamic text from the error message.
+- {0}, {1}, and so on insert those captured values into explanation and fix.
 
-## Pull request readiness checklist
+## Rule Writing Tips
 
-Before opening a PR, verify:
+- Keep patterns specific to avoid accidental matches.
+- Keep explanations short and plain-language.
+- Keep fixes actionable and immediate.
+- Prefer one focused rule over one very broad rule.
 
-- [ ] Scope is focused and reviewable.
-- [ ] Tests pass locally (`pytest`).
-- [ ] Changed behavior has test coverage.
-- [ ] Docs were updated where needed.
-- [ ] Wording is clear for future contributors.
+## Where Changes Usually Go
 
-Thanks again for helping improve the project for the next contributor.
+- error_translator/rules.json for new or improved translations
+- tests/test_core.py for behavior checks
+- README.md and docs for user-facing updates
+
+Only edit core engine files when rule-based changes are not enough.
+
+## Pull Request Checklist
+
+- [ ] I tested locally with pytest.
+- [ ] I included a sample traceback in my PR description.
+- [ ] My explanation is clear to a beginner.
+- [ ] My fix is concrete and actionable.
+- [ ] I updated docs if behavior changed.
+
+## Suggested GIF for Your PR
+
+Record a short terminal clip that shows:
+
+1. Running explain-error on a failing traceback before your rule.
+2. Adding your JSON rule in rules.json.
+3. Running explain-error again to show the improved translation.
+
+Record this as a short terminal GIF at normal speed with readable font size.
+
+Ideal length: 15-30 seconds.
+
+This makes review faster and helps maintainers merge with confidence.
+
+Thanks for building this with us.

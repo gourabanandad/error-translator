@@ -1,93 +1,114 @@
-# Error Translator Documentation
+# Error Translator
 
-Welcome to the project documentation for **Error Translator**, a local Python toolkit that transforms traceback output into concise, actionable explanations.
+[![PyPI Version](https://img.shields.io/pypi/v/error-translator-cli-v2.svg)](https://pypi.org/project/error-translator-cli-v2/)
+[![Python Version](https://img.shields.io/pypi/pyversions/error-translator-cli-v2.svg)](https://pypi.org/project/error-translator-cli-v2/)
+[![License](https://img.shields.io/github/license/gourabanandad/error-translator)](https://github.com/gourabanandad/error-translator)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/gourabanandad/error-translator/ci.yml?branch=master&label=build)](https://github.com/gourabanandad/error-translator/actions/workflows/ci.yml)
 
-This documentation is written for three audiences:
+Translate raw Python tracebacks into developer-ready fixes in milliseconds with one offline engine powering CLI, APIs, and editor hovers.
 
-- **Users** who want fast error explanations from the CLI.
-- **Integrators** who want to consume translation results from code or HTTP.
-- **Contributors** who want to improve rules, architecture, and documentation over time.
+## Show, Don’t Tell
 
-## Project overview
+### Raw traceback
 
-Error Translator reads traceback text, extracts the final error line, and matches it against curated regex rules. It then enriches the response with available traceback metadata (file, line, code) and optional AST-based insights.
+~~~text
+Traceback (most recent call last):
+  File "app.py", line 14, in <module>
+    total = "Users: " + 42
+TypeError: can only concatenate str (not "int") to str
+~~~
 
-The result is a consistent structure that can be rendered in terminals, returned by API endpoints, or consumed by custom tooling.
+### Translated output
 
-!!! tip "Design principle"
-    Keep the runtime simple and deterministic. Most enhancements should be expressed as rule and test changes rather than broad engine rewrites.
+~~~markdown
+### Error Detected
+TypeError: can only concatenate str (not "int") to str
 
-## Core outcomes
+### Location
+app.py (line 14)
 
-- Clear explanations designed for humans.
-- Suggested fixes oriented toward immediate action.
-- Stable output fields for downstream integration.
-- Local-first behavior with no required external service.
+### Explanation
+You are trying to add a string to an int, which Python cannot do.
 
-## Installation
+### Suggested Fix
+Convert the int to a string first using str() before concatenating.
+~~~
 
-```bash
+### Colorized terminal view
+
+*When run in a terminal, the output appears as:*
+
+~~~
+🔴 Error Detected:
+TypeError: can only concatenate str (not "int") to str
+
+🟡 Location: app.py (Line 14)
+
+🔵 Explanation:
+You are trying to add a string to an int, which Python cannot do.
+
+🟢 Suggested Fix:
+Convert the int to a string first using str() before concatenating.
+~~~
+
+(Red, yellow, blue, and green text for visual hierarchy in terminal)
+
+##  Quickstart
+
+Install first:
+
+~~~bash
 pip install error-translator-cli-v2
-```
+~~~
 
-For local development:
+### 1. CLI mode (run scripts, strings, or pipes)
 
-```bash
-pip install -r requirements.txt
-```
+~~~bash
+explain-error run script.py
+explain-error "NameError: name 'usr_count' is not defined"
+cat error.log | explain-error
+~~~
 
-## Quick start
+### 2. Magic Import (auto-hook)
 
-### Automatic translation via import hook
-
-```python title="script.py"
+~~~python
 import error_translator.auto
 
-maximum_user_connections = 100
-print(maximum_user_connectons)
-```
+# Unhandled exceptions are auto-translated through sys.excepthook.
+~~~
 
-`error_translator.auto` replaces `sys.excepthook` for that process, translating unhandled exceptions automatically.
+### 3. VS Code Extension
 
-### CLI translation
+Install the Error Translator extension and hover on traceback output.
 
-```bash
-explain-error run script.py
-```
+The extension invokes a PyInstaller-frozen executable of the same core engine for offline, near-zero-latency UI help.
 
-```bash
-explain-error "NameError: name 'x' is not defined"
-```
+## Why Error Translator?
 
-```bash
-cat error.log | explain-error
-```
+- Offline and private: your stack traces never leave your machine.
+- Blazing fast: regex-first matching with targeted AST inspection for typo hints.
+- Editor native: VS Code extension uses a PyInstaller-frozen executable for near-instant hover help.
 
-### API translation
+## Five Core Features
 
-```bash
-uvicorn error_translator.server:app --reload
-```
+1. Magic Import (Auto-Hook)
+2. CLI execution, raw-string translation, and log piping
+3. VS Code extension with frozen offline engine
+4. Python native API via error_translator.core.translate_error
+5. FastAPI server via error_translator.server
 
-`POST /translate` request body:
+## Documentation Map
 
-```json
-{
-  "traceback_setting": "Traceback (most recent call last): ..."
-}
-```
+- Architecture: ARCHITECTURE.md
+- Contributing: CONTRIBUTING.md
 
-## Documentation map
+## Recommended Demo Recording
 
-- **Architecture**: `ARCHITECTURE.md`
-- **Contributor workflow**: `CONTRIBUTING.md`
+Record a 20-30 second GIF that shows this exact flow:
 
-## Contributor first steps
+1. Run a script that throws a NameError caused by a typo.
+2. Show the raw traceback in terminal for one second.
+3. Immediately run explain-error on the same error and show the translated explanation and fix.
+4. Fix the typo and rerun to show success.
 
-If you are new to the repository, start with a small, reviewable improvement:
-
-1. Fix one doc gap, one rule, or one missing test.
-2. Validate with `pytest`.
-3. Keep language user-centric and technically precise.
-
-Professional documentation is a shared responsibility; every merged change should make the next contributor faster.
+This gives new users proof of speed, clarity, and practical value in one clip.
