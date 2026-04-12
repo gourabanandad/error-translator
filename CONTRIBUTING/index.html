@@ -348,10 +348,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#start-here" class="md-nav__link">
+  <a href="#contribution-principles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Start here
+        Contribution principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local setup
       
     </span>
   </a>
@@ -370,10 +381,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-simple-contribution-flow" class="md-nav__link">
+  <a href="#recommended-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A simple contribution flow
+        Recommended workflow
       
     </span>
   </a>
@@ -381,10 +392,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#writing-a-better-rule" class="md-nav__link">
+  <a href="#rule-authoring-standards" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Writing a better rule
+        Rule authoring standards
       
     </span>
   </a>
@@ -392,10 +403,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#helpful-first-prs" class="md-nav__link">
+  <a href="#documentation-standards" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Helpful first PRs
+        Documentation standards
       
     </span>
   </a>
@@ -403,10 +414,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#optional-tools" class="md-nav__link">
+  <a href="#optional-maintenance-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Optional tools
+        Optional maintenance tools
       
     </span>
   </a>
@@ -414,10 +425,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#before-you-open-a-pr" class="md-nav__link">
+  <a href="#pull-request-readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Before you open a PR
+        Pull request readiness checklist
       
     </span>
   </a>
@@ -459,10 +470,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#start-here" class="md-nav__link">
+  <a href="#contribution-principles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Start here
+        Contribution principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local setup
       
     </span>
   </a>
@@ -481,10 +503,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-simple-contribution-flow" class="md-nav__link">
+  <a href="#recommended-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A simple contribution flow
+        Recommended workflow
       
     </span>
   </a>
@@ -492,10 +514,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#writing-a-better-rule" class="md-nav__link">
+  <a href="#rule-authoring-standards" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Writing a better rule
+        Rule authoring standards
       
     </span>
   </a>
@@ -503,10 +525,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#helpful-first-prs" class="md-nav__link">
+  <a href="#documentation-standards" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Helpful first PRs
+        Documentation standards
       
     </span>
   </a>
@@ -514,10 +536,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#optional-tools" class="md-nav__link">
+  <a href="#optional-maintenance-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Optional tools
+        Optional maintenance tools
       
     </span>
   </a>
@@ -525,10 +547,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#before-you-open-a-pr" class="md-nav__link">
+  <a href="#pull-request-readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Before you open a PR
+        Pull request readiness checklist
       
     </span>
   </a>
@@ -553,54 +575,78 @@
 
 
 <h1 id="contributing-to-error-translator">Contributing to Error Translator<a class="headerlink" href="#contributing-to-error-translator" title="Permanent link">&para;</a></h1>
-<p>Thanks for helping improve the project. This guide is meant to make the first contribution feel straightforward, not formal.</p>
-<h2 id="start-here">Start here<a class="headerlink" href="#start-here" title="Permanent link">&para;</a></h2>
-<p>Set up the repository and make sure the tests pass before changing anything:</p>
+<p>Thank you for contributing to Error Translator. This guide defines the working standards for code, rules, tests, and documentation so the project remains reliable and easy to maintain.</p>
+<h2 id="contribution-principles">Contribution principles<a class="headerlink" href="#contribution-principles" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Clarity over cleverness</strong>: prefer straightforward logic and plain language.</li>
+<li><strong>Small, reviewable changes</strong>: scoped PRs are easier to test and maintain.</li>
+<li><strong>Tests with behavior changes</strong>: new behavior should be covered by regression tests.</li>
+<li><strong>Docs as part of the feature</strong>: user-facing behavior changes require documentation updates.</li>
+</ul>
+<h2 id="local-setup">Local setup<a class="headerlink" href="#local-setup" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pytest
 </code></pre></div>
-<p>If that works, you are ready to contribute.</p>
+<p>If tests pass, the environment is ready for contribution work.</p>
 <h2 id="where-to-make-changes">Where to make changes<a class="headerlink" href="#where-to-make-changes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>error_translator/rules.json</code> for better explanations or fixes.</li>
-<li><code>error_translator/core.py</code> if the translation flow itself needs a change.</li>
-<li><code>error_translator/ast_handlers.py</code> if the suggestion needs source-file context.</li>
-<li><code>tests/test_core.py</code> to protect the behavior you changed.</li>
-<li><code>README.md</code> or <code>docs/</code> if the instructions are unclear or incomplete.</li>
+<li><code>error_translator/rules.json</code>:</li>
+<li>Add or improve regex patterns, explanations, and fixes.</li>
+<li>Preferred location for most translation improvements.</li>
+<li><code>error_translator/core.py</code>:</li>
+<li>Update matching/parsing flow only when rule changes are insufficient.</li>
+<li><code>error_translator/ast_handlers.py</code>:</li>
+<li>Add contextual source-aware insights for specific error families.</li>
+<li><code>tests/test_core.py</code>:</li>
+<li>Add coverage for any changed behavior.</li>
+<li><code>README.md</code> and <code>docs/</code>:</li>
+<li>Keep onboarding and operational guidance accurate.</li>
 </ul>
-<h2 id="a-simple-contribution-flow">A simple contribution flow<a class="headerlink" href="#a-simple-contribution-flow" title="Permanent link">&para;</a></h2>
+<h2 id="recommended-workflow">Recommended workflow<a class="headerlink" href="#recommended-workflow" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Choose one small issue to improve.</li>
-<li>Make the smallest change that solves it.</li>
-<li>Add or update a test if the behavior changed.</li>
+<li>Identify one concrete issue (incorrect match, unclear fix, missing docs, etc.).</li>
+<li>Reproduce it with a traceback sample.</li>
+<li>Implement the minimal fix in rule, code, or docs.</li>
+<li>Add/adjust tests.</li>
 <li>Run <code>pytest</code>.</li>
-<li>Open the pull request with a short summary of what changed and why.</li>
+<li>Re-read modified docs for correctness and tone.</li>
 </ol>
-<h2 id="writing-a-better-rule">Writing a better rule<a class="headerlink" href="#writing-a-better-rule" title="Permanent link">&para;</a></h2>
+<h2 id="rule-authoring-standards">Rule authoring standards<a class="headerlink" href="#rule-authoring-standards" title="Permanent link">&para;</a></h2>
+<p>When adding or refining a rule:</p>
 <ul>
-<li>Match the exact final traceback line when possible.</li>
-<li>Keep the regex narrow and specific.</li>
-<li>Write explanations in plain language.</li>
-<li>Make the fix direct and practical.</li>
-<li>Avoid adding extra noise to the rule if the current wording already works.</li>
+<li>Match as specifically as practical to avoid false positives.</li>
+<li>Keep explanations concise, neutral, and actionable.</li>
+<li>Keep fixes concrete (what to change and where to look).</li>
+<li>Avoid broad language that could describe many unrelated failures.</li>
+<li>Validate with at least one representative test case.</li>
 </ul>
-<h2 id="helpful-first-prs">Helpful first PRs<a class="headerlink" href="#helpful-first-prs" title="Permanent link">&para;</a></h2>
+<h2 id="documentation-standards">Documentation standards<a class="headerlink" href="#documentation-standards" title="Permanent link">&para;</a></h2>
+<p>To keep docs professional and useful for future contributors:</p>
 <ul>
-<li>Fix a typo in the docs.</li>
-<li>Improve one rule explanation.</li>
-<li>Add one missing test case.</li>
-<li>Clarify an example in the README.</li>
+<li>Use clear headings and short paragraphs.</li>
+<li>Define terms before using project-specific shorthand.</li>
+<li>Prefer imperative guidance for contributor steps.</li>
+<li>Avoid promises not backed by current implementation.</li>
+<li>Update docs in the same PR as behavior changes.</li>
 </ul>
-<h2 id="optional-tools">Optional tools<a class="headerlink" href="#optional-tools" title="Permanent link">&para;</a></h2>
-<p>If you want a draft for a new rule, run <code>python builder.py</code> after setting <code>GEMINI_API_KEY</code>.</p>
-<p>If you want to refresh the scraped Python exception dataset, run <code>python scraper.py</code>.</p>
-<h2 id="before-you-open-a-pr">Before you open a PR<a class="headerlink" href="#before-you-open-a-pr" title="Permanent link">&para;</a></h2>
+<h2 id="optional-maintenance-tools">Optional maintenance tools<a class="headerlink" href="#optional-maintenance-tools" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The docs still match the code.</li>
-<li>The test suite passes locally.</li>
-<li>The change is focused and easy to review.</li>
-<li>Any new behavior has a test.</li>
+<li><code>python builder.py</code>:</li>
+<li>Generates draft rules from the scraped dataset.</li>
+<li>Requires <code>GEMINI_API_KEY</code>.</li>
+<li><code>python scraper.py</code>:</li>
+<li>Refreshes <code>scraped_errors_database.json</code> from Python documentation.</li>
 </ul>
+<h2 id="pull-request-readiness-checklist">Pull request readiness checklist<a class="headerlink" href="#pull-request-readiness-checklist" title="Permanent link">&para;</a></h2>
+<p>Before opening a PR, verify:</p>
+<ul>
+<li>[ ] Scope is focused and reviewable.</li>
+<li>[ ] Tests pass locally (<code>pytest</code>).</li>
+<li>[ ] Changed behavior has test coverage.</li>
+<li>[ ] Docs were updated where needed.</li>
+<li>[ ] Wording is clear for future contributors.</li>
+</ul>
+<p>Thanks again for helping improve the project for the next contributor.</p>
 
 
 
