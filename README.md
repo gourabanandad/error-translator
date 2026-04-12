@@ -1,24 +1,38 @@
-# Error Translator CLI
+# Error Translator
 
-Error Translator CLI turns Python tracebacks into clear, actionable explanations. It is a local, rule-based tool that reads the final error line, matches it against a curated regex rule set, and returns a structured translation with the original file, line number, code context, and a suggested fix.
+Error Translator is a Python toolkit that converts raw tracebacks into clear, actionable guidance. The project is designed for local use, deterministic output, and easy extension by contributors.
 
-## Highlights
+It can be used as:
 
-- Runs locally with no model inference or external API calls during normal translation.
-- Supports three entry points: automatic crash interception, CLI execution, and direct traceback translation.
-- Extracts file and line information from standard Python tracebacks when available.
-- Includes optional AST-based insight hooks for a few error families.
-- Provides both machine-readable results and colorized terminal output.
+- A CLI (`explain-error`) for direct translation and script execution.
+- An import hook (`error_translator.auto`) for automatic translation of unhandled exceptions.
+- A small FastAPI service (`error_translator.server`) for integrations.
+
+## Why this project exists
+
+Python's default tracebacks are precise but can be difficult for beginners and occasional Python users to act on quickly. Error Translator narrows that gap by matching final traceback lines against a curated set of regex rules and returning:
+
+- A plain-language explanation.
+- A concrete suggested fix.
+- Location/context metadata when available (`file`, `line`, `code`).
+- Optional AST-based hints for selected error families.
+
+## Key capabilities
+
+- **Local and deterministic**: no external API is required for normal translation.
+- **Structured output**: returns a predictable dictionary for CLI, library, and API consumers.
+- **Multiple entry points**: CLI, import hook, and HTTP API share the same core engine.
+- **Contributor-friendly rule model**: behavior is primarily driven by `error_translator/rules.json`.
 
 ## Installation
 
-Install the published package with pip:
+### Install from package
 
 ```bash
 pip install error-translator-cli-v2
 ```
 
-For local development or running the project from source, install the repository dependencies instead:
+### Install for local development
 
 ```bash
 pip install -r requirements.txt
@@ -26,11 +40,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-### 1. Automatic crash interception
-
-Import `error_translator.auto` at the top of a script to replace Python's default exception hook with the translated output.
-
-This is the project's magic import: once imported, any unhandled exception in that process is intercepted and formatted by the translator before Python prints the default traceback.
+### 1) Automatic crash interception
 
 ```python
 import error_translator.auto
@@ -39,33 +49,35 @@ maximum_user_connections = 100
 print(maximum_user_connectons)
 ```
 
-Use this when you want the translation to happen automatically without wrapping your code in a custom try/except block.
+Importing `error_translator.auto` installs a custom `sys.excepthook`, so unhandled exceptions are translated automatically in that process.
 
-### 2. CLI execution
+### 2) CLI mode
 
-Run a script through the CLI and let the tool translate crashes from `stderr`.
+Run a script and translate any failure from `stderr`:
 
 ```bash
 explain-error run script.py
 ```
 
-You can also translate a raw traceback or error string directly:
+Translate a single raw error string:
 
 ```bash
 explain-error "TypeError: unsupported operand type(s) for +: 'int' and 'str'"
 ```
 
-If you want to pipe a saved traceback into the tool, use the shell syntax for your terminal:
-
-```bash
-Get-Content error.log | explain-error
-```
+Pipe traceback text from a file:
 
 ```bash
 cat error.log | explain-error
 ```
 
-### 3. Programmatic use
+PowerShell:
+
+```bash
+Get-Content error.log | explain-error
+```
+
+### 3) Programmatic usage
 
 ```python
 from error_translator.core import translate_error
@@ -74,25 +86,25 @@ result = translate_error(traceback_text)
 print(result["explanation"])
 ```
 
-### 4. HTTP API
+### 4) HTTP API
 
-Start the FastAPI app with Uvicorn:
+Start the API:
 
 ```bash
 uvicorn error_translator.server:app --reload
 ```
 
-`POST /translate` expects JSON in the form:
+`POST /translate` expects:
 
 ```json
 {
-	"traceback_setting": "Traceback (most recent call last): ..."
+  "traceback_setting": "Traceback (most recent call last): ..."
 }
 ```
 
-## What the translator returns
+## Response contract
 
-The translation engine returns a dictionary with these fields when available:
+`translate_error()` returns a dictionary with these fields when available:
 
 - `explanation`
 - `fix`
@@ -102,23 +114,27 @@ The translation engine returns a dictionary with these fields when available:
 - `code`
 - `ast_insight`
 
-## Supported errors
+## Repository structure
 
-The bundled rule set covers many common Python runtime, syntax, indentation, import, OS, encoding, and networking errors. The full list lives in `error_translator/rules.json` and can be expanded over time without changing the runtime engine.
+- `error_translator/core.py`: translation pipeline and rule matching.
+- `error_translator/cli.py`: terminal interface (`explain-error`).
+- `error_translator/auto.py`: automatic exception-hook integration.
+- `error_translator/server.py`: FastAPI surface.
+- `error_translator/ast_handlers.py`: optional contextual heuristics.
+- `error_translator/rules.json`: primary rule database.
+- `tests/test_core.py`: regression tests for translation behavior.
 
-## Project layout
+## Contributing
 
-- `error_translator/core.py` loads the rule set and performs the translation.
-- `error_translator/cli.py` provides the `explain-error` command.
-- `error_translator/auto.py` installs the automatic exception hook.
-- `error_translator/server.py` exposes the HTTP API.
-- `error_translator/ast_handlers.py` contains contextual suggestion hooks.
-- `error_translator/rules.json` stores the rule database.
+We welcome contributions of all sizes. If you are new to the project:
 
-## Development notes
+1. Start with one narrowly scoped improvement.
+2. Add or update tests for behavior changes.
+3. Run `pytest` before submitting.
+4. Keep user-facing docs aligned with implementation.
 
-- `builder.py` can generate new rule drafts with Gemini when `GEMINI_API_KEY` is set.
-- `scraper.py` refreshes the scraped exception dataset from the official Python documentation.
-- `tests/test_core.py` contains the current regression coverage for the translation engine.
+See `docs/CONTRIBUTING.md` for full contributor workflow and review standards.
 
-Built by Gourabananda Datta.
+---
+
+Maintained by Gourabananda Datta and contributors.

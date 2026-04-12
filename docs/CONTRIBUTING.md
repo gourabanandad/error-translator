@@ -1,58 +1,82 @@
 # Contributing to Error Translator
 
-Thank you for considering a contribution. This project is intentionally small, so even a modest improvement to a rule, test, or page can make the experience better for the next person who opens the repository.
+Thank you for contributing to Error Translator. This guide defines the working standards for code, rules, tests, and documentation so the project remains reliable and easy to maintain.
 
-If you are new here, start with a tiny change. A good first PR might fix a typo in the docs, improve one error explanation, or add a regression test for an existing rule.
+## Contribution principles
 
-## Quick start
+- **Clarity over cleverness**: prefer straightforward logic and plain language.
+- **Small, reviewable changes**: scoped PRs are easier to test and maintain.
+- **Tests with behavior changes**: new behavior should be covered by regression tests.
+- **Docs as part of the feature**: user-facing behavior changes require documentation updates.
 
-Set up the project and verify the test suite before you change anything:
+## Local setup
 
 ```bash
 pip install -r requirements.txt
 pytest
 ```
 
-If that passes, you are ready to edit.
+If tests pass, the environment is ready for contribution work.
 
-## What to edit
+## Where to make changes
 
-- Use `error_translator/rules.json` when you want to improve an explanation or fix for a specific Python error.
-- Use `error_translator/core.py` only when the translation flow itself needs to change.
-- Use `error_translator/ast_handlers.py` when the fix needs source-file context.
-- Use `tests/test_core.py` whenever you add or adjust behavior so the change stays covered.
-- Use `README.md` or the files in `docs/` when the user-facing instructions need to be clearer.
+- `error_translator/rules.json`:
+  - Add or improve regex patterns, explanations, and fixes.
+  - Preferred location for most translation improvements.
+- `error_translator/core.py`:
+  - Update matching/parsing flow only when rule changes are insufficient.
+- `error_translator/ast_handlers.py`:
+  - Add contextual source-aware insights for specific error families.
+- `tests/test_core.py`:
+  - Add coverage for any changed behavior.
+- `README.md` and `docs/`:
+  - Keep onboarding and operational guidance accurate.
 
 ## Recommended workflow
 
-1. Pick one small problem and focus on that only.
-2. Find the exact traceback line or behavior you want to improve.
-3. Update the rule, doc, or handler with the smallest change that solves it.
-4. Add or update a test that proves the behavior.
-5. Run `pytest` again before you open a pull request.
+1. Identify one concrete issue (incorrect match, unclear fix, missing docs, etc.).
+2. Reproduce it with a traceback sample.
+3. Implement the minimal fix in rule, code, or docs.
+4. Add/adjust tests.
+5. Run `pytest`.
+6. Re-read modified docs for correctness and tone.
 
-If you want help drafting a new rule, you can run `python builder.py` after setting `GEMINI_API_KEY`. The builder reads `scraped_errors_database.json`, proposes a draft, and asks for approval before writing to `error_translator/rules.json`.
+## Rule authoring standards
 
-If you want to refresh the source dataset used by the builder, run `python scraper.py`.
+When adding or refining a rule:
 
-## Rule-writing tips
+- Match as specifically as practical to avoid false positives.
+- Keep explanations concise, neutral, and actionable.
+- Keep fixes concrete (what to change and where to look).
+- Avoid broad language that could describe many unrelated failures.
+- Validate with at least one representative test case.
 
-- Match the final traceback line as narrowly as possible.
-- Avoid patterns that are so broad they could describe several different errors.
-- Keep explanations short and beginner-friendly.
-- Make fixes concrete and actionable.
-- Prefer plain language over technical jargon unless the error itself requires it.
+## Documentation standards
 
-## Good first contributions
+To keep docs professional and useful for future contributors:
 
-- Fix a typo or unclear sentence in the docs.
-- Add a test for an existing traceback example.
-- Improve one rule's explanation or fix.
-- Expand a missing example in the README.
+- Use clear headings and short paragraphs.
+- Define terms before using project-specific shorthand.
+- Prefer imperative guidance for contributor steps.
+- Avoid promises not backed by current implementation.
+- Update docs in the same PR as behavior changes.
 
-## Before opening a pull request
+## Optional maintenance tools
 
-- The docs still read naturally and do not promise behavior the code does not have.
-- The test suite passes locally.
-- The change is small enough to review quickly.
-- Any new rule or behavior has at least one test.
+- `python builder.py`:
+  - Generates draft rules from the scraped dataset.
+  - Requires `GEMINI_API_KEY`.
+- `python scraper.py`:
+  - Refreshes `scraped_errors_database.json` from Python documentation.
+
+## Pull request readiness checklist
+
+Before opening a PR, verify:
+
+- [ ] Scope is focused and reviewable.
+- [ ] Tests pass locally (`pytest`).
+- [ ] Changed behavior has test coverage.
+- [ ] Docs were updated where needed.
+- [ ] Wording is clear for future contributors.
+
+Thanks again for helping improve the project for the next contributor.

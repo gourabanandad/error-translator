@@ -1,20 +1,28 @@
-# Welcome to Error Translator
+# Error Translator Documentation
 
-Error Translator is a local, rule-based Python error translator. It converts raw tracebacks into plain English, keeps the original file and line context when available, and returns a structured fix suggestion you can read in the terminal or consume from code.
+Welcome to the project documentation for **Error Translator**, a local Python toolkit that transforms traceback output into concise, actionable explanations.
 
-## Why it exists
+This documentation is written for three audiences:
 
-Python tracebacks are precise, but they are not always beginner-friendly. This project narrows the gap by matching the final error line against a curated rule set, then combining that match with traceback metadata and optional AST-backed insight.
+- **Users** who want fast error explanations from the CLI.
+- **Integrators** who want to consume translation results from code or HTTP.
+- **Contributors** who want to improve rules, architecture, and documentation over time.
 
-!!! tip "Local by default"
-    Translation is deterministic and runs inside your Python process. No external service is required for normal CLI or library usage.
+## Project overview
 
-## Highlights
+Error Translator reads traceback text, extracts the final error line, and matches it against curated regex rules. It then enriches the response with available traceback metadata (file, line, code) and optional AST-based insights.
 
-- Clear explanations written for humans, not compiler output.
-- Structured results that include the matched error, file, line, and code context when available.
-- Three entry points: import hook, CLI, and FastAPI service.
-- Extensible rule table stored in `error_translator/rules.json`.
+The result is a consistent structure that can be rendered in terminals, returned by API endpoints, or consumed by custom tooling.
+
+!!! tip "Design principle"
+    Keep the runtime simple and deterministic. Most enhancements should be expressed as rule and test changes rather than broad engine rewrites.
+
+## Core outcomes
+
+- Clear explanations designed for humans.
+- Suggested fixes oriented toward immediate action.
+- Stable output fields for downstream integration.
+- Local-first behavior with no required external service.
 
 ## Installation
 
@@ -22,15 +30,15 @@ Python tracebacks are precise, but they are not always beginner-friendly. This p
 pip install error-translator-cli-v2
 ```
 
-For local development, install the repository requirements instead:
+For local development:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Quick Start
+## Quick start
 
-### Automatic interception
+### Automatic translation via import hook
 
 ```python title="script.py"
 import error_translator.auto
@@ -39,63 +47,47 @@ maximum_user_connections = 100
 print(maximum_user_connectons)
 ```
 
-This is the magic import. Importing `error_translator.auto` installs the project's `sys.excepthook` handler, so unhandled exceptions in that process are translated automatically instead of showing only the raw traceback.
-
-Use it when you want the error translation to happen with a single import and no extra wrapper code.
+`error_translator.auto` replaces `sys.excepthook` for that process, translating unhandled exceptions automatically.
 
 ### CLI translation
-
-Run a script and translate any crash that appears on `stderr`:
 
 ```bash
 explain-error run script.py
 ```
 
-Translate a raw error string directly:
-
 ```bash
-explain-error "TypeError: unsupported operand type(s) for +: 'int' and 'str'"
-```
-
-Pipe saved traceback text into the CLI:
-
-```bash
-Get-Content error.log | explain-error
+explain-error "NameError: name 'x' is not defined"
 ```
 
 ```bash
 cat error.log | explain-error
 ```
 
-## API surface
-
-The FastAPI service exposes a lightweight HTTP interface for integrations and demos.
+### API translation
 
 ```bash
 uvicorn error_translator.server:app --reload
 ```
 
-`POST /translate` accepts JSON with a `traceback_setting` field containing the traceback text.
+`POST /translate` request body:
 
-## Returned fields
+```json
+{
+  "traceback_setting": "Traceback (most recent call last): ..."
+}
+```
 
-The translation result may include:
+## Documentation map
 
-- `explanation`
-- `fix`
-- `matched_error`
-- `file`
-- `line`
-- `code`
-- `ast_insight`
+- **Architecture**: `ARCHITECTURE.md`
+- **Contributor workflow**: `CONTRIBUTING.md`
 
-## Learn more
+## Contributor first steps
 
-- Read the architecture overview in `ARCHITECTURE.md`.
-- See contribution guidance in `CONTRIBUTING.md`.
+If you are new to the repository, start with a small, reviewable improvement:
 
-## For contributors
+1. Fix one doc gap, one rule, or one missing test.
+2. Validate with `pytest`.
+3. Keep language user-centric and technically precise.
 
-If you are here to improve the project, start with a small change. Good first contributions include fixing a doc typo, improving one rule explanation, or adding a test for an existing traceback example.
-
-Before you open a pull request, run `pytest` and check that the docs still describe the code accurately.
+Professional documentation is a shared responsibility; every merged change should make the next contributor faster.
