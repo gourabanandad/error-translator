@@ -553,7 +553,7 @@
 
 
 <h1 id="contributing-to-error-translator">Contributing to Error Translator<a class="headerlink" href="#contributing-to-error-translator" title="Permanent link">&para;</a></h1>
-<p>First contribution? You are in the right place.</p>
+<p>First open-source contribution? You are absolutely welcome here.</p>
 <p>This project is intentionally beginner-friendly. Most improvements happen in one JSON file, and many meaningful contributions require zero Python coding.</p>
 <h2 id="new-contributor-path">New Contributor Path<a class="headerlink" href="#new-contributor-path" title="Permanent link">&para;</a></h2>
 <ol>
@@ -563,6 +563,7 @@
 <li>Open a PR with your sample traceback and expected explanation.</li>
 </ol>
 <p>That alone is a high-value contribution.</p>
+<p>If you get stuck at any point, open a draft PR anyway and ask for help. Maintainers will guide you.</p>
 <h2 id="local-setup">Local Setup<a class="headerlink" href="#local-setup" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pytest
@@ -578,6 +579,15 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">&quot;fix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Make sure &#39;{0}&#39; only contains digits, or parse it as float first if decimals are expected.&quot;</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div>
+<p>Example where this helps:</p>
+<p>Input error line:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ValueError: invalid literal for int() with base 10: &#39;12.7&#39;
+</code></pre></div>
+<p>Result after matching:</p>
+<ul>
+<li>{0} becomes 12.7</li>
+<li>Your explanation and fix are filled in automatically</li>
+</ul>
 <p>How placeholders work:</p>
 <ul>
 <li>(.*) captures dynamic text from the error message.</li>
@@ -612,6 +622,8 @@
 <li>Adding your JSON rule in rules.json.</li>
 <li>Running explain-error again to show the improved translation.</li>
 </ol>
+<p>Record this as a short terminal GIF at normal speed with readable font size.</p>
+<p>Ideal length: 15-30 seconds.</p>
 <p>This makes review faster and helps maintainers merge with confidence.</p>
 <p>Thanks for building this with us.</p>
 

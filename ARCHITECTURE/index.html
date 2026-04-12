@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architecture-one-brain-two-doors" class="md-skip">
+        <a href="#architecture-one-core-engine-multiple-tools" class="md-skip">
           Skip to content
         </a>
       
@@ -323,10 +323,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-one-brain" class="md-nav__link">
+  <a href="#the-core-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The One Brain
+        The Core Engine
       
     </span>
   </a>
@@ -334,22 +334,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-two-doors" class="md-nav__link">
+  <a href="#tool-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Two Doors
+        Tool Surfaces
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="The Two Doors">
+    <nav class="md-nav" aria-label="Tool Surfaces">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#door-1-pypi-package" class="md-nav__link">
+  <a href="#1-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Door 1: PyPI package
+        1. CLI
       
     </span>
   </a>
@@ -357,10 +357,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#door-2-frozen-vs-code-integration" class="md-nav__link">
+  <a href="#2-magic-import-auto-hook" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Door 2: Frozen VS Code integration
+        2. Magic Import Auto-Hook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-python-native-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python Native API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fastapi-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FastAPI Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-vs-code-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. VS Code Extension
       
     </span>
   </a>
@@ -467,10 +500,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-one-brain" class="md-nav__link">
+  <a href="#the-core-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The One Brain
+        The Core Engine
       
     </span>
   </a>
@@ -478,22 +511,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-two-doors" class="md-nav__link">
+  <a href="#tool-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Two Doors
+        Tool Surfaces
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="The Two Doors">
+    <nav class="md-nav" aria-label="Tool Surfaces">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#door-1-pypi-package" class="md-nav__link">
+  <a href="#1-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Door 1: PyPI package
+        1. CLI
       
     </span>
   </a>
@@ -501,10 +534,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#door-2-frozen-vs-code-integration" class="md-nav__link">
+  <a href="#2-magic-import-auto-hook" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Door 2: Frozen VS Code integration
+        2. Magic Import Auto-Hook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-python-native-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python Native API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fastapi-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FastAPI Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-vs-code-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. VS Code Extension
       
     </span>
   </a>
@@ -566,14 +632,14 @@
 
 
 
-<h1 id="architecture-one-brain-two-doors">Architecture: One Brain, Two Doors<a class="headerlink" href="#architecture-one-brain-two-doors" title="Permanent link">&para;</a></h1>
-<p>Error Translator is built around a simple model:</p>
+<h1 id="architecture-one-core-engine-multiple-tools">Architecture: One Core Engine, Multiple Tools<a class="headerlink" href="#architecture-one-core-engine-multiple-tools" title="Permanent link">&para;</a></h1>
+<p>Error Translator is built on a single translation engine that powers multiple delivery surfaces.</p>
 <ul>
-<li>One brain: a single Python core engine for parsing and translation.</li>
-<li>Two doors: package usage through PyPI and editor usage through a frozen VS Code wrapper.</li>
+<li>One core engine: error parsing, regex matching, AST inspection, and JSON output.</li>
+<li>Multiple tools: CLI, Magic Import auto-hook, Python native API, FastAPI server, and VS Code extension.</li>
 </ul>
-<p>This keeps behavior consistent while giving developers two distribution paths.</p>
-<h2 id="the-one-brain">The One Brain<a class="headerlink" href="#the-one-brain" title="Permanent link">&para;</a></h2>
+<p>This keeps behavior consistent across terminal workflows, editor UX, and backend integrations.</p>
+<h2 id="the-core-engine">The Core Engine<a class="headerlink" href="#the-core-engine" title="Permanent link">&para;</a></h2>
 <p>The core engine lives in error_translator/core.py and owns all translation logic.</p>
 <p>It does four things fast:</p>
 <ol>
@@ -582,15 +648,16 @@
 <li>Runs AST inspection only when an error type benefits from deeper context.</li>
 <li>Returns structured JSON-style output for any renderer.</li>
 </ol>
-<h2 id="the-two-doors">The Two Doors<a class="headerlink" href="#the-two-doors" title="Permanent link">&para;</a></h2>
-<h3 id="door-1-pypi-package">Door 1: PyPI package<a class="headerlink" href="#door-1-pypi-package" title="Permanent link">&para;</a></h3>
-<p>Developers install error-translator-cli-v2 and use:</p>
-<ul>
-<li>explain-error in terminal</li>
-<li>error_translator.auto for crash interception</li>
-<li>error_translator.server for HTTP integrations</li>
-</ul>
-<h3 id="door-2-frozen-vs-code-integration">Door 2: Frozen VS Code integration<a class="headerlink" href="#door-2-frozen-vs-code-integration" title="Permanent link">&para;</a></h3>
+<h2 id="tool-surfaces">Tool Surfaces<a class="headerlink" href="#tool-surfaces" title="Permanent link">&para;</a></h2>
+<h3 id="1-cli">1. CLI<a class="headerlink" href="#1-cli" title="Permanent link">&para;</a></h3>
+<p>explain-error can run scripts, translate raw error strings, or process piped logs.</p>
+<h3 id="2-magic-import-auto-hook">2. Magic Import Auto-Hook<a class="headerlink" href="#2-magic-import-auto-hook" title="Permanent link">&para;</a></h3>
+<p>import error_translator.auto overrides sys.excepthook and auto-translates unhandled crashes.</p>
+<h3 id="3-python-native-api">3. Python Native API<a class="headerlink" href="#3-python-native-api" title="Permanent link">&para;</a></h3>
+<p>from error_translator.core import translate_error gives backend code direct access to JSON output.</p>
+<h3 id="4-fastapi-server">4. FastAPI Server<a class="headerlink" href="#4-fastapi-server" title="Permanent link">&para;</a></h3>
+<p>error_translator.server exposes the same engine over HTTP for service environments.</p>
+<h3 id="5-vs-code-extension">5. VS Code Extension<a class="headerlink" href="#5-vs-code-extension" title="Permanent link">&para;</a></h3>
 <p>The extension calls a PyInstaller-frozen executable of the same engine.</p>
 <p>Why this matters:</p>
 <ul>
@@ -600,13 +667,12 @@
 </ul>
 <h2 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A[User Input] --&gt; B[Regex DB Matcher]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A[User Input: CLI / VS Code / Auto-Hook / API] --&gt; B[Regex DB Matcher]
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; C{Needs deeper context?}
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    C -- No --&gt; D[JSON Output]
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    C -- Yes --&gt; E[AST Inspection]
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    E --&gt; D
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    D --&gt; F[Terminal Render]
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    D --&gt; G[VS Code UI Render]
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    D --&gt; F[Rendered UI: Terminal / Hover / API Response]
 </code></pre></div>
 <h2 id="runtime-contract">Runtime Contract<a class="headerlink" href="#runtime-contract" title="Permanent link">&para;</a></h2>
 <p>Every entry point gets a predictable translation object with fields like:</p>
