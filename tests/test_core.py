@@ -1,5 +1,5 @@
 import pytest
-from error_translator.core import translate_error
+from error_translator.core import translate_error, load_rules, compiled_rules
 
 # --- 1. EDGE CASE TESTS ---
 
@@ -33,6 +33,24 @@ def test_unknown_error_fallback():
     
     assert "unknown error" in result["explanation"]
     assert result["matched_error"] == "Something completely random went wrong here."
+
+
+def test_empty_input_returns_helpful_message():
+    result = translate_error("   \n   ")
+    assert result["explanation"] == "No error text provided."
+    assert result["fix"] == "Provide a valid Python error."
+
+
+def test_rule_loading_is_cached():
+    first = load_rules()
+    second = load_rules()
+    assert first is second
+
+
+def test_compiled_rules_are_cached():
+    first = compiled_rules()
+    second = compiled_rules()
+    assert first is second
 
 
 # --- 2. THE PARAMETERIZED ENGINE FOR ALL ERRORS ---
