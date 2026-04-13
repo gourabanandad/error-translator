@@ -1,20 +1,22 @@
 name: Python CI/CD
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 on:
-  # 1. Run tests every time a PR is merged into master
   pull_request:
     types: [closed]
-    branches: [ "master" ]
-    
-  # 2. Run the PyPI upload ONLY when you publish a Release on GitHub
+    branches: ["master"]
+
   release:
     types: [published]
 
 jobs:
   test-code:
-    # Run tests if a PR was merged, OR if a release was published
     if: github.event.pull_request.merged == true || github.event_name == 'release'
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,9 +30,8 @@ jobs:
         run: pytest
 
   publish-to-pypi:
-    # ONLY run this job if a GitHub Release was just published
     if: github.event_name == 'release'
-    needs: test-code # Wait for tests to pass first!
+    needs: test-code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
