@@ -131,7 +131,7 @@ For more information, visit: https://github.com/gourabanandad/error-translator
         action="store_true",
         help="Show the current version of the tool."
     )
-    # Allow multiple arguments so we can accept "run script.py" or a long error string
+
     parser.add_argument(
         "args",
         nargs="*",
@@ -164,18 +164,15 @@ For more information, visit: https://github.com/gourabanandad/error-translator
         parser.print_help()
         sys.exit(1)
 
-    if parsed_args.args:
-        # 3. Check if the user used the "run" command
-        if parsed_args.args[0] == "run" and len(parsed_args.args) > 1:
-            script_name = parsed_args.args[1]
-            run_script(script_name)
-        
-        # 4. Fallback: Treat the input as a raw error string
-        else:
-            error_input = " ".join(parsed_args.args)
-            print_result(translate_error(error_input))
+    # 3. Check if the user used the "run" command
+    if parsed_args.args[0] == "run" and len(parsed_args.args) > 1:
+        script_name = parsed_args.args[1]
+        run_script(script_name)
+
+    # 4. Fallback: Treat the input as a raw error string
     else:
-        parser.print_help()
-        sys.exit(1)
+        error_input = " ".join(parsed_args.args)
+        print_result(translate_error(error_input))
+
 if __name__ == "__main__":
     main()
