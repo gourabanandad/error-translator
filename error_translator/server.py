@@ -5,12 +5,18 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
 
+from importlib.metadata import version, PackageNotFoundError
+
+try:
+    VERSION = version("error-translator-cli-v2")
+except PackageNotFoundError:
+    VERSION = "unknown (not installed via pip)"
+
 app = FastAPI(
     title="Error translator API",
     description="An API that translates Python errors into human-readable English.",
-    version='1.0.0'
+    version=VERSION
 )
-
 class ErrorRequest(BaseModel):
     traceback_setting: str
 
