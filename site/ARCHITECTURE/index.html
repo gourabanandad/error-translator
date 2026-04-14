@@ -16,7 +16,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="../CONTRIBUTING/">
+        <link rel="next" href="../examples/">
       
       
         
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architecture-one-core-engine-multiple-tools" class="md-skip">
+        <a href="#architectural-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -193,6 +193,18 @@
       
     
     
+      <div class="md-header__source">
+        <a href="https://github.com/gourabanandad/error-translator-cli-v2" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gourabanandad/error-translator-cli-v2
+  </div>
+</a>
+      </div>
+    
   </nav>
   
 </header>
@@ -226,6 +238,18 @@
     </a>
     Error Translator
   </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gourabanandad/error-translator-cli-v2" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gourabanandad/error-translator-cli-v2
+  </div>
+</a>
+    </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
     
@@ -323,10 +347,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-core-engine" class="md-nav__link">
+  <a href="#core-translation-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Core Engine
+        Core Translation Pipeline
       
     </span>
   </a>
@@ -334,82 +358,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tool-surfaces" class="md-nav__link">
+  <a href="#implementation-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tool Surfaces
+        Implementation Surfaces
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Tool Surfaces">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-cli" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. CLI
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-magic-import-auto-hook" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Magic Import Auto-Hook
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-python-native-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Python Native API
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-fastapi-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. FastAPI Server
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-vs-code-extension" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. VS Code Extension
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-flow" class="md-nav__link">
+  <a href="#ast-insight-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data Flow
+        AST Insight Notes
       
     </span>
   </a>
@@ -442,6 +405,33 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -500,10 +490,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-core-engine" class="md-nav__link">
+  <a href="#core-translation-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Core Engine
+        Core Translation Pipeline
       
     </span>
   </a>
@@ -511,82 +501,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tool-surfaces" class="md-nav__link">
+  <a href="#implementation-surfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tool Surfaces
+        Implementation Surfaces
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Tool Surfaces">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-cli" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. CLI
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-magic-import-auto-hook" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Magic Import Auto-Hook
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-python-native-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Python Native API
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-fastapi-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. FastAPI Server
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-vs-code-extension" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. VS Code Extension
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-flow" class="md-nav__link">
+  <a href="#ast-insight-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data Flow
+        AST Insight Notes
       
     </span>
   </a>
@@ -631,68 +560,78 @@
                   
 
 
+  
+    <a href="https://github.com/gourabanandad/error-translator-cli-v2/edit/master/docs/ARCHITECTURE.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/gourabanandad/error-translator-cli-v2/raw/master/docs/ARCHITECTURE.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
 
-<h1 id="architecture-one-core-engine-multiple-tools">Architecture: One Core Engine, Multiple Tools<a class="headerlink" href="#architecture-one-core-engine-multiple-tools" title="Permanent link">&para;</a></h1>
-<p>Error Translator is built on a single translation engine that powers multiple delivery surfaces.</p>
-<ul>
-<li>One core engine: error parsing, regex matching, AST inspection, and JSON output.</li>
-<li>Multiple tools: CLI, Magic Import auto-hook, Python native API, FastAPI server, and VS Code extension.</li>
-</ul>
-<p>This keeps behavior consistent across terminal workflows, editor UX, and backend integrations.</p>
-<h2 id="the-core-engine">The Core Engine<a class="headerlink" href="#the-core-engine" title="Permanent link">&para;</a></h2>
-<p>The core engine lives in error_translator/core.py and owns all translation logic.</p>
-<p>It does four things fast:</p>
+
+<h1 id="architectural-overview">Architectural Overview<a class="headerlink" href="#architectural-overview" title="Permanent link">&para;</a></h1>
+<p>Error Translator is built around one deterministic engine in <code>error_translator/core.py</code>. The same engine powers the CLI, auto-hook mode, Python imports, and the FastAPI service.</p>
+<h2 id="core-translation-pipeline">Core Translation Pipeline<a class="headerlink" href="#core-translation-pipeline" title="Permanent link">&para;</a></h2>
+<p>Each translation request follows this sequence:</p>
 <ol>
-<li>Extracts the final error line from traceback input.</li>
-<li>Matches against the local regex rule database.</li>
-<li>Runs AST inspection only when an error type benefits from deeper context.</li>
-<li>Returns structured JSON-style output for any renderer.</li>
+<li><strong>Load and cache rule data</strong> from <code>error_translator/rules.json</code>.</li>
+<li><strong>Extract traceback location</strong> (<code>file</code>, <code>line</code>) when present.</li>
+<li><strong>Read source context line</strong> using <code>linecache</code> when file and line are available.</li>
+<li><strong>Match the last error line</strong> against pre-compiled regex patterns.</li>
+<li><strong>Format output fields</strong> (<code>explanation</code>, <code>fix</code>, and metadata).</li>
+<li><strong>Optionally attach <code>ast_insight</code></strong> for registered error types.</li>
 </ol>
-<h2 id="tool-surfaces">Tool Surfaces<a class="headerlink" href="#tool-surfaces" title="Permanent link">&para;</a></h2>
-<h3 id="1-cli">1. CLI<a class="headerlink" href="#1-cli" title="Permanent link">&para;</a></h3>
-<p>explain-error can run scripts, translate raw error strings, or process piped logs.</p>
-<h3 id="2-magic-import-auto-hook">2. Magic Import Auto-Hook<a class="headerlink" href="#2-magic-import-auto-hook" title="Permanent link">&para;</a></h3>
-<p>import error_translator.auto overrides sys.excepthook and auto-translates unhandled crashes.</p>
-<h3 id="3-python-native-api">3. Python Native API<a class="headerlink" href="#3-python-native-api" title="Permanent link">&para;</a></h3>
-<p>from error_translator.core import translate_error gives backend code direct access to JSON output.</p>
-<h3 id="4-fastapi-server">4. FastAPI Server<a class="headerlink" href="#4-fastapi-server" title="Permanent link">&para;</a></h3>
-<p>error_translator.server exposes the same engine over HTTP for service environments.</p>
-<h3 id="5-vs-code-extension">5. VS Code Extension<a class="headerlink" href="#5-vs-code-extension" title="Permanent link">&para;</a></h3>
-<p>The extension calls a PyInstaller-frozen executable of the same engine.</p>
-<p>Why this matters:</p>
-<ul>
-<li>No Python environment setup required in the extension runtime path.</li>
-<li>Very low startup overhead for hover interactions.</li>
-<li>Consistent translation behavior with the CLI path.</li>
-</ul>
-<h2 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A[User Input: CLI / VS Code / Auto-Hook / API] --&gt; B[Regex DB Matcher]
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; C{Needs deeper context?}
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    C -- No --&gt; D[JSON Output]
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    C -- Yes --&gt; E[AST Inspection]
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    E --&gt; D
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    D --&gt; F[Rendered UI: Terminal / Hover / API Response]
-</code></pre></div>
-<h2 id="runtime-contract">Runtime Contract<a class="headerlink" href="#runtime-contract" title="Permanent link">&para;</a></h2>
-<p>Every entry point gets a predictable translation object with fields like:</p>
-<ul>
-<li>explanation</li>
-<li>fix</li>
-<li>matched_error</li>
-<li>file</li>
-<li>line</li>
-<li>code</li>
-<li>ast_insight</li>
-</ul>
-<p>Stable output shape is intentional. It keeps integrations simple and lowers maintenance cost.</p>
-<h2 id="extension-strategy">Extension Strategy<a class="headerlink" href="#extension-strategy" title="Permanent link">&para;</a></h2>
-<p>When improving behavior, use this order:</p>
+<p>If no pattern matches, the <code>default</code> rule is returned.</p>
+<h2 id="implementation-surfaces">Implementation Surfaces<a class="headerlink" href="#implementation-surfaces" title="Permanent link">&para;</a></h2>
+<p>The same engine is exposed through:</p>
 <ol>
-<li>Update rules first in error_translator/rules.json.</li>
-<li>Add AST handlers only for cases where rules alone are insufficient.</li>
-<li>Touch core pipeline last, and only for cross-cutting improvements.</li>
-<li>Lock behavior with tests in tests/test_core.py.</li>
+<li><strong>CLI</strong> (<code>error_translator/cli.py</code>):<ul>
+<li><code>explain-error run script.py</code></li>
+<li><code>explain-error "&lt;error text&gt;"</code></li>
+<li><code>cat error.log | explain-error</code></li>
+</ul>
+</li>
+<li><strong>Auto hook</strong> (<code>error_translator/auto.py</code>): import once to override <code>sys.excepthook</code>.</li>
+<li><strong>Python API</strong>: <code>from error_translator.core import translate_error</code>.</li>
+<li><strong>FastAPI service</strong> (<code>error_translator/server.py</code>):<ul>
+<li><code>POST /translate</code></li>
+<li><code>GET /health</code></li>
+<li><code>GET /</code> serves the bundled static UI (if present)</li>
+</ul>
+</li>
+</ol>
+<h2 id="ast-insight-notes">AST Insight Notes<a class="headerlink" href="#ast-insight-notes" title="Permanent link">&para;</a></h2>
+<p><code>ast_insight</code> is optional and routed via <code>AST_REGISTRY</code> in <code>error_translator/ast_handlers.py</code>.</p>
+<p>Current handlers are lightweight placeholders and return suggestion strings for supported error classes (<code>NameError</code>, <code>AttributeError</code>, <code>ImportError</code>). They do not yet perform full file AST traversal.</p>
+<h2 id="runtime-contract">Runtime Contract<a class="headerlink" href="#runtime-contract" title="Permanent link">&para;</a></h2>
+<p><code>translate_error(...)</code> always returns a dictionary with these fields:</p>
+<ul>
+<li><code>explanation</code></li>
+<li><code>fix</code></li>
+</ul>
+<p>And typically includes:</p>
+<ul>
+<li><code>matched_error</code></li>
+<li><code>file</code> (or <code>Unknown File</code>)</li>
+<li><code>line</code> (or <code>Unknown Line</code>)</li>
+<li><code>code</code> (empty string if unavailable)</li>
+<li><code>ast_insight</code> (only when available)</li>
+</ul>
+<h2 id="extension-strategy">Extension Strategy<a class="headerlink" href="#extension-strategy" title="Permanent link">&para;</a></h2>
+<p>For most contributions, follow this order:</p>
+<ol>
+<li>Add or improve a regex rule in <code>error_translator/rules.json</code>.</li>
+<li>Add tests in <code>tests/test_core.py</code>.</li>
+<li>Add/update handler behavior in <code>error_translator/ast_handlers.py</code> only when regex alone is insufficient.</li>
+<li>Update <code>error_translator/core.py</code> only for shared pipeline behavior.</li>
 </ol>
 
 
@@ -743,7 +682,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
