@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../ARCHITECTURE/">
+      
+      
+        <link rel="next" href="../CONTRIBUTING/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>Real-World Input → Output Examples - Error Translator</title>
+        <title>Examples - Error Translator</title>
       
     
     
@@ -110,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Real-World Input → Output Examples
+              Examples
             
           </span>
         </div>
@@ -275,6 +279,201 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-a-type-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example A: Type mismatch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-b-missing-variable-typo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example B: Missing variable typo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-c-index-out-of-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example C: Index out of range
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-d-key-not-found-in-dictionary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example D: Key not found in dictionary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-e-division-by-zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example E: Division by zero
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-f-file-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example F: File not found
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-g-attribute-error-on-wrong-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example G: Attribute error on wrong type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-h-import-module-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example H: Import module not found
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-i-indentation-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example I: Indentation mismatch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-j-value-conversion-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example J: Value conversion error
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-k-recursion-limit-exceeded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example K: Recursion limit exceeded
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -472,6 +671,7 @@
 
 <h1 id="real-world-input-output-examples">Real-World Input → Output Examples<a class="headerlink" href="#real-world-input-output-examples" title="Permanent link">&para;</a></h1>
 <p>Here are some examples of raw tracebacks and their translated output using Error Translator.</p>
+<p>Note: file/line/code context is only available when the input includes traceback location lines like <code>File "...", line N</code>.</p>
 <h3 id="example-a-type-mismatch">Example A: Type mismatch<a class="headerlink" href="#example-a-type-mismatch" title="Permanent link">&para;</a></h3>
 <p>Input traceback:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Traceback (most recent call last):
@@ -503,17 +703,13 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Error Detected:
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>NameError: name &#39;usr_count&#39; is not defined
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Location: script.py (Line 5)
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Location: Unknown File (Line Unknown Line)
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>   |
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>   |  print(usr_count)
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>   |
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>Explanation:
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>You tried to use a variable or function named &#39;usr_count&#39;, but Python doesn&#39;t recognize it.
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>Suggested Fix:
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>Check if &#39;usr_count&#39; is spelled correctly, or ensure you defined/imported it before using it.
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Explanation:
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>You tried to use a variable or function named &#39;usr_count&#39;, but Python doesn&#39;t recognize it.
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>Suggested Fix:
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>Check if &#39;usr_count&#39; is spelled correctly, or ensure you defined/imported it before using it.
 </code></pre></div>
 <h3 id="example-c-index-out-of-range">Example C: Index out of range<a class="headerlink" href="#example-c-index-out-of-range" title="Permanent link">&para;</a></h3>
 <p>Input traceback:</p>
@@ -546,18 +742,14 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Error Detected:
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>KeyError: &#39;age&#39;
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Location: script.py (Line 8)
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Location: Unknown File (Line Unknown Line)
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>   |
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>   |  person[&#39;age&#39;]
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>   |
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>Explanation:
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>You tried to access a dictionary key (&#39;age&#39;) that doesn&#39;t exist.
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>Suggested Fix:
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>Use dict.get(&#39;age&#39;, default_value) to safely retrieve the key with a fallback,
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>or ensure the key is set before accessing it.
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>Explanation:
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>You tried to access a dictionary key (&#39;age&#39;) that doesn&#39;t exist.
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>Suggested Fix:
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>Use dict.get(&#39;age&#39;, default_value) to safely retrieve the key with a fallback,
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>or ensure the key is set before accessing it.
 </code></pre></div>
 <h3 id="example-e-division-by-zero">Example E: Division by zero<a class="headerlink" href="#example-e-division-by-zero" title="Permanent link">&para;</a></h3>
 <p>Input error line:</p>
@@ -567,17 +759,13 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Error Detected:
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>ZeroDivisionError: division by zero
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>Location: calculator.py (Line 10)
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>Location: Unknown File (Line Unknown Line)
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>   |
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>   |  result = 100 / 0
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>   |
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>Explanation:
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>You attempted to divide a number by zero, which is mathematically undefined.
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>Suggested Fix:
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>Add a condition to check if the denominator is zero before performing division.
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>Explanation:
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>You attempted to divide a number by zero, which is mathematically undefined.
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>Suggested Fix:
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>Add a condition to check if the denominator is zero before performing division.
 </code></pre></div>
 <h3 id="example-f-file-not-found">Example F: File not found<a class="headerlink" href="#example-f-file-not-found" title="Permanent link">&para;</a></h3>
 <p>Input traceback:</p>
@@ -611,18 +799,14 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Error Detected:
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>AttributeError: &#39;int&#39; object has no attribute &#39;append&#39;
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Location: script.py (Line 6)
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Location: Unknown File (Line Unknown Line)
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>   |
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>   |  value.append(5)
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>   |
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>Explanation:
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>You are trying to call .append() on an integer. .append() is a method for lists.
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
-<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>Suggested Fix:
-<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>If you meant to collect multiple values, initialize a list instead (my_list = []).
-<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>If you&#39;re working with a single integer, review what operation you intended.
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>Explanation:
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>You are trying to call .append() on an integer. .append() is a method for lists.
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>Suggested Fix:
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>If you meant to collect multiple values, initialize a list instead (my_list = []).
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>If you&#39;re working with a single integer, review what operation you intended.
 </code></pre></div>
 <h3 id="example-h-import-module-not-found">Example H: Import module not found<a class="headerlink" href="#example-h-import-module-not-found" title="Permanent link">&para;</a></h3>
 <p>Input error line:</p>
@@ -632,19 +816,15 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Error Detected:
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>ModuleNotFoundError: No module named &#39;requests&#39;
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>Location: script.py (Line 1)
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>Location: Unknown File (Line Unknown Line)
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>   |
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>   |  import requests
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>   |
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>Explanation:
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>Python cannot find the &#39;requests&#39; module. It is not part of the standard library
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>and needs to be installed separately or you have a typo in the module name.
 <a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>Explanation:
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>Python cannot find the &#39;requests&#39; module. It is not part of the standard library
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>and needs to be installed separately or you have a typo in the module name.
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>Suggested Fix:
-<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>Install the missing package using pip: pip install requests.
-<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>If the module is your own file, check the import path and file location.
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>Suggested Fix:
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>Install the missing package using pip: pip install requests.
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>If the module is your own file, check the import path and file location.
 </code></pre></div>
 <h3 id="example-i-indentation-mismatch">Example I: Indentation mismatch<a class="headerlink" href="#example-i-indentation-mismatch" title="Permanent link">&para;</a></h3>
 <p>Input traceback:</p>
@@ -679,19 +859,15 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Error Detected:
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>ValueError: invalid literal for int() with base 10: &#39;42.5&#39;
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>Location: script.py (Line 3)
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>Location: Unknown File (Line Unknown Line)
 <a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>   |
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>   |  number = int(&#39;42.5&#39;)
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>   |
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>Explanation:
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>You are trying to convert the string &#39;42.5&#39; to an integer, but it contains a
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>decimal point, so it&#39;s not a valid whole number.
 <a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>Explanation:
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>You are trying to convert the string &#39;42.5&#39; to an integer, but it contains a
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>decimal point, so it&#39;s not a valid whole number.
-<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
-<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>Suggested Fix:
-<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>If you need to keep the fractional part, use float() instead of int().
-<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>If you want to truncate, convert to float first then to int: int(float(&#39;42.5&#39;)).
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>Suggested Fix:
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>If you need to keep the fractional part, use float() instead of int().
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>If you want to truncate, convert to float first then to int: int(float(&#39;42.5&#39;)).
 </code></pre></div>
 <h3 id="example-k-recursion-limit-exceeded">Example K: Recursion limit exceeded<a class="headerlink" href="#example-k-recursion-limit-exceeded" title="Permanent link">&para;</a></h3>
 <p>Input traceback:</p>

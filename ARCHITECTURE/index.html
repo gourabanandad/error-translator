@@ -16,7 +16,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="../CONTRIBUTING/">
+        <link rel="next" href="../examples/">
       
       
         
@@ -323,10 +323,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-core-translation-pipeline" class="md-nav__link">
+  <a href="#core-translation-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Core Translation Pipeline
+        Core Translation Pipeline
       
     </span>
   </a>
@@ -345,10 +345,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pipeline-data-flow" class="md-nav__link">
+  <a href="#ast-insight-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pipeline Data Flow
+        AST Insight Notes
       
     </span>
   </a>
@@ -367,10 +367,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#extension-evolution-strategy" class="md-nav__link">
+  <a href="#extension-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Extension &amp; Evolution Strategy
+        Extension Strategy
       
     </span>
   </a>
@@ -381,6 +381,33 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -439,10 +466,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-core-translation-pipeline" class="md-nav__link">
+  <a href="#core-translation-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Core Translation Pipeline
+        Core Translation Pipeline
       
     </span>
   </a>
@@ -461,10 +488,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pipeline-data-flow" class="md-nav__link">
+  <a href="#ast-insight-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pipeline Data Flow
+        AST Insight Notes
       
     </span>
   </a>
@@ -483,10 +510,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#extension-evolution-strategy" class="md-nav__link">
+  <a href="#extension-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Extension &amp; Evolution Strategy
+        Extension Strategy
       
     </span>
   </a>
@@ -511,49 +538,60 @@
 
 
 <h1 id="architectural-overview">Architectural Overview<a class="headerlink" href="#architectural-overview" title="Permanent link">&para;</a></h1>
-<p><strong>Error Translator</strong> is intentionally designed around a singular, cohesive translation engine that surfaces through multiple abstracted tooling layers. This guarantees architectural consistency whether the developer interfaces via the terminal, an automated hook, or a programmatic backend integration.</p>
-<h2 id="the-core-translation-pipeline">The Core Translation Pipeline<a class="headerlink" href="#the-core-translation-pipeline" title="Permanent link">&para;</a></h2>
-<p>All evaluation and logic strictly reside within <code>error_translator/core.py</code>. The engine evaluates state within four constrained, high-performance execution phases:</p>
+<p>Error Translator is built around one deterministic engine in <code>error_translator/core.py</code>. The same engine powers the CLI, auto-hook mode, Python imports, and the FastAPI service.</p>
+<h2 id="core-translation-pipeline">Core Translation Pipeline<a class="headerlink" href="#core-translation-pipeline" title="Permanent link">&para;</a></h2>
+<p>Each translation request follows this sequence:</p>
 <ol>
-<li><strong>Traceback Extraction</strong>: Safely traverses input blocks to isolate the terminal exception signature.</li>
-<li><strong>Rule Matrix Evaluation</strong>: Evaluates the terminal signature against pre-compiled regex topologies present in <code>rules.json</code>.</li>
-<li><strong>AST Introspection</strong>: Conditionally parses local files into Abstract Syntax Trees (AST) exclusively when resolving deep scoping issues (e.g., scoping typos, shadowed variables).</li>
-<li><strong>Structured Serialization</strong>: Maps resolved context into a uniform JSON-compatible dictionary for decoupled rendering tools.</li>
+<li><strong>Load and cache rule data</strong> from <code>error_translator/rules.json</code>.</li>
+<li><strong>Extract traceback location</strong> (<code>file</code>, <code>line</code>) when present.</li>
+<li><strong>Read source context line</strong> using <code>linecache</code> when file and line are available.</li>
+<li><strong>Match the last error line</strong> against pre-compiled regex patterns.</li>
+<li><strong>Format output fields</strong> (<code>explanation</code>, <code>fix</code>, and metadata).</li>
+<li><strong>Optionally attach <code>ast_insight</code></strong> for registered error types.</li>
 </ol>
+<p>If no pattern matches, the <code>default</code> rule is returned.</p>
 <h2 id="implementation-surfaces">Implementation Surfaces<a class="headerlink" href="#implementation-surfaces" title="Permanent link">&para;</a></h2>
-<p>The decoupling of logic from rendering allows the core matrix to operate through several unique interfaces:</p>
+<p>The same engine is exposed through:</p>
 <ol>
-<li><strong>Command-Line Application (CLI)</strong>: Built on standard argument parsing to provide direct terminal feedback for scripts, strings, and standard pipelines. </li>
-<li><strong>Auto-Hook Protocol</strong>: Implements <code>sys.excepthook</code> overrides (<code>import error_translator.auto</code>) to transparently intercept standard runtime crashes.</li>
-<li><strong>Native API</strong>: Allows standard Python imports (<code>from error_translator.core import translate_error</code>) to be natively queried for programmatic workflows.</li>
-<li><strong>Microservice Export</strong>: Exposes the logic entirely over standardized REST HTTP configurations via a FastAPI interface (<code>error_translator.server</code>).</li>
+<li><strong>CLI</strong> (<code>error_translator/cli.py</code>):<ul>
+<li><code>explain-error run script.py</code></li>
+<li><code>explain-error "&lt;error text&gt;"</code></li>
+<li><code>cat error.log | explain-error</code></li>
+</ul>
+</li>
+<li><strong>Auto hook</strong> (<code>error_translator/auto.py</code>): import once to override <code>sys.excepthook</code>.</li>
+<li><strong>Python API</strong>: <code>from error_translator.core import translate_error</code>.</li>
+<li><strong>FastAPI service</strong> (<code>error_translator/server.py</code>):<ul>
+<li><code>POST /translate</code></li>
+<li><code>GET /health</code></li>
+<li><code>GET /</code> serves the bundled static UI (if present)</li>
+</ul>
+</li>
 </ol>
-<h2 id="pipeline-data-flow">Pipeline Data Flow<a class="headerlink" href="#pipeline-data-flow" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    Origin[Input Origin: CLI / Auto-Hook / API] --&gt; Engine[Regex DB Resolver]
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    Engine --&gt; Check{AST Context Required?}
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    Check -- No --&gt; Output[Normalized JSON Map]
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    Check -- Yes --&gt; AST[AST Deep Introspection]
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    AST --&gt; Output
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    Output --&gt; UI[Interface Render: Terminal / REST JSON]
-</code></pre></div>
+<h2 id="ast-insight-notes">AST Insight Notes<a class="headerlink" href="#ast-insight-notes" title="Permanent link">&para;</a></h2>
+<p><code>ast_insight</code> is optional and routed via <code>AST_REGISTRY</code> in <code>error_translator/ast_handlers.py</code>.</p>
+<p>Current handlers are lightweight placeholders and return suggestion strings for supported error classes (<code>NameError</code>, <code>AttributeError</code>, <code>ImportError</code>). They do not yet perform full file AST traversal.</p>
 <h2 id="runtime-contract">Runtime Contract<a class="headerlink" href="#runtime-contract" title="Permanent link">&para;</a></h2>
-<p>Every executed cycle is contractually bound to emit a strictly-typed response mapping, heavily favoring backward compatibility and stability across integration features.</p>
-<p>Required mapping constraints:
-- <code>explanation</code>: Deterministic identification summary.
-- <code>fix</code>: Directly resolvable instructions.
-- <code>matched_error</code>: The root cause exception pattern.
-- <code>file</code>: Resolvable file-system pathing.
-- <code>line</code>: Stacktrace line coordinates.
-- <code>code</code>: The immediate code snippet of failure.
-- <code>ast_insight</code>: (Optional) Syntax resolutions.</p>
-<h2 id="extension-evolution-strategy">Extension &amp; Evolution Strategy<a class="headerlink" href="#extension-evolution-strategy" title="Permanent link">&para;</a></h2>
-<p>When committing logic modifications to the platform, strictly adhere to the designated cascading logic priority:</p>
+<p><code>translate_error(...)</code> always returns a dictionary with these fields:</p>
+<ul>
+<li><code>explanation</code></li>
+<li><code>fix</code></li>
+</ul>
+<p>And typically includes:</p>
+<ul>
+<li><code>matched_error</code></li>
+<li><code>file</code> (or <code>Unknown File</code>)</li>
+<li><code>line</code> (or <code>Unknown Line</code>)</li>
+<li><code>code</code> (empty string if unavailable)</li>
+<li><code>ast_insight</code> (only when available)</li>
+</ul>
+<h2 id="extension-strategy">Extension Strategy<a class="headerlink" href="#extension-strategy" title="Permanent link">&para;</a></h2>
+<p>For most contributions, follow this order:</p>
 <ol>
-<li>Modify or establish topology structures within <code>error_translator/rules.json</code>.</li>
-<li>Institute <code>ast_handlers.py</code> plugins only if lexical Regex definitions intrinsically lack context.</li>
-<li>Modify the primary <code>core.py</code> pipeline solely for sweeping architectural regressions or enhancements.</li>
-<li>Finalize logic by locking expectations inside <code>tests/test_core.py</code>.</li>
+<li>Add or improve a regex rule in <code>error_translator/rules.json</code>.</li>
+<li>Add tests in <code>tests/test_core.py</code>.</li>
+<li>Add/update handler behavior in <code>error_translator/ast_handlers.py</code> only when regex alone is insufficient.</li>
+<li>Update <code>error_translator/core.py</code> only for shared pipeline behavior.</li>
 </ol>
 
 
