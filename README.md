@@ -23,6 +23,12 @@ Built for local-first developer workflows: CLI, import-hook auto mode, Python AP
 ```bash
 pip install error-translator-cli-v2
 ```
+### Check if the CLI is working:
+
+```bash
+explain-error --version
+```
+
 
 ### Local development setup
 

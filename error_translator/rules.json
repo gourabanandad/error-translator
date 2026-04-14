@@ -259,6 +259,21 @@
             "pattern": "TimeoutError",
             "explanation": "This error means that an operation you were waiting for, like a network request to a server or waiting for a file to be written, took longer than the allowed time limit. The system decided it couldn't wait any longer and stopped the operation.",
             "fix": "First, check if the resource you're trying to access (e.g., a server, a file, an external service) is actually available and responsive. If it is, you can often fix this by increasing the timeout duration for the specific operation if the library or function you're using allows it. Alternatively, investigate why the operation is taking so long; it might indicate a performance bottleneck in your code or in the external system it relies on. For network operations, consider implementing retry logic with a backoff strategy in case of temporary network glitches."
+        },
+        {
+        "pattern": "StopIteration",
+        "explanation": "This exception is raised when the `next()` function is called on an iterator that has no more items to return. It signals the end of an iteration sequence.",
+        "fix": "If you are manually calling `next()`, you can either use a `try/except StopIteration` block to handle the end gracefully, or better, use a `for` loop which automatically catches this exception internally."
+        },
+        {
+        "pattern": "KeyboardInterrupt",
+        "explanation": "The user interrupted the program's execution, usually by pressing `Ctrl+C`. This is not necessarily an error in the code, but a manual termination signal.",
+        "fix": "To handle this gracefully, wrap your main program logic in a `try/except KeyboardInterrupt` block. Inside the `except` clause, you can perform cleanup operations (closing files, saving state) before exiting."
+        },
+        {
+        "pattern": "SystemExit",
+        "explanation": "This exception is raised by the `sys.exit()` function. It is used to terminate the Python interpreter. Unlike other exceptions, it does not indicate an error but a deliberate exit request.",
+        "fix": "If you want to prevent the script from exiting immediately, you can catch this exception. However, catching `SystemExit` is generally discouraged unless you have a specific reason to override the exit behavior (e.g., in a testing framework or embedded environment)."
         }
     ],
     "default": {
