@@ -4,7 +4,6 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
-
 from importlib.metadata import version, PackageNotFoundError
 
 try:

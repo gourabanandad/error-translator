@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error Translator</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Error Translator</h1>
         <p class="subtitle">Paste a Python traceback or error message below.</p>
-        
-        <textarea id="errorInput" placeholder="e.g.&#10;Traceback (most recent call last):&#10;  File &quot;app.py&quot;, line 14, in &lt;module&gt;&#10;    total = &quot;Users: &quot; + 42&#10;TypeError: can only concatenate str (not &quot;int&quot;) to str"></textarea>
-        
+
+        <textarea id="errorInput"
+            placeholder="e.g.&#10;Traceback (most recent call last):&#10;  File &quot;app.py&quot;, line 14, in &lt;module&gt;&#10;    total = &quot;Users: &quot; + 42&#10;TypeError: can only concatenate str (not &quot;int&quot;) to str"></textarea>
+
         <button id="translateBtn">Translate</button>
-        
+
         <div id="result" class="result hidden">
             <h3>Explanation</h3>
             <pre id="explanationText"></pre>
             <h3>Suggested Fix</h3>
             <pre id="fixText"></pre>
         </div>
-        
+
         <div id="error" class="error hidden"></div>
     </div>
 
@@ -53,7 +56,7 @@
                 });
 
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     explanationText.textContent = data.explanation || 'No explanation provided.';
                     fixText.textContent = data.fix || 'No fix suggested.';
@@ -75,4 +78,5 @@
         }
     </script>
 </body>
+
 </html>
