@@ -147,3 +147,25 @@ def test_regex_extraction_for_supported_errors(mock_traceback, expected_in_expla
     # 2. Prove the Context Engine successfully parsed the file location
     assert result["file"] == "script.py"
     assert result["line"] == "5"
+
+
+def test_print_result_json_emits_valid_json(capsys):
+    """The --json formatter writes a single line of valid JSON containing the result keys."""
+    import json
+    from error_translator.cli import print_result_json
+
+    payload = {
+        "explanation": "x is undefined",
+        "fix": "Define x before use",
+        "matched_error": "NameError: name 'x' is not defined",
+        "file": "Unknown File",
+        "line": "Unknown Line",
+        "code": "",
+        "ast_insight": None,
+    }
+    print_result_json(payload)
+    captured = capsys.readouterr().out
+    # Single line, valid JSON, contains the key fields
+    assert captured.count("\n") == 1
+    parsed = json.loads(captured.strip())
+    assert parsed == payload
