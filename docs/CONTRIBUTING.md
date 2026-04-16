@@ -79,6 +79,12 @@ Before submitting a Pull Request, please ensure the following:
 
 We appreciate your commitment to building a better developer experience with us!
 
+## Release Notes Format
+
+For maintainers publishing releases, use the structured template in `.github/release-template.md`.
+
+Consistent release notes improve both search indexing and LLM retrieval quality by keeping change summaries predictable and machine-readable.
+
 ## Optional Performance Build
 
 If you want to test the native matcher path locally, build the optional C extension from the repository root:

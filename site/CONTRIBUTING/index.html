@@ -6,11 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A local Python error translator that turns tracebacks into clear explanations and practical fixes.">
+        <meta name="description" content="Python error translator and traceback explainer for developers. Convert Python exceptions into clear explanations and actionable fixes offline.">
       
       
         <meta name="author" content="Gourabananda Datta">
       
+      
+        <link rel="canonical" href="https://gourabanandad.github.io/error-translator-cli-v2/CONTRIBUTING/">
       
       
         <link rel="prev" href="../examples/">
@@ -470,6 +472,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#release-notes-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release Notes Format
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-performance-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional Performance Build
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -576,6 +600,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#release-notes-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release Notes Format
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-performance-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional Performance Build
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -629,7 +675,7 @@
 <p>If the test suite passes successfully, your local environment is correctly configured.</p>
 <h2 id="writing-meaningful-rules">Writing Meaningful Rules<a class="headerlink" href="#writing-meaningful-rules" title="Permanent link">&para;</a></h2>
 <p>The core of Error Translator is driven by <code>rules.json</code>. Adding a rule significantly enhances the translation engine's coverage.</p>
-<p>Navigate to <code>error_translator/rules.json</code> and append your pattern to the <code>rules</code> array.</p>
+<p>Navigate to <code>src/error_translator/rules.json</code> and append your pattern to the <code>rules</code> array.</p>
 <h3 id="schema-template">Schema Template<a class="headerlink" href="#schema-template" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ValueError: invalid literal for int\\(\\) with base 10: &#39;(.*)&#39;&quot;</span><span class="p">,</span>
@@ -648,7 +694,7 @@
 <ol>
 <li>
 <p><strong>Scrape Reference Errors</strong>: Download the standard library error map natively.
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>scraper.py
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>scripts/scraper.py
 </code></pre></div>
    <em>(This hydrates <code>scraped_errors_database.json</code>)</em></p>
 </li>
@@ -656,11 +702,11 @@
 <p><strong>Run the Interactive Builder</strong>: Export your authentication credentials and invoke the rule generator.
    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Windows (PowerShell)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">$env</span>:GEMINI_API_KEY<span class="o">=</span><span class="s2">&quot;your_api_key_here&quot;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>python<span class="w"> </span>builder.py
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>python<span class="w"> </span>scripts/builder.py
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># macOS/Linux</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GEMINI_API_KEY</span><span class="o">=</span><span class="s2">&quot;your_api_key_here&quot;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>python<span class="w"> </span>builder.py
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>python<span class="w"> </span>scripts/builder.py
 </code></pre></div></p>
 </li>
 </ol>
@@ -674,6 +720,14 @@
 <li>[ ] <strong>Demonstration</strong>: Include the raw traceback and the output translation directly in your Pull Request description.</li>
 </ul>
 <p>We appreciate your commitment to building a better developer experience with us!</p>
+<h2 id="release-notes-format">Release Notes Format<a class="headerlink" href="#release-notes-format" title="Permanent link">&para;</a></h2>
+<p>For maintainers publishing releases, use the structured template in <code>.github/release-template.md</code>.</p>
+<p>Consistent release notes improve both search indexing and LLM retrieval quality by keeping change summaries predictable and machine-readable.</p>
+<h2 id="optional-performance-build">Optional Performance Build<a class="headerlink" href="#optional-performance-build" title="Permanent link">&para;</a></h2>
+<p>If you want to test the native matcher path locally, build the optional C extension from the repository root:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>setup_ext.py<span class="w"> </span>build_ext<span class="w"> </span>--inplace
+</code></pre></div>
+<p>The project will continue to work without this step by using the Python fallback matcher.</p>
 
 
 
