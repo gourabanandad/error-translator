@@ -27,7 +27,7 @@ If the test suite passes successfully, your local environment is correctly confi
 
 The core of Error Translator is driven by `rules.json`. Adding a rule significantly enhances the translation engine's coverage.
 
-Navigate to `error_translator/rules.json` and append your pattern to the `rules` array.
+Navigate to `src/error_translator/rules.json` and append your pattern to the `rules` array.
 
 ### Schema Template
 
@@ -51,7 +51,7 @@ If you have a Google Gemini API key, you can utilize our integrated tooling to a
 
 1. **Scrape Reference Errors**: Download the standard library error map natively.
    ```bash
-   python scraper.py
+   python scripts/scraper.py
    ```
    *(This hydrates `scraped_errors_database.json`)*
 
@@ -59,11 +59,11 @@ If you have a Google Gemini API key, you can utilize our integrated tooling to a
    ```bash
    # Windows (PowerShell)
    $env:GEMINI_API_KEY="your_api_key_here"
-   python builder.py
+   python scripts/builder.py
    
    # macOS/Linux
    export GEMINI_API_KEY="your_api_key_here"
-   python builder.py
+   python scripts/builder.py
    ```
 
 The script autonomously identifies gaps between `rules.json` and official Python specs, queries the Gemini model to synthesize high-quality regex `pattern` matching, and generates accessible `explanation`s and `fix`es. You can then interactively Accept, Edit, or Skip the proposal.
@@ -78,3 +78,13 @@ Before submitting a Pull Request, please ensure the following:
 - [ ] **Demonstration**: Include the raw traceback and the output translation directly in your Pull Request description.
 
 We appreciate your commitment to building a better developer experience with us!
+
+## Optional Performance Build
+
+If you want to test the native matcher path locally, build the optional C extension from the repository root:
+
+```bash
+python setup_ext.py build_ext --inplace
+```
+
+The project will continue to work without this step by using the Python fallback matcher.

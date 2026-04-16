@@ -11,6 +11,8 @@
 
 Error Translator parses raw Python tracebacks and converts them into readable explanations with actionable fixes. It uses a deterministic, offline regex-matching engine that powers the CLI, Python API, auto-hook mode, and a FastAPI service with a bundled web UI.
 
+For faster matching on supported platforms, the engine can also use an optional C extension (`fast_matcher`) and automatically falls back to pure Python when the extension is unavailable.
+
 If this project is useful to you, support it with a GitHub star: https://github.com/gourabanandad/error-translator-cli-v2
 
 Quick links:
@@ -58,7 +60,7 @@ The core deterministic engine is exported transparently across four major interf
 1. **Automatic Integration Hook**: Catch uncaught exceptions locally in your scripts.
 2. **Command-Line Interface (CLI)**: Translate active scripts, raw strings, or standard log streams automatically.
 3. **Python Native API**: Directly integrate `error_translator.core.translate_error` into your internal system workflows.
-4. **FastAPI Protocol**: Export translations externally over REST HTTP protocols via the `error_translator.server` module (`/translate`, `/health`, `/`).
+4. **FastAPI Protocol**: Export translations externally over REST HTTP protocols via the `error_translator.api.server` module (`/translate`, `/health`, `/`).
 
 ## Developer Quickstart
 

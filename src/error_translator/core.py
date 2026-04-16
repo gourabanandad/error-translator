@@ -5,6 +5,13 @@ import linecache
 from functools import lru_cache
 from .ast.ast_handlers import AST_REGISTRY
 
+# Attempt to load the ultra-fast C extension, fallback to Python if unavailable
+try:
+    from .fast_matcher import match_loop
+    C_EXTENSION_AVAILABLE = True
+except ImportError:
+    C_EXTENSION_AVAILABLE = False
+
 
 @lru_cache(maxsize=1)
 def load_rules():
@@ -55,27 +62,47 @@ def translate_error(traceback_text: str) -> dict:
         except Exception:
             pass
 
-    for pattern, rule in rules:
-        match = pattern.search(actual_error_line)
-        if match:
-            extracted_values = list(match.groups())
-            fix_text = rule["fix"].format(*extracted_values)
+    # ==========================================
+    # FAST MATCHING ENGINE (C Extension + Python Fallback)
+    # ==========================================
+    match = None
+    rule = None
 
-            error_type = actual_error_line.split(":")[0].strip()
-            handler_function = AST_REGISTRY.get(error_type)
-            insight = None
-            if handler_function and file_name != "Unknown File":
-                insight = handler_function(file_name, extracted_values)
-            return {
-                "explanation": rule["explanation"].format(*extracted_values),
-                "fix": fix_text,
-                "ast_insight": insight,
-                "matched_error": actual_error_line,
-                "file": file_name,
-                "line": line_number,
-                "code": code_context,
-            }
+    if C_EXTENSION_AVAILABLE:
+        # Execute the C extension (runs at C speed)
+        result = match_loop(actual_error_line, rules)
+        if result:
+            match, rule = result
+    else:
+        # Standard Python fallback loop
+        for pattern, r in rules:
+            m = pattern.search(actual_error_line)
+            if m:
+                match, rule = m, r
+                break
 
+    if match and rule:
+        extracted_values = list(match.groups())
+        fix_text = rule["fix"].format(*extracted_values)
+
+        error_type = actual_error_line.split(":")[0].strip()
+        handler_function = AST_REGISTRY.get(error_type)
+        insight = None
+        
+        if handler_function and file_name != "Unknown File":
+            insight = handler_function(file_name, extracted_values)
+        
+        return {
+            "explanation": rule["explanation"].format(*extracted_values),
+            "fix": fix_text,
+            "ast_insight": insight,
+            "matched_error": actual_error_line,
+            "file": file_name,
+            "line": line_number,
+            "code": code_context,
+        }
+
+    # Default fallback when no rules match
     return {
         "explanation": default_error["explanation"],
         "fix": default_error["fix"],

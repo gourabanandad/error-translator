@@ -28,6 +28,7 @@ If this project saves you debugging time, please consider starring it on GitHub:
 * **Automatic Integration Mode**: Inject the module via `import error_translator.auto` to automatically override `sys.excepthook` for graceful, translated crash reporting.
 * **Extensible API Surfaces**: Integrate natively within Python or expose the core engine over HTTP via the included FastAPI server.
 * **Deterministic Rules Engine**: High-performance, regex-based matching powered by `rules.json` guarantees offline and privacy-first translations.
+* **Optional Native Acceleration**: A C extension matcher (`fast_matcher`) can accelerate rule scanning, with automatic fallback to pure Python when unavailable.
 * **Optional AST Insight Hooks**: Registered handlers can append targeted hints (`ast_insight`) for selected error types.
 
 ## Installation
@@ -93,7 +94,7 @@ if __name__ == "__main__":
 Start the built-in HTTP server for remote translation services:
 
 ```bash
-uvicorn error_translator.server:app --host 127.0.0.1 --port 8000 --reload
+uvicorn error_translator.api.server:app --host 127.0.0.1 --port 8000 --reload
 ```
 
 Submit a traceback payload via the exposed REST API:
@@ -107,7 +108,20 @@ curl -X POST http://127.0.0.1:8000/translate \
 Additional endpoints:
 
 - `GET /health` returns service status.
-- `GET /` serves the bundled web UI from `error_translator/static/index.html`.
+- `GET /` serves the bundled web UI from `error_translator/api/static/index.html`.
+
+### 4. Optional C Extension Build
+
+The translation engine automatically attempts to import `error_translator.fast_matcher`.
+If it is not built or not available on the platform, Error Translator falls back to the pure Python regex loop with no behavior change.
+
+Build the extension in-place from the repository root:
+
+```bash
+python setup_ext.py build_ext --inplace
+```
+
+This step is optional and intended for local performance optimization.
 
 ## Documentation
 
