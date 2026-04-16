@@ -34,12 +34,12 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/gourabanandad/error-translator"
-"Source" = "https://github.com/gourabanandad/error-translator"
-"Documentation" = "https://github.com/gourabanandad/error-translator/tree/master/docs"
-"Issues" = "https://github.com/gourabanandad/error-translator/issues"
-"Changelog" = "https://github.com/gourabanandad/error-translator/releases"
-"Contributors" = "https://github.com/gourabanandad/error-translator/graphs/contributors"
+"Homepage" = "https://github.com/gourabanandad/error-translator-cli-v2"
+"Source" = "https://github.com/gourabanandad/error-translator-cli-v2"
+"Documentation" = "https://github.com/gourabanandad/error-translator-cli-v2/tree/master/docs"
+"Issues" = "https://github.com/gourabanandad/error-translator-cli-v2/issues"
+"Changelog" = "https://github.com/gourabanandad/error-translator-cli-v2/releases"
+"Contributors" = "https://github.com/gourabanandad/error-translator-cli-v2/graphs/contributors"
 
 [project.scripts]
 explain-error = "error_translator.cli:main"
@@ -50,7 +50,11 @@ docs = ["mkdocs>=1.6", "mkdocs-material>=9.7", "pymdown-extensions>=10.0"]
 dev = ["pytest>=8.0", "build>=1.2", "twine>=5.0"]
 
 [tool.setuptools]
+package-dir = {"" = "src"}
 packages = ["error_translator"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
 
 [tool.setuptools.package-data]
 error_translator = ["rules.json", "static/*.html", "static/*.css"]

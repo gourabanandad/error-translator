@@ -3,7 +3,7 @@ import os
 import re
 import linecache
 from functools import lru_cache
-from .ast_handlers import AST_REGISTRY
+from .ast.ast_handlers import AST_REGISTRY
 
 
 @lru_cache(maxsize=1)
