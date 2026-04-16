@@ -65,6 +65,14 @@ Pipe system or Docker logs into the engine:
 cat error.log | explain-error
 ```
 
+Emit structured JSON for scripting and automation:
+```bash
+explain-error --json "NameError: name 'x' is not defined"
+# {"explanation": "...", "fix": "...", "matched_error": "...", "file": "...", "line": "...", "code": "...", "ast_insight": null}
+```
+
+The `--json` flag works with every input mode (`run <script>`, raw string, piped log).
+
 ### 2. Automatic Import Hook
 
 Catch and translate unhandled exceptions globally by importing the module:
