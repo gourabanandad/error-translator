@@ -401,6 +401,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#optional-native-acceleration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional Native Acceleration
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -544,6 +555,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#optional-native-acceleration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional Native Acceleration
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -582,10 +604,14 @@
 <h2 id="core-translation-pipeline">Core Translation Pipeline<a class="headerlink" href="#core-translation-pipeline" title="Permanent link">&para;</a></h2>
 <p>Each translation request follows this sequence:</p>
 <ol>
-<li><strong>Load and cache rule data</strong> from <code>error_translator/rules.json</code>.</li>
+<li><strong>Load and cache rule data</strong> from <code>src/error_translator/rules.json</code>.</li>
 <li><strong>Extract traceback location</strong> (<code>file</code>, <code>line</code>) when present.</li>
 <li><strong>Read source context line</strong> using <code>linecache</code> when file and line are available.</li>
-<li><strong>Match the last error line</strong> against pre-compiled regex patterns.</li>
+<li><strong>Match the last error line</strong> against pre-compiled regex patterns.<ul>
+<li>First attempt uses the optional C extension matcher (<code>error_translator.fast_matcher.match_loop</code>).</li>
+<li>If the extension is unavailable, the engine falls back to the pure Python loop.</li>
+</ul>
+</li>
 <li><strong>Format output fields</strong> (<code>explanation</code>, <code>fix</code>, and metadata).</li>
 <li><strong>Optionally attach <code>ast_insight</code></strong> for registered error types.</li>
 </ol>
@@ -601,7 +627,7 @@
 </li>
 <li><strong>Auto hook</strong> (<code>error_translator/auto.py</code>): import once to override <code>sys.excepthook</code>.</li>
 <li><strong>Python API</strong>: <code>from error_translator.core import translate_error</code>.</li>
-<li><strong>FastAPI service</strong> (<code>error_translator/server.py</code>):<ul>
+<li><strong>FastAPI service</strong> (<code>error_translator/api/server.py</code>):<ul>
 <li><code>POST /translate</code></li>
 <li><code>GET /health</code></li>
 <li><code>GET /</code> serves the bundled static UI (if present)</li>
@@ -628,11 +654,15 @@
 <h2 id="extension-strategy">Extension Strategy<a class="headerlink" href="#extension-strategy" title="Permanent link">&para;</a></h2>
 <p>For most contributions, follow this order:</p>
 <ol>
-<li>Add or improve a regex rule in <code>error_translator/rules.json</code>.</li>
+<li>Add or improve a regex rule in <code>src/error_translator/rules.json</code>.</li>
 <li>Add tests in <code>tests/test_core.py</code>.</li>
 <li>Add/update handler behavior in <code>error_translator/ast_handlers.py</code> only when regex alone is insufficient.</li>
 <li>Update <code>error_translator/core.py</code> only for shared pipeline behavior.</li>
 </ol>
+<h2 id="optional-native-acceleration">Optional Native Acceleration<a class="headerlink" href="#optional-native-acceleration" title="Permanent link">&para;</a></h2>
+<p>The optional C extension source lives at <code>src/error_translator/ext/fast_matcher.c</code> and is built via <code>setup_ext.py</code>.</p>
+<p>When built successfully, core translation uses native code for the rule scan loop.
+When not built, behavior remains identical because the Python loop is used automatically.</p>
 
 
 
