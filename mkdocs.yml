@@ -1,6 +1,7 @@
 site_name: Error Translator
-site_description: A local Python error translator that turns tracebacks into clear explanations and practical fixes.
+site_description: Python error translator and traceback explainer for developers. Convert Python exceptions into clear explanations and actionable fixes offline.
 site_author: Gourabananda Datta
+site_url: https://gourabanandad.github.io/error-translator-cli-v2/
 repo_name: gourabanandad/error-translator-cli-v2
 repo_url: https://github.com/gourabanandad/error-translator-cli-v2
 edit_uri: edit/master/docs/

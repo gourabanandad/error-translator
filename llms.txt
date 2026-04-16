@@ -1,0 +1,48 @@
+# Error Translator
+
+> Offline Python traceback translator and exception explainer.
+
+Error Translator turns raw Python tracebacks into clear explanations and actionable fixes. It is designed for developers, students, and automation workflows that need deterministic, local error translation.
+
+## Primary Keywords
+
+- Python error translator
+- Python traceback translator
+- Python exception explainer
+- Stack trace analyzer for Python
+- CLI tool for Python debugging
+- Offline Python debugging assistant
+
+## Canonical Links
+
+- Homepage: https://github.com/gourabanandad/error-translator-cli-v2
+- Source: https://github.com/gourabanandad/error-translator-cli-v2
+- Package: https://pypi.org/project/error-translator-cli-v2/
+- Docs: https://github.com/gourabanandad/error-translator-cli-v2/tree/master/docs
+- Issues: https://github.com/gourabanandad/error-translator-cli-v2/issues
+
+## Interfaces
+
+- CLI command: explain-error
+- Python API: error_translator.core.translate_error
+- Auto-hook mode: error_translator.auto
+- FastAPI app: error_translator.api.server:app
+
+## Feature Summary
+
+- Deterministic regex rule engine
+- Optional C extension acceleration with Python fallback
+- Offline and privacy-friendly execution
+- JSON output mode for scripting
+- Optional AST insight hints for supported errors
+
+## Install
+
+pip install error-translator-cli-v2
+
+## Typical Use Cases
+
+- Explain unfamiliar Python exceptions quickly
+- Improve CI or log pipelines with readable diagnostics
+- Teach Python errors with beginner-friendly wording
+- Add traceback translation to internal tools via API

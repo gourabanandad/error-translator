@@ -6,11 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A local Python error translator that turns tracebacks into clear explanations and practical fixes.">
+        <meta name="description" content="Python error translator and traceback explainer for developers. Convert Python exceptions into clear explanations and actionable fixes offline.">
       
       
         <meta name="author" content="Gourabananda Datta">
       
+      
+        <link rel="canonical" href="https://gourabanandad.github.io/error-translator-cli-v2/">
       
       
       
@@ -619,6 +621,7 @@
 
 <p><br></p>
 <p>Error Translator parses raw Python tracebacks and converts them into readable explanations with actionable fixes. It uses a deterministic, offline regex-matching engine that powers the CLI, Python API, auto-hook mode, and a FastAPI service with a bundled web UI.</p>
+<p>For faster matching on supported platforms, the engine can also use an optional C extension (<code>fast_matcher</code>) and automatically falls back to pure Python when the extension is unavailable.</p>
 <p>If this project is useful to you, support it with a GitHub star: https://github.com/gourabanandad/error-translator-cli-v2</p>
 <p>Quick links:</p>
 <ul>
@@ -657,7 +660,7 @@
 <li><strong>Automatic Integration Hook</strong>: Catch uncaught exceptions locally in your scripts.</li>
 <li><strong>Command-Line Interface (CLI)</strong>: Translate active scripts, raw strings, or standard log streams automatically.</li>
 <li><strong>Python Native API</strong>: Directly integrate <code>error_translator.core.translate_error</code> into your internal system workflows.</li>
-<li><strong>FastAPI Protocol</strong>: Export translations externally over REST HTTP protocols via the <code>error_translator.server</code> module (<code>/translate</code>, <code>/health</code>, <code>/</code>).</li>
+<li><strong>FastAPI Protocol</strong>: Export translations externally over REST HTTP protocols via the <code>error_translator.api.server</code> module (<code>/translate</code>, <code>/health</code>, <code>/</code>).</li>
 </ol>
 <h2 id="developer-quickstart">Developer Quickstart<a class="headerlink" href="#developer-quickstart" title="Permanent link">&para;</a></h2>
 <p>To install Error Translator globally via your package manager:</p>

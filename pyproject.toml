@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "error-translator-cli-v2"
 version = "1.1.5"
-description = "A CLI tool that explains Python errors in simple human language."
+description = "Offline Python traceback translator and error explainer CLI that converts exceptions into clear explanations and actionable fixes."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
@@ -13,9 +13,21 @@ authors = [
     { name = "Gourabananda Datta", email = "gourabanandadatta@zohomail.in" }
 ]
 keywords = [
-    "python", "traceback", "cli", "debugging", "error handling", 
-    "developer tools", "exception", "stack-trace", "terminal", 
-    "human-readable", "bug-tracker"
+    "python",
+    "python error translator",
+    "traceback translator",
+    "python traceback analyzer",
+    "python exception explainer",
+    "error explainer",
+    "error handling",
+    "debugging",
+    "developer tools",
+    "stack-trace",
+    "cli",
+    "terminal",
+    "offline",
+    "fastapi",
+    "human-readable"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -36,10 +48,11 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/gourabanandad/error-translator-cli-v2"
 "Source" = "https://github.com/gourabanandad/error-translator-cli-v2"
-"Documentation" = "https://github.com/gourabanandad/error-translator-cli-v2/tree/master/docs"
+"Documentation" = "https://gourabanandad.github.io/error-translator-cli-v2/"
 "Issues" = "https://github.com/gourabanandad/error-translator-cli-v2/issues"
 "Changelog" = "https://github.com/gourabanandad/error-translator-cli-v2/releases"
 "Contributors" = "https://github.com/gourabanandad/error-translator-cli-v2/graphs/contributors"
+"PyPI" = "https://pypi.org/project/error-translator-cli-v2/"
 
 [project.scripts]
 explain-error = "error_translator.cli:main"
