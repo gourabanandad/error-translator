@@ -1,98 +1,80 @@
 # Contributing to Error Translator
 
-First open-source contribution? You are absolutely welcome here.
+Thank you for your interest in contributing to Error Translator! This project was built to be highly accessible and welcoming to new developers. Most improvements to the engine's translation mapping occur within a single JSON configuration file, meaning impactful contributions are possible even without extensive Python experience.
 
-This project is intentionally beginner-friendly. Most improvements happen in one JSON file, and many meaningful contributions require zero Python coding.
+## Developer Setup
 
-## New Contributor Path
+Clone the repository and set up your virtual environment for local development:
 
-1. Pick one real traceback that confused you.
-2. Add or improve one rule in error_translator/rules.json.
-3. Run tests.
-4. Open a PR with your sample traceback and expected explanation.
+```bash
+git clone https://github.com/gourabanandad/error-translator.git
+cd error-translator
+python -m venv .venv
 
-That alone is a high-value contribution.
+# Activate environment (Windows)
+.\.venv\Scripts\activate
+# Activate environment (macOS/Linux)
+source .venv/bin/activate
 
-If you get stuck at any point, open a draft PR anyway and ask for help. Maintainers will guide you.
-
-## Local Setup
-
-~~~bash
 pip install -r requirements.txt
+pip install -e .
 pytest
-~~~
+```
 
-If tests pass, you are ready.
+If the test suite passes successfully, your local environment is correctly configured.
 
-## Easiest Way to Contribute: Add a Rule
+## Writing Meaningful Rules
 
-You can extend coverage without writing any Python.
+The core of Error Translator is driven by `rules.json`. Adding a rule significantly enhances the translation engine's coverage.
 
-Open error_translator/rules.json and add a new object to the rules array.
+Navigate to `error_translator/rules.json` and append your pattern to the `rules` array.
 
-Use this copy-paste template:
+### Schema Template
 
-~~~json
+```json
 {
   "pattern": "ValueError: invalid literal for int\\(\\) with base 10: '(.*)'",
   "explanation": "You tried to convert '{0}' into an integer, but it is not a valid whole number.",
   "fix": "Make sure '{0}' only contains digits, or parse it as float first if decimals are expected."
 }
-~~~
+```
 
-Example where this helps:
+### Capturing Mechanism
 
-Input error line:
+- The engine evaluates Python `re` syntax against the target exception.
+- `(.*)` evaluates and captures dynamic runtime variables from the raw traceback.
+- `{0}`, `{1}`, etc., inject those extracted sub-patterns into your defined `explanation` and `fix` strings for rich user context.
 
-~~~text
-ValueError: invalid literal for int() with base 10: '12.7'
-~~~
+## The Fastest Workflow: AI-Powered Rule Builder
 
-Result after matching:
+If you have a Google Gemini API key, you can utilize our integrated tooling to automate the rule creation lifecycle entirely:
 
-- {0} becomes 12.7
-- Your explanation and fix are filled in automatically
+1. **Scrape Reference Errors**: Download the standard library error map natively.
+   ```bash
+   python scraper.py
+   ```
+   *(This hydrates `scraped_errors_database.json`)*
 
-How placeholders work:
+2. **Run the Interactive Builder**: Export your authentication credentials and invoke the rule generator.
+   ```bash
+   # Windows (PowerShell)
+   $env:GEMINI_API_KEY="your_api_key_here"
+   python builder.py
+   
+   # macOS/Linux
+   export GEMINI_API_KEY="your_api_key_here"
+   python builder.py
+   ```
 
-- (.*) captures dynamic text from the error message.
-- {0}, {1}, and so on insert those captured values into explanation and fix.
+The script autonomously identifies gaps between `rules.json` and official Python specs, queries the Gemini model to synthesize high-quality regex `pattern` matching, and generates accessible `explanation`s and `fix`es. You can then interactively Accept, Edit, or Skip the proposal.
 
-## Rule Writing Tips
+## Pull Request Standards
 
-- Keep patterns specific to avoid accidental matches.
-- Keep explanations short and plain-language.
-- Keep fixes actionable and immediate.
-- Prefer one focused rule over one very broad rule.
+Before submitting a Pull Request, please ensure the following:
 
-## Where Changes Usually Go
+- [ ] **Test Coverage**: You have verified new rules locally via `pytest` and updated `tests/test_core.py` when applicable.
+- [ ] **Accessibility**: Explanations are drafted in plain, supportive terminology without unnecessary technical jargon.
+- [ ] **Actionability**: Suggested fixes are concrete, deterministic, and immediately applicable by a developer.
+- [ ] **Demonstration**: Include the raw traceback and the output translation directly in your Pull Request description.
 
-- error_translator/rules.json for new or improved translations
-- tests/test_core.py for behavior checks
-- README.md and docs for user-facing updates
-
-Only edit core engine files when rule-based changes are not enough.
-
-## Pull Request Checklist
-
-- [ ] I tested locally with pytest.
-- [ ] I included a sample traceback in my PR description.
-- [ ] My explanation is clear to a beginner.
-- [ ] My fix is concrete and actionable.
-- [ ] I updated docs if behavior changed.
-
-## Suggested GIF for Your PR
-
-Record a short terminal clip that shows:
-
-1. Running explain-error on a failing traceback before your rule.
-2. Adding your JSON rule in rules.json.
-3. Running explain-error again to show the improved translation.
-
-Record this as a short terminal GIF at normal speed with readable font size.
-
-Ideal length: 15-30 seconds.
-
-This makes review faster and helps maintainers merge with confidence.
-
-Thanks for building this with us.
+We appreciate your commitment to building a better developer experience with us!

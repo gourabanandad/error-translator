@@ -1,9 +1,15 @@
 site_name: Error Translator
 site_description: A local Python error translator that turns tracebacks into clear explanations and practical fixes.
 site_author: Gourabananda Datta
+repo_name: gourabanandad/error-translator-cli-v2
+repo_url: https://github.com/gourabanandad/error-translator-cli-v2
+edit_uri: edit/master/docs/
 
 theme:
   name: material
+  features:
+    - content.action.edit
+    - content.action.view
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -31,4 +37,5 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Architecture: ARCHITECTURE.md
+  - Examples: examples.md
   - Contributing: CONTRIBUTING.md

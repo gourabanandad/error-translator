@@ -1,82 +1,61 @@
-# Architecture: One Core Engine, Multiple Tools
+# Architectural Overview
 
-Error Translator is built on a single translation engine that powers multiple delivery surfaces.
+Error Translator is built around one deterministic engine in `error_translator/core.py`. The same engine powers the CLI, auto-hook mode, Python imports, and the FastAPI service.
 
-- One core engine: error parsing, regex matching, AST inspection, and JSON output.
-- Multiple tools: CLI, Magic Import auto-hook, Python native API, FastAPI server, and VS Code extension.
+## Core Translation Pipeline
 
-This keeps behavior consistent across terminal workflows, editor UX, and backend integrations.
+Each translation request follows this sequence:
 
-## The Core Engine
+1. **Load and cache rule data** from `error_translator/rules.json`.
+2. **Extract traceback location** (`file`, `line`) when present.
+3. **Read source context line** using `linecache` when file and line are available.
+4. **Match the last error line** against pre-compiled regex patterns.
+5. **Format output fields** (`explanation`, `fix`, and metadata).
+6. **Optionally attach `ast_insight`** for registered error types.
 
-The core engine lives in error_translator/core.py and owns all translation logic.
+If no pattern matches, the `default` rule is returned.
 
-It does four things fast:
+## Implementation Surfaces
 
-1. Extracts the final error line from traceback input.
-2. Matches against the local regex rule database.
-3. Runs AST inspection only when an error type benefits from deeper context.
-4. Returns structured JSON-style output for any renderer.
+The same engine is exposed through:
 
-## Tool Surfaces
+1. **CLI** (`error_translator/cli.py`):
+    - `explain-error run script.py`
+    - `explain-error "<error text>"`
+    - `cat error.log | explain-error`
+2. **Auto hook** (`error_translator/auto.py`): import once to override `sys.excepthook`.
+3. **Python API**: `from error_translator.core import translate_error`.
+4. **FastAPI service** (`error_translator/server.py`):
+    - `POST /translate`
+    - `GET /health`
+    - `GET /` serves the bundled static UI (if present)
 
-### 1. CLI
+## AST Insight Notes
 
-explain-error can run scripts, translate raw error strings, or process piped logs.
+`ast_insight` is optional and routed via `AST_REGISTRY` in `error_translator/ast_handlers.py`.
 
-### 2. Magic Import Auto-Hook
-
-import error_translator.auto overrides sys.excepthook and auto-translates unhandled crashes.
-
-### 3. Python Native API
-
-from error_translator.core import translate_error gives backend code direct access to JSON output.
-
-### 4. FastAPI Server
-
-error_translator.server exposes the same engine over HTTP for service environments.
-
-### 5. VS Code Extension
-
-The extension calls a PyInstaller-frozen executable of the same engine.
-
-Why this matters:
-
-- No Python environment setup required in the extension runtime path.
-- Very low startup overhead for hover interactions.
-- Consistent translation behavior with the CLI path.
-
-## Data Flow
-
-~~~mermaid
-flowchart LR
-    A[User Input: CLI / VS Code / Auto-Hook / API] --> B[Regex DB Matcher]
-    B --> C{Needs deeper context?}
-    C -- No --> D[JSON Output]
-    C -- Yes --> E[AST Inspection]
-    E --> D
-    D --> F[Rendered UI: Terminal / Hover / API Response]
-~~~
+Current handlers are lightweight placeholders and return suggestion strings for supported error classes (`NameError`, `AttributeError`, `ImportError`). They do not yet perform full file AST traversal.
 
 ## Runtime Contract
 
-Every entry point gets a predictable translation object with fields like:
+`translate_error(...)` always returns a dictionary with these fields:
 
-- explanation
-- fix
-- matched_error
-- file
-- line
-- code
-- ast_insight
+- `explanation`
+- `fix`
 
-Stable output shape is intentional. It keeps integrations simple and lowers maintenance cost.
+And typically includes:
+
+- `matched_error`
+- `file` (or `Unknown File`)
+- `line` (or `Unknown Line`)
+- `code` (empty string if unavailable)
+- `ast_insight` (only when available)
 
 ## Extension Strategy
 
-When improving behavior, use this order:
+For most contributions, follow this order:
 
-1. Update rules first in error_translator/rules.json.
-2. Add AST handlers only for cases where rules alone are insufficient.
-3. Touch core pipeline last, and only for cross-cutting improvements.
-4. Lock behavior with tests in tests/test_core.py.
+1. Add or improve a regex rule in `error_translator/rules.json`.
+2. Add tests in `tests/test_core.py`.
+3. Add/update handler behavior in `error_translator/ast_handlers.py` only when regex alone is insufficient.
+4. Update `error_translator/core.py` only for shared pipeline behavior.

@@ -1,26 +1,38 @@
 # Error Translator
 
-[![PyPI Version](https://img.shields.io/pypi/v/error-translator-cli-v2.svg)](https://pypi.org/project/error-translator-cli-v2/)
-[![Python Version](https://img.shields.io/pypi/pyversions/error-translator-cli-v2.svg)](https://pypi.org/project/error-translator-cli-v2/)
-[![License](https://img.shields.io/github/license/gourabanandad/error-translator)](https://github.com/gourabanandad/error-translator)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/gourabanandad/error-translator/ci.yml?branch=master&label=build)](https://github.com/gourabanandad/error-translator/actions/workflows/ci.yml)
+<div align="left">
+  <a href="https://pypi.org/project/error-translator-cli-v2/"><img alt="PyPI Version" src="https://img.shields.io/pypi/v/error-translator-cli-v2.svg"></a>
+  <a href="https://pypi.org/project/error-translator-cli-v2/"><img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-blue.svg"></a>
+  <a href="https://github.com/gourabanandad/error-translator-cli-v2"><img alt="License" src="https://img.shields.io/github/license/gourabanandad/error-translator-cli-v2.svg"></a>
+  <a href="https://github.com/gourabanandad/error-translator-cli-v2/actions/workflows/ci.yml"><img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/gourabanandad/error-translator-cli-v2/ci.yml?branch=master&label=build"></a>
+</div>
 
-Translate raw Python tracebacks into developer-ready fixes in milliseconds with one offline engine powering CLI, APIs, and editor hovers.
+<br>
 
-## Show, Don’t Tell
+Error Translator parses raw Python tracebacks and converts them into readable explanations with actionable fixes. It uses a deterministic, offline regex-matching engine that powers the CLI, Python API, auto-hook mode, and a FastAPI service with a bundled web UI.
 
-### Raw traceback
+If this project is useful to you, support it with a GitHub star: https://github.com/gourabanandad/error-translator-cli-v2
 
-~~~text
+Quick links:
+
+- GitHub Repository: https://github.com/gourabanandad/error-translator-cli-v2
+- PyPI Package: https://pypi.org/project/error-translator-cli-v2/
+- Issues / Feature Requests: https://github.com/gourabanandad/error-translator/issues
+
+## Demonstration
+
+### Raw Traceback Input
+
+```text
 Traceback (most recent call last):
   File "app.py", line 14, in <module>
     total = "Users: " + 42
 TypeError: can only concatenate str (not "int") to str
-~~~
+```
 
-### Translated output
+### Engine Translation Output
 
-~~~markdown
+```markdown
 ### Error Detected
 TypeError: can only concatenate str (not "int") to str
 
@@ -32,83 +44,28 @@ You are trying to add a string to an int, which Python cannot do.
 
 ### Suggested Fix
 Convert the int to a string first using str() before concatenating.
-~~~
+```
 
-### Colorized terminal view
+## Core Design Principles
 
-*When run in a terminal, the output appears as:*
+- **Privacy-First (Offline)**: Your stack traces and source code snippets never leave your machine. The regex and AST engines operate entirely locally.
+- **Deterministic Matching**: Regex rules are compiled once and reused, so outputs stay consistent for the same error text.
 
-~~~
-🔴 Error Detected:
-TypeError: can only concatenate str (not "int") to str
+## The Tooling Ecosystem
 
-🟡 Location: app.py (Line 14)
+The core deterministic engine is exported transparently across four major interfaces:
 
-🔵 Explanation:
-You are trying to add a string to an int, which Python cannot do.
+1. **Automatic Integration Hook**: Catch uncaught exceptions locally in your scripts.
+2. **Command-Line Interface (CLI)**: Translate active scripts, raw strings, or standard log streams automatically.
+3. **Python Native API**: Directly integrate `error_translator.core.translate_error` into your internal system workflows.
+4. **FastAPI Protocol**: Export translations externally over REST HTTP protocols via the `error_translator.server` module (`/translate`, `/health`, `/`).
 
-🟢 Suggested Fix:
-Convert the int to a string first using str() before concatenating.
-~~~
+## Developer Quickstart
 
-(Red, yellow, blue, and green text for visual hierarchy in terminal)
+To install Error Translator globally via your package manager:
 
-##  Quickstart
-
-Install first:
-
-~~~bash
+```bash
 pip install error-translator-cli-v2
-~~~
+```
 
-### 1. CLI mode (run scripts, strings, or pipes)
-
-~~~bash
-explain-error run script.py
-explain-error "NameError: name 'usr_count' is not defined"
-cat error.log | explain-error
-~~~
-
-### 2. Magic Import (auto-hook)
-
-~~~python
-import error_translator.auto
-
-# Unhandled exceptions are auto-translated through sys.excepthook.
-~~~
-
-### 3. VS Code Extension
-
-Install the Error Translator extension and hover on traceback output.
-
-The extension invokes a PyInstaller-frozen executable of the same core engine for offline, near-zero-latency UI help.
-
-## Why Error Translator?
-
-- Offline and private: your stack traces never leave your machine.
-- Blazing fast: regex-first matching with targeted AST inspection for typo hints.
-- Editor native: VS Code extension uses a PyInstaller-frozen executable for near-instant hover help.
-
-## Five Core Features
-
-1. Magic Import (Auto-Hook)
-2. CLI execution, raw-string translation, and log piping
-3. VS Code extension with frozen offline engine
-4. Python native API via error_translator.core.translate_error
-5. FastAPI server via error_translator.server
-
-## Documentation Map
-
-- Architecture: ARCHITECTURE.md
-- Contributing: CONTRIBUTING.md
-
-## Recommended Demo Recording
-
-Record a 20-30 second GIF that shows this exact flow:
-
-1. Run a script that throws a NameError caused by a typo.
-2. Show the raw traceback in terminal for one second.
-3. Immediately run explain-error on the same error and show the translated explanation and fix.
-4. Fix the typo and rerun to show success.
-
-This gives new users proof of speed, clarity, and practical value in one clip.
+We recommend navigating to the [**Contributing Guidelines**](CONTRIBUTING.md) to familiarize yourself with adding and extending deterministic rules using our automated Rule Builder tools.
