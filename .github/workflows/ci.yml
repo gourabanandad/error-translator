@@ -7,7 +7,7 @@ permissions:
 
 on:
   pull_request:
-    types: [closed]
+    types: [opened, synchronize, reopened]
     branches: ["master"]
 
   release:
@@ -15,7 +15,7 @@ on:
 
 jobs:
   test-code:
-    if: github.event.pull_request.merged == true || github.event_name == 'release'
+    if: github.event_name == 'pull_request' || github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
