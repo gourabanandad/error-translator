@@ -4,100 +4,173 @@ import argparse
 from .core import translate_error
 from importlib.metadata import version, PackageNotFoundError
 
+# Import Rich UI Components
+from rich.console import Console
+from rich.panel import Panel
+from rich.syntax import Syntax
+from rich.text import Text
+from rich.table import Table
+from rich import box
+
 try:
     VERSION = version("error-translator-cli-v2")
 except PackageNotFoundError:
-    VERSION = "unknown (not installed via pip)"  # Fallback version if package metadata is not found
+    VERSION = "unknown (not installed via pip)"
 
-# ANSI Color Codes
-class Colors:
-    RED = '\033[91m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    CYAN = '\033[96m'
-    BOLD = '\033[1m'
-    RESET = '\033[0m'
-    MAGENTA = '\033[95m'
+# Initialize the global rich console
+console = Console()
 
+
+def _print_title_banner():
+    banner = Text()
+    banner.append("Error Translator CLI\n", style="bold bright_magenta")
+    banner.append("Translate Python tracebacks into clear, actionable guidance.", style="cyan")
+    console.print(
+        Panel(
+            banner,
+            border_style="magenta",
+            padding=(1, 2),
+            expand=False,
+        )
+    )
 
 def print_about():
-    """Prints the about message for the tool."""
-    about_text = f"""
-ERROR TRANSLATOR CLI
-=====================
-A lightning-fast, offline tool that translates raw Python tracebacks 
-into human-readable explanations with actionable fixes.
+    """Prints a polished about view using rich components."""
+    _print_title_banner()
 
-Authors: Gourabananda Datta
-Repository: https://github.com/gourabanandad/error-translator-cli-v2
-Usage:
-  1. Run a script and translate its errors:
-        explain-error run your_script.py
-    2. Translate an error message directly:
-        explain-error "TypeError: unsupported operand type(s) for +: 'int' and 'str'"
-    3. Pipe an error log:
-        cat error.log | explain-error
-    4. Get help:
-        explain-error --help
-    5. About:
-        explain-error --about
-"""
-    print(f"\033[96m{about_text}\033[0m")
+    meta = Table.grid(padding=(0, 1))
+    meta.add_column(style="bold white", justify="right")
+    meta.add_column(style="green")
+    meta.add_row("Version", VERSION)
+    meta.add_row("Author", "Gourabananda Datta")
+    meta.add_row("Repository", "https://github.com/gourabanandad/error-translator-cli-v2")
+    console.print(Panel(meta, title="[bold cyan]Project[/]", border_style="cyan", expand=False))
+
+    features = Text()
+    features.append("• Offline and fast translation\n", style="white")
+    features.append("• Human-readable explanations\n", style="white")
+    features.append("• Actionable fix suggestions\n", style="white")
+    features.append("• Optional AST-level insight", style="white")
+    console.print(Panel(features, title="[bold green]Features[/]", border_style="green", expand=False))
+
+    examples = Text()
+    examples.append("explain-error run your_script.py\n", style="bold cyan")
+    examples.append("explain-error \"TypeError: ...\"\n", style="bold cyan")
+    examples.append("cat error.log | explain-error", style="bold cyan")
+    console.print(Panel(examples, title="[bold yellow]Quick Start[/]", border_style="yellow", expand=False))
 
 
 def print_result(result: dict):
-    """Prints the translated error to the terminal with colors."""
-    print(f"\n{Colors.RED}{Colors.BOLD} Error Detected:{Colors.RESET}")
-    print(f"{result.get('matched_error', 'N/A')}")
-    
-    if "file" in result:
-        print(f"{Colors.YELLOW} Location: {result['file']} (Line {result['line']}){Colors.RESET}\n")
-        if result.get("code"):
-            print(f"{Colors.RESET}   |")
-            print(f"{Colors.RESET}   |  {Colors.RED}{result['code']}{Colors.RESET}")
-            print(f"{Colors.RESET}   |\n")
-        else:
-            print("\n")
+    """Print translated output in a polished, professional layout."""
+    console.print()
 
-    else:
-        print()
-    
-    print(f"{Colors.CYAN}{Colors.BOLD} Explanation:{Colors.RESET}")
-    print(f"{result['explanation']}\n")
-    
-    print(f"{Colors.GREEN}{Colors.BOLD} Suggested Fix:{Colors.RESET}")
-    print(f"{result['fix']}\n")
+    if result.get("error") and not result.get("matched_error"):
+        message = result.get("message", "An unexpected error occurred.")
+        console.print(
+            Panel(
+                f"[bold red]{message}[/]",
+                title="[bold red]Error[/]",
+                border_style="red",
+                box=box.ROUNDED,
+                expand=False,
+            )
+        )
+        return
+
+    error_title = result.get("matched_error", "Unknown Error")
+    console.print(
+        Panel(
+            f"[bold white]{error_title}[/]",
+            title="[bold red]Detected Error[/]",
+            border_style="red",
+            box=box.ROUNDED,
+            expand=False,
+        )
+    )
+
+    file_name = result.get("file")
+    line_no = result.get("line", "?")
+    if file_name and file_name != "Unknown File":
+        console.print(
+            Panel(
+                f"[yellow]File:[/] {file_name}\n[yellow]Line:[/] {line_no}",
+                title="[bold yellow]Location[/]",
+                border_style="yellow",
+                box=box.ROUNDED,
+                expand=False,
+            )
+        )
+
+    if result.get("code"):
+        try:
+            start_line = int(line_no)
+        except (TypeError, ValueError):
+            start_line = 1
+
+        syntax = Syntax(
+            result["code"],
+            "python",
+            theme="monokai",
+            line_numbers=True,
+            start_line=start_line,
+            word_wrap=True,
+        )
+        console.print(Panel(syntax, title="[bold blue]Code Context[/]", border_style="blue", box=box.ROUNDED))
+
+    explanation = result.get("explanation", "No explanation available.")
+    console.print(
+        Panel(
+            f"[white]{explanation}[/]",
+            title="[bold cyan]Explanation[/]",
+            title_align="left",
+            border_style="cyan",
+            box=box.ROUNDED,
+            expand=False,
+        )
+    )
+
+    fix = result.get("fix", "No suggested fix available.")
+    console.print(
+        Panel(
+            f"[bold green]{fix}[/]",
+            title="[bold green]Suggested Fix[/]",
+            title_align="left",
+            border_style="green",
+            box=box.ROUNDED,
+            expand=False,
+        )
+    )
 
     if result.get("ast_insight"):
-        print(f"{Colors.MAGENTA}{Colors.BOLD} AST Insight:{Colors.RESET}")
-        print(f"{result['ast_insight']}\n")
+        console.print(
+            Panel(
+                f"[white]{result['ast_insight']}[/]",
+                title="[bold magenta]AST Insight[/]",
+                title_align="left",
+                border_style="magenta",
+                box=box.ROUNDED,
+                expand=False,
+            )
+        )
 
 
 def print_result_json(result: dict):
-    """Prints the translated error as a single-line JSON object on stdout.
-
-    Useful for scripting and automation: pipe the output to `jq`, parse it
-    in another language, or store it as structured logs.
-    """
+    """Prints the translated error as a single-line JSON object on stdout."""
     print(json.dumps(result, ensure_ascii=False))
 
 
 def run_script(script_name: str, *, as_json: bool = False):
-    """Runs a python script in the background and catches its errors."""
+    """Run a Python script and translate traceback output if it fails."""
     import subprocess
     try:
-        # Run the script using the current Python environment
         result = subprocess.run(
             [sys.executable, script_name],
             capture_output=True,
             text=True
         )
 
-        # If the script ran perfectly (Return Code 0), print standard output
         if result.returncode == 0:
             print(result.stdout, end="")
-
-        # If the script crashed, print whatever succeeded, THEN translate the error
         else:
             if result.stdout:
                 print(result.stdout, end="")
@@ -115,59 +188,49 @@ def run_script(script_name: str, *, as_json: bool = False):
                 "message": f"Could not find script '{script_name}'",
             }))
         else:
-            print(f"{Colors.RED}Error: Could not find script '{script_name}'{Colors.RESET}")
+            console.print(
+                Panel(
+                    f"[bold red]Could not find script '{script_name}'[/]",
+                    title="[bold red]Execution Error[/]",
+                    border_style="red",
+                    box=box.ROUNDED,
+                    expand=False,
+                )
+            )
+    except Exception as exc:
+        if as_json:
+            print(json.dumps({
+                "error": "runtime_failure",
+                "message": str(exc),
+            }))
+        else:
+            console.print(
+                Panel(
+                    f"[bold red]{exc}[/]",
+                    title="[bold red]Runtime Error[/]",
+                    border_style="red",
+                    box=box.ROUNDED,
+                    expand=False,
+                )
+            )
 
-# Entry point of the program
 def main():
     parser = argparse.ArgumentParser(
         prog="explain-error",
         description="Error Translator — Turn cryptic Python tracebacks into clear, actionable advice.",
         epilog="""
 Examples:
-  # Run a Python script and translate any unhandled errors
   explain-error run my_script.py
-
-  # Translate a raw error string directly
   explain-error "NameError: name 'usr_count' is not defined"
-
-  # Pipe a traceback from a log file or another command
   cat error.log | explain-error
-
-For more information, visit: https://github.com/gourabanandad/error-translator
         """,
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
 
-    parser.add_argument(
-        "-a",
-        "--about",
-        action="store_true",
-        help="Display information about the tool."
-    )
-    
-    parser.add_argument(
-        "-v",
-        "--version",
-        action="store_true",
-        help="Show the current version of the tool."
-    )
-
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        dest="as_json",
-        help="Output the translated error as a single JSON object on stdout (useful for scripting)."
-    )
-
-    parser.add_argument(
-        "args",
-        nargs="*",
-        help=(
-            "Positional arguments. Use 'run <script.py>' to execute a Python file, "
-            "or provide an error string to translate. If no arguments are given and "
-            "stdin is not piped, this help message is displayed."
-        )
-    )
+    parser.add_argument("-a", "--about", action="store_true", help="Display information about the tool.")
+    parser.add_argument("-v", "--version", action="store_true", help="Show the current version of the tool.")
+    parser.add_argument("--json", action="store_true", dest="as_json", help="Output the translated error as a JSON object.")
+    parser.add_argument("args", nargs="*", help="Positional arguments.")
 
     parsed_args = parser.parse_args()
 
@@ -176,29 +239,24 @@ For more information, visit: https://github.com/gourabanandad/error-translator
         sys.exit(0)
     
     if parsed_args.version:
-        print(f"Error Translator CLI Version: {Colors.GREEN}{VERSION}{Colors.RESET}")
+        console.print(f"Error Translator CLI Version: [bold green]{VERSION}[/]")
         sys.exit(0)
     
     emit = print_result_json if parsed_args.as_json else print_result
 
-    # 1. Handle Piped Input (e.g., cat error.log | explain-error)
     if not sys.stdin.isatty():
         error_input = sys.stdin.read()
         if error_input.strip():
             emit(translate_error(error_input))
             return
 
-    # 2. Print help if no arguments and no piped input
     if not parsed_args.args:
         parser.print_help()
         sys.exit(1)
 
-    # 3. Check if the user used the "run" command
     if parsed_args.args[0] == "run" and len(parsed_args.args) > 1:
         script_name = parsed_args.args[1]
         run_script(script_name, as_json=parsed_args.as_json)
-
-    # 4. Fallback: Treat the input as a raw error string
     else:
         error_input = " ".join(parsed_args.args)
         emit(translate_error(error_input))

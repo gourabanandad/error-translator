@@ -3,6 +3,7 @@
 Here are some examples of raw tracebacks and their translated output using Error Translator.
 
 Note: file/line/code context is only available when the input includes traceback location lines like `File "...", line N`.
+Note: the CLI prints a Rich panel UI; examples below use normalized plain text labels for readability.
 
 ### Example A: Type mismatch
 
@@ -18,7 +19,7 @@ TypeError: can only concatenate str (not "int") to str
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 TypeError: can only concatenate str (not "int") to str
 
 Location: app.py (Line 14)
@@ -45,7 +46,7 @@ NameError: name 'usr_count' is not defined
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 NameError: name 'usr_count' is not defined
 
 Location: Unknown File (Line Unknown Line)
@@ -72,7 +73,7 @@ Translated output:
 
 
 ```text
-Error Detected:
+Detected Error:
 IndexError: list index out of range
 
 Location: script.py (Line 3)
@@ -99,7 +100,7 @@ KeyError: 'age'
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 KeyError: 'age'
 
 Location: Unknown File (Line Unknown Line)
@@ -123,7 +124,7 @@ ZeroDivisionError: division by zero
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 ZeroDivisionError: division by zero
 
 Location: Unknown File (Line Unknown Line)
@@ -149,7 +150,7 @@ FileNotFoundError: [Errno 2] No such file or directory: 'data.csv'
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 FileNotFoundError: [Errno 2] No such file or directory: 'data.csv'
 
 Location: reader.py (Line 2)
@@ -177,7 +178,7 @@ AttributeError: 'int' object has no attribute 'append'
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 AttributeError: 'int' object has no attribute 'append'
 
 Location: Unknown File (Line Unknown Line)
@@ -201,7 +202,7 @@ ModuleNotFoundError: No module named 'requests'
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 ModuleNotFoundError: No module named 'requests'
 
 Location: Unknown File (Line Unknown Line)
@@ -230,7 +231,7 @@ IndentationError: expected an indented block
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 IndentationError: expected an indented block
 
 Location: script.py (Line 5)
@@ -258,7 +259,7 @@ ValueError: invalid literal for int() with base 10: '42.5'
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 ValueError: invalid literal for int() with base 10: '42.5'
 
 Location: Unknown File (Line Unknown Line)
@@ -291,7 +292,7 @@ RecursionError: maximum recursion depth exceeded
 Translated output:
 
 ```text
-Error Detected:
+Detected Error:
 RecursionError: maximum recursion depth exceeded
 
 Location: recursive.py (Line 2)

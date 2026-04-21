@@ -19,7 +19,7 @@ Quick links:
 
 - GitHub Repository: https://github.com/gourabanandad/error-translator-cli-v2
 - PyPI Package: https://pypi.org/project/error-translator-cli-v2/
-- Issues / Feature Requests: https://github.com/gourabanandad/error-translator/issues
+- Issues / Feature Requests: https://github.com/gourabanandad/error-translator-cli-v2/issues
 
 ## Demonstration
 
@@ -35,11 +35,14 @@ TypeError: can only concatenate str (not "int") to str
 ### Engine Translation Output
 
 ```markdown
-### Error Detected
+### Detected Error
 TypeError: can only concatenate str (not "int") to str
 
 ### Location
 app.py (line 14)
+
+### Code Context
+total = "Users: " + 42
 
 ### Explanation
 You are trying to add a string to an int, which Python cannot do.
@@ -47,6 +50,8 @@ You are trying to add a string to an int, which Python cannot do.
 ### Suggested Fix
 Convert the int to a string first using str() before concatenating.
 ```
+
+The CLI renders this output with a polished Rich terminal layout (rounded panels, clear section titles, and syntax-highlighted code context).
 
 ## Core Design Principles
 

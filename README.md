@@ -25,6 +25,7 @@ If this project saves you debugging time, please consider starring it on GitHub:
 ## Key Features
 
 * **CLI-First Architecture**: Seamlessly process scripts, direct error strings, or piped logs via the `explain-error` command.
+* **Professional Rich Terminal UI**: Clean panels, syntax-highlighted code context, structured sections, and improved readability for day-to-day debugging.
 * **Automatic Integration Mode**: Inject the module via `import error_translator.auto` to automatically override `sys.excepthook` for graceful, translated crash reporting.
 * **Extensible API Surfaces**: Integrate natively within Python or expose the core engine over HTTP via the included FastAPI server.
 * **Deterministic Rules Engine**: High-performance, regex-based matching powered by `rules.json` guarantees offline and privacy-first translations.
@@ -70,6 +71,11 @@ Emit structured JSON for scripting and automation:
 ```bash
 explain-error --json "NameError: name 'x' is not defined"
 # {"explanation": "...", "fix": "...", "matched_error": "...", "file": "...", "line": "...", "code": "...", "ast_insight": null}
+```
+
+Show an about screen with project metadata and quick usage examples:
+```bash
+explain-error --about
 ```
 
 The `--json` flag works with every input mode (`run <script>`, raw string, piped log).
