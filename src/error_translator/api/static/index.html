@@ -13,22 +13,65 @@
         <h1>Error Translator</h1>
         <p class="subtitle">Paste a Python traceback or error message below.</p>
 
-        <textarea id="errorInput"
-            placeholder="e.g.&#10;Traceback (most recent call last):&#10;  File &quot;app.py&quot;, line 14, in &lt;module&gt;&#10;    total = &quot;Users: &quot; + 42&#10;TypeError: can only concatenate str (not &quot;int&quot;) to str"></textarea>
-
-        <button id="translateBtn">Translate</button>
-
-        <div id="result" class="result hidden">
-            <h3>Explanation</h3>
-            <pre id="explanationText"></pre>
-            <h3>Suggested Fix</h3>
-            <pre id="fixText"></pre>
+        <div class="tabs">
+            <button class="tab-btn active" id="tabSingle">Single</button>
+            <button class="tab-btn" id="tabBatch">Batch</button>
         </div>
 
-        <div id="error" class="error hidden"></div>
+        <div id="viewSingle" class="view-section">
+            <textarea id="errorInput"
+                placeholder="e.g.&#10;Traceback (most recent call last):&#10;  File &quot;app.py&quot;, line 14, in &lt;module&gt;&#10;    total = &quot;Users: &quot; + 42&#10;TypeError: can only concatenate str (not &quot;int&quot;) to str"></textarea>
+
+            <button id="translateBtn" class="primary-btn">Translate</button>
+
+            <div id="result" class="result hidden">
+                <h3>Explanation</h3>
+                <pre id="explanationText"></pre>
+                <h3>Suggested Fix</h3>
+                <pre id="fixText"></pre>
+            </div>
+
+            <div id="error" class="error hidden"></div>
+        </div>
+
+        <div id="viewBatch" class="view-section hidden">
+            <div id="batchInputsContainer">
+                <textarea class="batch-input" placeholder="Paste traceback 1 here..."></textarea>
+                <textarea class="batch-input" placeholder="Paste traceback 2 here..."></textarea>
+            </div>
+            
+            <div class="batch-actions">
+                <button id="addInputBtn" class="secondary-btn">+ Add Another</button>
+                <button id="translateBatchBtn" class="primary-btn">Translate Batch</button>
+            </div>
+
+            <div id="batchResult" class="result hidden"></div>
+            <div id="batchError" class="error hidden"></div>
+        </div>
     </div>
 
     <script>
+        // Tab switching
+        const tabSingle = document.getElementById('tabSingle');
+        const tabBatch = document.getElementById('tabBatch');
+        const viewSingle = document.getElementById('viewSingle');
+        const viewBatch = document.getElementById('viewBatch');
+
+        tabSingle.addEventListener('click', () => {
+            tabSingle.classList.add('active');
+            tabBatch.classList.remove('active');
+            viewSingle.classList.remove('hidden');
+            viewBatch.classList.add('hidden');
+        });
+
+        tabBatch.addEventListener('click', () => {
+            tabBatch.classList.add('active');
+            tabSingle.classList.remove('active');
+            viewBatch.classList.remove('hidden');
+            viewSingle.classList.add('hidden');
+        });
+
+        // Single Translation
         const input = document.getElementById('errorInput');
         const btn = document.getElementById('translateBtn');
         const resultDiv = document.getElementById('result');
@@ -75,6 +118,75 @@
         function showError(msg) {
             errorDiv.textContent = msg;
             errorDiv.classList.remove('hidden');
+        }
+
+        // Batch Translation
+        const addInputBtn = document.getElementById('addInputBtn');
+        const batchInputsContainer = document.getElementById('batchInputsContainer');
+        const translateBatchBtn = document.getElementById('translateBatchBtn');
+        const batchResult = document.getElementById('batchResult');
+        const batchError = document.getElementById('batchError');
+
+        addInputBtn.addEventListener('click', () => {
+            const ta = document.createElement('textarea');
+            ta.className = 'batch-input';
+            ta.placeholder = `Paste traceback ${batchInputsContainer.children.length + 1} here...`;
+            batchInputsContainer.appendChild(ta);
+        });
+
+        translateBatchBtn.addEventListener('click', async () => {
+            const textareas = batchInputsContainer.querySelectorAll('.batch-input');
+            const tracebacks = Array.from(textareas).map(ta => ta.value.trim()).filter(v => v);
+            
+            if (tracebacks.length === 0) {
+                showBatchError('Please enter at least one traceback.');
+                return;
+            }
+
+            translateBatchBtn.disabled = true;
+            translateBatchBtn.textContent = 'Translating...';
+            batchResult.classList.add('hidden');
+            batchError.classList.add('hidden');
+            batchResult.innerHTML = '';
+
+            try {
+                const response = await fetch('/translate/batch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tracebacks: tracebacks })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    const results = data.translate_errors || [];
+                    results.forEach((res, index) => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'batch-result-item';
+                        itemDiv.innerHTML = `
+                            <h4>Traceback ${index + 1}</h4>
+                            <h5>Explanation</h5>
+                            <pre>${res.explanation || 'No explanation provided.'}</pre>
+                            <h5>Suggested Fix</h5>
+                            <pre>${res.fix || 'No fix suggested.'}</pre>
+                        `;
+                        batchResult.appendChild(itemDiv);
+                    });
+                    batchResult.classList.remove('hidden');
+                } else {
+                    showBatchError(data.detail || 'Batch translation failed.');
+                }
+            } catch (err) {
+                showBatchError('Network error. Is the server running?');
+            } finally {
+                translateBatchBtn.disabled = false;
+                translateBatchBtn.textContent = 'Translate Batch';
+            }
+        });
+
+        function showBatchError(msg) {
+            batchError.textContent = msg;
+            batchError.classList.remove('hidden');
         }
     </script>
 </body>
