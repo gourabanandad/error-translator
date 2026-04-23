@@ -2,9 +2,10 @@ import ast
 import difflib
 import os
 
-class ComprehensiveSymbolCollector(ast.NodeVisitor):
-    """Walks the Abstract Syntax Tree to collect all defined symbols in a file."""
-    def __init__(self):
+class ScopedSymbolCollector(ast.NodeVisitor):
+    """Walks the AST, respecting lexical scope based on the crash line number."""
+    def __init__(self, target_line: int):
+        self.target_line = target_line
         self.names = set()        # Variables
         self.attributes = set()   # Object attributes/methods
         self.classes = set()      # Class names
@@ -12,23 +13,35 @@ class ComprehensiveSymbolCollector(ast.NodeVisitor):
         self.imports = set()      # Imported modules or aliases
 
     def visit_Name(self, node):
-        # Only collect names that are being assigned/stored (defining a variable)
         if isinstance(node.ctx, ast.Store):
             self.names.add(node.id)
         self.generic_visit(node)
 
     def visit_FunctionDef(self, node):
+        # The function's name is always added to the enclosing scope
         self.names.add(node.name)
         self.functions.add(node.name)
-        self.generic_visit(node)
+        
+        # SCOPING LOGIC: Only visit the body if the crash happened INSIDE this function
+        if hasattr(node, 'lineno') and hasattr(node, 'end_lineno'):
+            if node.lineno <= self.target_line <= node.end_lineno:
+                self.generic_visit(node)
+        else:
+            self.generic_visit(node)
 
     def visit_ClassDef(self, node):
+        # The class name is always added to the enclosing scope
         self.names.add(node.name)
         self.classes.add(node.name)
-        self.generic_visit(node)
+        
+        # SCOPING LOGIC: Only visit the body if the crash happened INSIDE this class
+        if hasattr(node, 'lineno') and hasattr(node, 'end_lineno'):
+            if node.lineno <= self.target_line <= node.end_lineno:
+                self.generic_visit(node)
+        else:
+            self.generic_visit(node)
 
     def visit_Attribute(self, node):
-        # Collects any '.attribute' used in the file
         self.attributes.add(node.attr)
         self.generic_visit(node)
 
@@ -47,23 +60,20 @@ class ComprehensiveSymbolCollector(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-def get_ast_suggestions(filepath: str, target_word: str, error_type: str) -> str:
-    """
-    Parses the file, builds a pool of valid symbols based on the error type,
-    and returns the closest match using Levenshtein distance.
-    """
+def get_ast_suggestions(filepath: str, line_number: str, target_word: str, error_type: str) -> str:
     if not os.path.exists(filepath) or filepath == "Unknown File":
         return None
 
     try:
+        target_line = int(line_number) if line_number.isdigit() else 0
+        
         with open(filepath, 'r', encoding='utf-8') as f:
             source_code = f.read()
         
         tree = ast.parse(source_code)
-        collector = ComprehensiveSymbolCollector()
+        collector = ScopedSymbolCollector(target_line)
         collector.visit(tree)
         
-        # Determine which pool of words to check against based on the error
         pool = set()
         if error_type == "NameError":
             pool = collector.names | collector.functions | collector.classes
@@ -72,7 +82,6 @@ def get_ast_suggestions(filepath: str, target_word: str, error_type: str) -> str
         elif error_type in ("ImportError", "ModuleNotFoundError"):
             pool = collector.classes | collector.functions | collector.names | collector.imports
         
-        # Find the closest match (cutoff=0.6 means it must be at least 60% similar)
         matches = difflib.get_close_matches(target_word, pool, n=1, cutoff=0.6)
         
         if matches:
@@ -80,5 +89,4 @@ def get_ast_suggestions(filepath: str, target_word: str, error_type: str) -> str
         return None
         
     except Exception:
-        # Failsafe: if the file has a SyntaxError and cannot be parsed, degrade gracefully
         return None

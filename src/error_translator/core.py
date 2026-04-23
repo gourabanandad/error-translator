@@ -90,7 +90,7 @@ def translate_error(traceback_text: str) -> dict:
         insight = None
         
         if handler_function and file_name != "Unknown File":
-            insight = handler_function(file_name, extracted_values)
+            insight = handler_function(file_name, line_number, extracted_values)
         
         return {
             "explanation": rule["explanation"].format(*extracted_values),
