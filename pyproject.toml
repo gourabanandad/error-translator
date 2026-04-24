@@ -67,7 +67,9 @@ package-dir = {"" = "src"}
 packages = ["error_translator"]
 
 [tool.pytest.ini_options]
+testpaths = ["tests"]
 pythonpath = ["src"]
+addopts = "--cov=error_translator --cov-report=term-missing"
 
 [tool.setuptools.package-data]
 error_translator = ["rules.json", "static/*.html", "static/*.css"]
